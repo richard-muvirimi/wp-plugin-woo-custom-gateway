@@ -15,7 +15,7 @@
  * Plugin Name:       Woo Custom Gateway
  * Plugin URI:        https://tyganeutronics.com/woo-custom-gateway/
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
- * Version:           1.0.0
+ * Version:           1.0.3
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com/
  * License:           GPL-2.0+
@@ -25,7 +25,7 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined('WPINC') ) {
+if (!defined('WPINC')) {
 	die();
 }
 
@@ -34,7 +34,7 @@ if ( ! defined('WPINC') ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('WOO_CUSTOM_GATEWAY_VERSION', '1.0.0');
+define('WOO_CUSTOM_GATEWAY_VERSION', '1.0.3');
 
 /**
  * Reference to this file and this file only.
@@ -45,22 +45,22 @@ define('WOO_CUSTOM_GATEWAY_FILE', __FILE__);
  * The code that runs during plugin activation.
  * This action is documented in includes/class-woo-custom-gateway-activator.php
  */
-function activate_Woo_Custom_Gateway() {
+function activate_Woo_Custom_Gateway()
+{
 
 	require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-activator.php';
 	Woo_Custom_Gateway_Activator::activate();
-
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-woo-custom-gateway-deactivator.php
  */
-function deactivate_Woo_Custom_Gateway() {
+function deactivate_Woo_Custom_Gateway()
+{
 
 	require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-deactivator.php';
 	Woo_Custom_Gateway_Deactivator::deactivate();
-
 }
 
 register_activation_hook(__FILE__, 'activate_Woo_Custom_Gateway');
@@ -80,11 +80,11 @@ require plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway.php';
  *
  * @since 1.0.0
  */
-function run_Woo_Custom_Gateway() {
+function run_Woo_Custom_Gateway()
+{
 
 	$plugin = new Woo_Custom_Gateway_Main();
 	$plugin->run();
-
 }
 
 // ... and off we go -------->>>
