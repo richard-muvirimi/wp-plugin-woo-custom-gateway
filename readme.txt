@@ -52,11 +52,8 @@ In the search field type “Woo Custom Gateway,” then click “Search Plugins.
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
-= 1.0.3 =
-* Added screenshots
-
-= 1.0.1 - 1.0.2 =
-* Updated Readme
+= 1.0.1 - 1.0.4 =
+* Minor Bug Fixes
 
 = 1.0.0 =
 * Initial release.
