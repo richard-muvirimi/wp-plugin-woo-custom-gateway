@@ -15,13 +15,15 @@
  * Plugin Name:       Woo Custom Gateway
  * Plugin URI:        https://tyganeutronics.com/woo-custom-gateway/
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
- * Version:           1.0.4
+ * Version:           1.0.5
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       woo-custom-gateway
  * Domain Path:       /languages
+ * WC requires at least: 3.0.0
+ * WC tested up to:   4.1.0
  */
 
 // If this file is called directly, abort.

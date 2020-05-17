@@ -269,5 +269,3 @@ class Woo_Custom_Gateway_Admin {
 
 	}
 }
-
-

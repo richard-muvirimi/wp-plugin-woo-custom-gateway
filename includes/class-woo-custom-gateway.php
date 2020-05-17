@@ -23,7 +23,8 @@
  * @subpackage Woo_Custom_Gateway/includes
  * @author tyganeutronics <tygalive@gmail.com>
  */
-class Woo_Custom_Gateway_Main {
+class Woo_Custom_Gateway_Main
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -61,9 +62,10 @@ class Woo_Custom_Gateway_Main {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 
-		if ( defined('WOO_CUSTOM_GATEWAY_VERSION') ) {
+		if (defined('WOO_CUSTOM_GATEWAY_VERSION')) {
 			$this->version = WOO_CUSTOM_GATEWAY_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -74,7 +76,6 @@ class Woo_Custom_Gateway_Main {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -90,7 +91,8 @@ class Woo_Custom_Gateway_Main {
 	 * @since 1.0.0
 	 * @access private
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -116,7 +118,6 @@ class Woo_Custom_Gateway_Main {
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-woo-custom-gateway-public.php';
 
 		$this->loader = new Woo_Custom_Gateway_Loader();
-
 	}
 
 	/**
@@ -127,12 +128,12 @@ class Woo_Custom_Gateway_Main {
 	 * @since 1.0.0
 	 * @access private
 	 */
-	private function set_locale() {
+	private function set_locale()
+	{
 
 		$plugin_i18n = new Woo_Custom_Gateway_i18n();
 
 		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
-
 	}
 
 	/**
@@ -142,7 +143,8 @@ class Woo_Custom_Gateway_Main {
 	 * @since 1.0.0
 	 * @access private
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks()
+	{
 
 		$plugin_admin = new Woo_Custom_Gateway_Admin($this->get_plugin_name(), $this->get_version());
 
@@ -171,16 +173,18 @@ class Woo_Custom_Gateway_Main {
 
 		// on post delete
 		$this->loader->add_action('before_delete_post', $plugin_admin, 'on_delete_method');
-
 	}
 
-	public function init_custom_payment_gateway() {
+	public function init_custom_payment_gateway()
+	{
 
-		/**
-		 * The blueprint class of a custom gateway
-		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/custom-gateway-blueprint.php';
+		if (function_exists("WC")) {
 
+			/**
+			 * The blueprint class of a custom gateway
+			 */
+			require_once plugin_dir_path(dirname(__FILE__)) . 'includes/custom-gateway-blueprint.php';
+		}
 	}
 
 	/**
@@ -190,7 +194,8 @@ class Woo_Custom_Gateway_Main {
 	 * @since 1.0.0
 	 * @access private
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks()
+	{
 
 		$plugin_public = new Woo_Custom_Gateway_Public($this->get_plugin_name(), $this->get_version());
 
@@ -199,7 +204,6 @@ class Woo_Custom_Gateway_Main {
 
 		// add our custom gateways to woocommerce
 		$this->loader->add_filter('woocommerce_payment_gateways', $plugin_public, 'woo_add_gateways');
-
 	}
 
 	/**
@@ -207,10 +211,10 @@ class Woo_Custom_Gateway_Main {
 	 *
 	 * @since 1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 
 		$this->loader->run();
-
 	}
 
 	/**
@@ -220,10 +224,10 @@ class Woo_Custom_Gateway_Main {
 	 * @since 1.0.0
 	 * @return string The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name()
+	{
 
 		return $this->plugin_name;
-
 	}
 
 	/**
@@ -232,10 +236,10 @@ class Woo_Custom_Gateway_Main {
 	 * @since 1.0.0
 	 * @return Woo_Custom_Gateway_Loader Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 
 		return $this->loader;
-
 	}
 
 	/**
@@ -244,9 +248,9 @@ class Woo_Custom_Gateway_Main {
 	 * @since 1.0.0
 	 * @return string The version number of the plugin.
 	 */
-	public function get_version() {
+	public function get_version()
+	{
 
 		return $this->version;
-
 	}
 }
