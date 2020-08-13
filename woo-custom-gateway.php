@@ -8,14 +8,11 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link https://tyganeutronics.com
- * @since 1.0.0
- * @package Woo_Custom_Gateway
  * @wordpress-plugin
  * Plugin Name:       Woo Custom Gateway
  * Plugin URI:        https://tyganeutronics.com/woo-custom-gateway/
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
- * Version:           1.0.6
+ * Version:           1.0.7
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com/
  * License:           GPL-2.0+
@@ -23,12 +20,18 @@
  * Text Domain:       woo-custom-gateway
  * Domain Path:       /languages
  * WC requires at least: 3.0.0
- * WC tested up to:   4.1.0
+ * WC tested up to:   4.3.2
+ *
+ * @package Woo_Custom_Gateway
+ *
+ * @link https://tyganeutronics.com
+ * @since 1.0.0
  */
 
 // If this file is called directly, abort.
+
 if (!defined('WPINC')) {
-	die();
+    die();
 }
 
 /**
@@ -36,7 +39,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('WOO_CUSTOM_GATEWAY_VERSION', '1.0.4');
+define('WOO_CUSTOM_GATEWAY_VERSION', '1.0.7');
 
 /**
  * Reference to this file and this file only.
@@ -50,8 +53,8 @@ define('WOO_CUSTOM_GATEWAY_FILE', __FILE__);
 function activate_Woo_Custom_Gateway()
 {
 
-	require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-activator.php';
-	Woo_Custom_Gateway_Activator::activate();
+    require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-activator.php';
+    Woo_Custom_Gateway_Activator::activate();
 }
 
 /**
@@ -61,8 +64,8 @@ function activate_Woo_Custom_Gateway()
 function deactivate_Woo_Custom_Gateway()
 {
 
-	require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-deactivator.php';
-	Woo_Custom_Gateway_Deactivator::deactivate();
+    require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-deactivator.php';
+    Woo_Custom_Gateway_Deactivator::deactivate();
 }
 
 register_activation_hook(__FILE__, 'activate_Woo_Custom_Gateway');
@@ -85,8 +88,8 @@ require plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway.php';
 function run_Woo_Custom_Gateway()
 {
 
-	$plugin = new Woo_Custom_Gateway_Main();
-	$plugin->run();
+    $plugin = new Woo_Custom_Gateway_Main();
+    $plugin->run();
 }
 
 // ... and off we go -------->>>

@@ -18,7 +18,8 @@
  * @subpackage Woo_Custom_Gateway/public
  * @author Tyganeutronics <tygalive@gmail.com>
  */
-class Woo_Custom_Gateway_Public {
+class Woo_Custom_Gateway_Public
+{
 
 	/**
 	 * The ID of this plugin.
@@ -47,11 +48,11 @@ class Woo_Custom_Gateway_Public {
 	 * @param string $version
 	 *        	The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version)
+	{
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -59,7 +60,8 @@ class Woo_Custom_Gateway_Public {
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -71,7 +73,6 @@ class Woo_Custom_Gateway_Public {
 		 * class.
 		 */
 		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/woo-custom-gateway-public.css', array(), $this->version, 'all');
-
 	}
 
 	/**
@@ -79,7 +80,8 @@ class Woo_Custom_Gateway_Public {
 	 *
 	 * @since 1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -90,22 +92,21 @@ class Woo_Custom_Gateway_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/woo-custom-gateway-public.js', array( 'jquery'), $this->version, false);
-
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/woo-custom-gateway-public.js', array('jquery'), $this->version, false);
 	}
 
-	public function woo_add_gateways( $gateways ) {
+	public function woo_add_gateways($gateways)
+	{
 
-		$args = array( 'post_type' => 'woocg-post', 'fields' => 'ids', "no_found_rows" => true, 'post_status' => 'publish');
+		$args = array('post_type' => 'woocg-post', 'fields' => 'ids', "no_found_rows" => true, 'post_status' => 'publish', "numberposts" => -1);
 
 		$posts = get_posts($args);
 
-		foreach ( $posts as $id ) {
+		foreach ($posts as $id) {
 
 			$gateways[] = new WC_Woo_Custom_Gateway($id);
 		}
 
 		return $gateways;
-
 	}
 }
