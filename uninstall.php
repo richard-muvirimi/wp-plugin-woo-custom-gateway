@@ -15,27 +15,31 @@
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
+ *
+ * @package Plugin_Name
+ *
  * @link http://example.com
  * @since 1.0.0
- * @package Plugin_Name
  */
 
 // If uninstall not called from WordPress, then exit.
-if ( ! defined('WP_UNINSTALL_PLUGIN') ) {
-	exit();
+
+if (!defined('WP_UNINSTALL_PLUGIN')) {
+    exit();
 }
 
 // delete all our custom gateway posts
-function woo_custom_gateway_unistall() {
+function woo_custom_gateway_unistall()
+{
 
-	$args = array( 'post_type' => 'woocg-post', 'fields' => 'ids', "no_found_rows" => true);
+    $args = array('post_type' => 'woocg-post', 'fields' => 'ids', 'no_found_rows' => true);
 
-	$posts = get_posts($args);
+    $posts = get_posts($args);
 
-	foreach ( $posts as $id ) {
+    foreach ($posts as $id) {
 
-		wp_delete_post($id, true);
-	}
+        wp_delete_post($id, true);
+    }
 
 }
 
