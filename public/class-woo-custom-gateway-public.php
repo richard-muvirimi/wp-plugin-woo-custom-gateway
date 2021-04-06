@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
+}
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -20,7 +24,7 @@
  * @package Woo_Custom_Gateway
  * @subpackage Woo_Custom_Gateway/public
  *
- * @author Tyganeutronics <tygalive@gmail.com>
+ * @author https://tyganeutronics.com <tygalive@gmail.com>
  */
 class Woo_Custom_Gateway_Public
 {
@@ -101,6 +105,13 @@ class Woo_Custom_Gateway_Public
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/woo-custom-gateway-public.js', array('jquery'), $this->version, false);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @since 1.0.0
+     * @param array $gateways
+     * @return void
+     */
     public function woo_add_gateways($gateways)
     {
 
@@ -115,5 +126,4 @@ class Woo_Custom_Gateway_Public
 
         return $gateways;
     }
-
 }

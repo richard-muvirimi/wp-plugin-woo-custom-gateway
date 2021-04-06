@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
+}
+
 /**
  * Define the internationalization functionality
  * Loads and defines the internationalization files for this plugin
@@ -39,6 +43,5 @@ class Woo_Custom_Gateway_i18n
     {
 
         load_plugin_textdomain('plugin-name', false, dirname(dirname(plugin_basename(__FILE__))) . '/languages/');
-
     }
 }

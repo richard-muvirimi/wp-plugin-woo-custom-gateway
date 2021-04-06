@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
+}
+
 /**
  * The file that defines the core plugin class
  * A class definition that includes attributes and functions used across both the
@@ -180,8 +184,17 @@ class Woo_Custom_Gateway_Main
 
         // on post delete
         $this->loader->add_action('before_delete_post', $plugin_admin, 'on_delete_method');
+
+        // request rating
+        $this->loader->add_action('admin_notices', $plugin_admin, 'request_rating');
     }
 
+    /**
+     * Include files
+     *
+     * @since 1.0.0
+     * @return void
+     */
     public function init_custom_payment_gateway()
     {
 
@@ -192,7 +205,6 @@ class Woo_Custom_Gateway_Main
              */
             require_once plugin_dir_path(dirname(__FILE__)) . 'includes/custom-gateway-blueprint.php';
         }
-
     }
 
     /**
@@ -267,5 +279,4 @@ class Woo_Custom_Gateway_Main
 
         return $this->version;
     }
-
 }

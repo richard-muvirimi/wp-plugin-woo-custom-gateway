@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
+}
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -20,7 +24,7 @@
  * @package Woo_Custom_Gateway
  * @subpackage Woo_Custom_Gateway/admin
  *
- * @author Tyganeutronics <tygalive@gmail.com>
+ * @author https://tyganeutronics.com <tygalive@gmail.com>
  */
 class Woo_Custom_Gateway_Admin
 {
@@ -59,7 +63,6 @@ class Woo_Custom_Gateway_Admin
 
         $this->plugin_name = $plugin_name;
         $this->version     = $version;
-
     }
 
     /**
@@ -80,7 +83,6 @@ class Woo_Custom_Gateway_Admin
          * class.
          */
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/woo-custom-gateway-admin.css', array(), $this->version, 'all');
-
     }
 
     /**
@@ -101,9 +103,15 @@ class Woo_Custom_Gateway_Admin
          * class.
          */
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/woo-custom-gateway-admin.js', array('jquery'), $this->version, false);
-
     }
 
+    /**
+     * Add setings page link
+     * 
+     * @since 1.0.0
+     * @param array $links
+     * @return void
+     */
     public function plugins_list_options_link($links)
     {
 
@@ -116,20 +124,27 @@ class Woo_Custom_Gateway_Admin
         // Merge our new link with the default ones
 
         return array_merge($plugin_links, $links);
-
     }
 
+    /**
+     * Register custom post typre
+     *
+     * @since 1.0.0
+     * @return void
+     */
     public function init()
     {
 
-        register_post_type('woocg-post', array('show_ui' => true,
+        register_post_type('woocg-post', array(
+            'show_ui' => true,
             'show_in_menu' => current_user_can('manage_woocommerce') ? 'woocommerce' : true,
             'description' => 'woocg-post',
             // 'has_archive' => true,
             'exclude_from_search' => true,
             // 'map_meta_cap' => true,
             'hierarchical' => false,
-            'labels' => array('name' => __('Payment Methods', 'woo-custom-gateway'),
+            'labels' => array(
+                'name' => __('Payment Methods', 'woo-custom-gateway'),
                 'singular_name' => __('Payment Method', 'woo-custom-gateway'),
                 'add_new' => __('Add New', 'woo-custom-gateway'),
                 'add_new_item' => __('Add New Payment Method', 'woo-custom-gateway'),
@@ -145,16 +160,18 @@ class Woo_Custom_Gateway_Admin
                 'insert_into_item' => __('Insert into Payment Method profile', 'woo-custom-gateway'),
                 'uploaded_to_this_item' => __('Uploaded to Payment Method profile', 'woo-custom-gateway'),
                 'menu_name' => __('Payment Methods', 'woo-custom-gateway'),
-                'name_admin_bar' => __('Payment Methods', 'woo-custom-gateway')),
+                'name_admin_bar' => __('Payment Methods', 'woo-custom-gateway')
+            ),
             'rewrite' => array('slug' => 'custom-gateway', 'woo-custom-gateway'),
             'supports' => array('thumbnail', 'title', 'woo-custom-gateway'),
             'delete_with_user' => false,
-            'register_meta_box_cb' => array($this, 'addMetaBoxs')));
-
+            'register_meta_box_cb' => array($this, 'addMetaBoxs')
+        ));
     }
 
     /**
      *
+     * @since 1.0.0
      * @param int      $post_id
      * @param \WP_Post $post
      * @param boolean  $update
@@ -167,24 +184,49 @@ class Woo_Custom_Gateway_Admin
         if ($description) {
             update_post_meta($post_id, 'woocg-desciption', $description);
         }
-
     }
 
     /**
+     * Show rating request
      *
-     *            Post object
+     * @since 1.1.0
+     * @return void
+     */
+    public function request_rating()
+    {
+
+        //if has at least one post and has never been shown
+        $args = array('post_type' => 'woocg-post', 'fields' => 'ids', 'no_found_rows' => true);
+
+        /**
+         * When shown, will persist for a minute then wait quarter year
+         */
+        if (boolval(get_transient("woocg-rate-persist")) === true || (get_transient("woocg-rate") === false && count(get_posts($args)) >= 1)) {
+            include plugin_dir_path(__FILE__) . "/partials/woo-custom-gateway-admin-rating.php";
+
+            if (boolval(get_transient("woocg-rate-persist")) === false) {
+                //remind again quarter year
+                set_transient("woocg-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
+
+                set_transient("woocg-rate-persist", true, MINUTE_IN_SECONDS);
+            }
+        }
+    }
+
+    /**
+     * 
+     * @since 1.0.0
      * @param \WP_Post $post
      */
     public function addMetaBoxs($post)
     {
 
         add_meta_box('woocg-post-description', __('Payment Method Description', 'woo-custom-gateway'), array($this, 'descriptionMetaBox'), 'woocg-post', 'normal', 'high');
-
     }
 
     /**
-     *
-     *            Post object
+     * 
+     * @since 1.0.0
      * @param \WP_Post $post
      * @param array    $args
      */
@@ -202,11 +244,11 @@ class Woo_Custom_Gateway_Admin
         }
 
         echo $html;
-
     }
 
     /**
      *
+     * @since 1.0.0
      * @param  string   $content
      * @param  int      $post_id
      * @param  int      $thumbnail_id
@@ -220,11 +262,11 @@ class Woo_Custom_Gateway_Admin
         }
 
         return $content;
-
     }
 
     /**
      *
+     * @since 1.0.0
      * @param  string   $input
      * @param  \WP_Post $post
      * @return string
@@ -237,10 +279,11 @@ class Woo_Custom_Gateway_Admin
         }
 
         return $input;
-
     }
 
     /**
+     * 
+     * @since 1.0.0
      * @param $column
      * @param $post_id
      */
@@ -252,10 +295,11 @@ class Woo_Custom_Gateway_Admin
                 echo the_post_thumbnail('thumb');
                 break;
         }
-
     }
 
     /**
+     * 
+     * @since 1.0.0
      * @param  $columns
      * @return mixed
      */
@@ -265,11 +309,11 @@ class Woo_Custom_Gateway_Admin
         $columns['thumbnail'] = __('Thumbnail', 'woo-custom-gateway');
 
         return $columns;
-
     }
 
     /**
      *
+     * @since 1.0.0
      * @param  array    $actions
      * @param  \WP_Post $post
      * @return string
@@ -287,11 +331,11 @@ class Woo_Custom_Gateway_Admin
         }
 
         return $actions;
-
     }
 
     /**
      *
+     * @since 1.0.0
      * @param int $postid
      */
     public function on_delete_method($postid)
@@ -300,7 +344,5 @@ class Woo_Custom_Gateway_Admin
         $method = new WC_Woo_Custom_Gateway($postid);
 
         delete_option($method->get_option_key());
-
     }
-
 }

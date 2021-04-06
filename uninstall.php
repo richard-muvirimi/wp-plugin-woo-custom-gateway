@@ -28,11 +28,16 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
     exit();
 }
 
-// delete all our custom gateway posts
+/**
+ * delete all our custom gateway posts
+ *
+ * @since 1.0.0
+ * @return void
+ */
 function woo_custom_gateway_unistall()
 {
 
-    $args = array('post_type' => 'woocg-post', 'fields' => 'ids', 'no_found_rows' => true);
+    $args = array('post_type' => 'woocg-post', 'fields' => 'ids', 'no_found_rows' => true, 'numberposts' => -1);
 
     $posts = get_posts($args);
 
@@ -40,7 +45,6 @@ function woo_custom_gateway_unistall()
 
         wp_delete_post($id, true);
     }
-
 }
 
 woo_custom_gateway_unistall();

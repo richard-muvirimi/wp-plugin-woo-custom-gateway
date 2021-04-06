@@ -13,7 +13,9 @@ if (!defined('WPINC')) {
  * @package Woo_Custom_Gateway
  * @subpackage Woo_Custom_Gateway/public
  *
- * @author Tyganeutronics <tygalive@gmail.com>
+ * @author https://tyganeutronics.com <tygalive@gmail.com>
+ * @since 1.0.0
+ * 
  */
 class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
 {
@@ -21,6 +23,9 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
     /**
      *
      * @param int $id
+     * 
+     * @version 1.1.0
+     * @since 1.0.0
      */
     public function __construct($id)
     {
@@ -44,20 +49,23 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
         $this->title        = $this->get_option('title');
         $this->description  = $this->get_option('description');
         $this->instructions = $this->get_option('instructions', $this->description);
-        $this->order_stat   = $this->get_option('order_stat');
+
+        //append prefix if not present for compatibility with 1.0.7
+        $status = $this->get_option('order_stat');
+        $this->order_stat   = 'wc-' === substr($status, 0, 3) ? $status  : 'wc-' . $status;
 
         add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
         add_action('woocommerce_thankyou_' . $this->id, array($this, 'thankyou_page'));
 
         // Customer Emails
         add_action('woocommerce_email_before_order_table', array($this, 'email_instructions'), 10, 3);
-
     }
 
     /**
      * Output for the order received page.
      *
      * @param int $orderId
+     * @since 1.0.0
      */
     public function thankyou_page($orderId)
     {
@@ -65,55 +73,56 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
         if ($this->instructions) {
             echo wpautop(wptexturize($this->instructions));
         }
-
     }
 
     /**
      * Add content to the WC emails.
      *
      * @access public
+     * @since 1.0.0
+     * @version 1.1.0
      * @param WC_Order $order
      * @param bool     $sent_to_admin
      * @param bool     $plain_text
      */
     public function email_instructions($order, $sent_to_admin, $plain_text = false)
     {
-
+        // Go ahead only if the order was created by us.
         if ($this->instructions && !$sent_to_admin && $this->id === $order->get_payment_method()) {
-
-// Go ahead only if the order has one of our statusses.
-            if ($order->has_status('on-hold') || $order->has_status('processing')) {
-
-                echo wpautop(wptexturize($this->instructions)) . PHP_EOL;
-            }
-
+            echo wpautop(wptexturize($this->instructions)) . PHP_EOL;
         }
-
     }
 
     /**
      * Initialise Gateway Settings Form Fields
+     * 
+     * @version 1.1.0
+     * @since 1.0.0
      */
     public function init_form_fields()
     {
 
-        $this->form_fields = array('enabled' => array('title' => __('Enable/Disable', 'woocommerce'), 'type' => 'checkbox', 'label' => __(sprintf('Enable %s?', $this->method_title), 'woocommerce'), 'default' => 'yes'),
-            'order_stat' => array('title' => __('Order status', 'woocommerce'),
+        $this->form_fields = array(
+            'enabled' => array('title' => __('Enable/Disable', 'woocommerce'), 'type' => 'checkbox', 'label' => __(sprintf('Enable %s?', $this->method_title), 'woocommerce'), 'default' => 'yes'),
+            'order_stat' => array(
+                'title' => __('Order Status', 'woocommerce'),
                 'type' => 'select',
                 'description' => __('The setting controls the status that\'s being displayed on the order when it\'s placed.', 'woocommerce'),
-                'default' => 'on-hold',
+                'default' => wc_get_is_pending_statuses()[0] ?: wc_get_order_statuses()[0],
                 'desc_tip' => false,
-                'options' => array('on-hold' => __('On Hold', 'woocommerce'), 'processing' => __('Processing', 'woocommerce'))),
+                'options' => wc_get_order_statuses()
+            ),
             'title' => array('title' => __('Title', 'woocommerce'), 'type' => 'text', 'description' => __('This controls the title which the user sees during checkout.', 'woocommerce'), 'default' => __($this->method_title, 'woocommerce'), 'desc_tip' => false),
             'description' => array('title' => __('Description', 'woocommerce'), 'type' => 'textarea', 'description' => __('Payment method description that the customer will see on your checkout.', 'woocommerce'), 'default' => __('', 'woocommerce'), 'desc_tip' => false),
-            'instructions' => array('title' => __('Instructions', 'woocommerce'), 'type' => 'textarea', 'description' => __('Instructions that will be added to the thank you page and emails.', 'woocommerce'), 'default' => '', 'desc_tip' => false));
-
+            'instructions' => array('title' => __('Instructions', 'woocommerce'), 'type' => 'textarea', 'description' => __('Instructions that will be added to the thank you page and emails.', 'woocommerce'), 'default' => '', 'desc_tip' => false)
+        );
     }
 
     /**
      * Process the payment and return the result
      *
      * @param  int     $order_id
+     * @since 1.0.0
      * @return array
      */
     public function process_payment($order_id)
@@ -121,10 +130,10 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
 
         $order = wc_get_order($order_id);
 
-        // Mark as on-hold (we're awaiting the payment)
+        // Mark as set order status (we're awaiting the payment)
         $order->update_status($this->order_stat, sprintf(__('Awaiting %s payment.', 'woo-custom-gateway'), $this->method_title));
 
-// Reduce stock levels
+        // Reduce stock levels
         // $order->reduce_order_stock();
         wc_reduce_stock_levels($order_id);
 
@@ -134,7 +143,5 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
         // Return thankyou redirect
 
         return array('result' => 'success', 'redirect' => $this->get_return_url($order));
-
     }
-
 }

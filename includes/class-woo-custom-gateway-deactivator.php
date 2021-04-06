@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
+}
+
 /**
  * Fired during plugin deactivation
  *
@@ -36,6 +40,5 @@ class Woo_Custom_Gateway_Deactivator
      */
     public static function deactivate()
     {
-
     }
 }

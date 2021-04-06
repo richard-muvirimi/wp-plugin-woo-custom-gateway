@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
+}
+
 /**
  * Register all actions and filters for the plugin
  *
@@ -54,7 +58,6 @@ class Woo_Custom_Gateway_Loader
 
         $this->actions = array();
         $this->filters = array();
-
     }
 
     /**
@@ -78,7 +81,6 @@ class Woo_Custom_Gateway_Loader
     {
 
         $this->actions = $this->add($this->actions, $hook, $component, $callback, $priority, $accepted_args);
-
     }
 
     /**
@@ -102,7 +104,6 @@ class Woo_Custom_Gateway_Loader
     {
 
         $this->filters = $this->add($this->filters, $hook, $component, $callback, $priority, $accepted_args);
-
     }
 
     /**
@@ -133,7 +134,6 @@ class Woo_Custom_Gateway_Loader
         $hooks[] = array('hook' => $hook, 'component' => $component, 'callback' => $callback, 'priority' => $priority, 'accepted_args' => $accepted_args);
 
         return $hooks;
-
     }
 
     /**
@@ -151,7 +151,5 @@ class Woo_Custom_Gateway_Loader
         foreach ($this->actions as $hook) {
             add_action($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
         }
-
     }
-
 }

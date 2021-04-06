@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
+}
+
 /**
  * Fired during plugin activation
  *
@@ -44,7 +48,5 @@ class Woo_Custom_Gateway_Activator
 
             $id = wp_insert_post(array('post_status' => 'publish', 'post_type' => 'woocg-post', 'post_title' => __('Sample Custom Gateway', 'woo-custom-gateway'), 'meta_input' => array('woocg-desciption' => __('Sample payment gateway to just show off. ;)', 'woo-custom-gateway'))));
         }
-
     }
-
 }
