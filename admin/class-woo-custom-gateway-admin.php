@@ -201,7 +201,7 @@ class Woo_Custom_Gateway_Admin
         /**
          * When shown, will persist for a minute then wait quarter year
          */
-        if (boolval(get_transient("woocg-rate-persist")) === true || (get_transient("woocg-rate") === false && count(get_posts($args)) >= 1)) {
+        if (boolval(get_transient("woocg-rate-persist")) === true || (boolval(get_transient("woocg-rate")) === false && count(get_posts($args)) >= 1)) {
             include plugin_dir_path(__FILE__) . "/partials/woo-custom-gateway-admin-rating.php";
 
             if (boolval(get_transient("woocg-rate-persist")) === false) {
