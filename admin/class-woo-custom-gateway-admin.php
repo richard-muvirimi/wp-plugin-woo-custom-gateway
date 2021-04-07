@@ -110,7 +110,7 @@ class Woo_Custom_Gateway_Admin
      * 
      * @since 1.0.0
      * @param array $links
-     * @return void
+     * @return array
      */
     public function plugins_list_options_link($links)
     {
@@ -208,7 +208,7 @@ class Woo_Custom_Gateway_Admin
                 //remind again quarter year
                 set_transient("woocg-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
 
-                set_transient("woocg-rate-persist", true, MINUTE_IN_SECONDS);
+                set_transient("woocg-rate-persist", true, MINUTE_IN_SECONDS * 1.5);
             }
         }
     }
