@@ -81,7 +81,7 @@ class Woo_Custom_Gateway_Main
             $this->version = '1.0.0';
         }
 
-        $this->plugin_name = 'WOO CUSTOM GATEWAY';
+        $this->plugin_name = 'woo-custom-gateway';
 
         $this->load_dependencies();
         $this->set_locale();
@@ -186,7 +186,9 @@ class Woo_Custom_Gateway_Main
         $this->loader->add_action('before_delete_post', $plugin_admin, 'on_delete_method');
 
         // request rating
-        $this->loader->add_action('admin_notices', $plugin_admin, 'request_rating');
+        $this->loader->add_filter('admin_notices', $plugin_admin, 'show_rating');
+
+        $this->loader->add_filter('admin_action_' . $this->plugin_name, $plugin_admin, 'handle_action');
     }
 
     /**

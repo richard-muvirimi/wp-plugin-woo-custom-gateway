@@ -13,23 +13,29 @@ if (!defined('WPINC')) {
  * @subpackage Woo_Custom_Gateway/admin/partials
  *
  * @link https://tyganeutronics.com
- * @since 1.0.0
+ * @since 1.1.0
+ * @version 1.1.1
  */; ?>
 
 <div class="notice notice-info is-dismissible">
     <div style="margin: 20px 5px;">
         <span
-            class="float: left;"><?php printf(__('Please consider rating %s as it will encourage others to install it too.', 'woo-custom-gateway'), __("Woo Custom Gateway", 'woo-custom-gateway')); ?></span>
-        <a href="https://wordpress.org/support/plugin/woo-custom-gateway/reviews/" target="_blank"
-            style="float: right;">
-            <span><?php _e('Rate', 'woo-custom-gateway'); ?></span>
-            <div class="wporg-ratings" style="color:#ffb900; display:inline-block;">
-                <span class="dashicons dashicons-star-filled"></span>
-                <span class="dashicons dashicons-star-filled"></span>
-                <span class="dashicons dashicons-star-filled"></span>
-                <span class="dashicons dashicons-star-filled"></span>
-                <span class="dashicons dashicons-star-filled"></span>
-            </div>
-        </a>
+            class="float: left;"><?php printf(__('Please consider rating %s as it will encourage others to install it too.', $this->plugin_name), __("Woo Custom Gateway", $this->plugin_name)); ?></span>
+        <span style="float: right;">
+            <a class="button"
+                href="<?php echo $this->url_targetting_self(array($this->plugin_name . "-target" => "rate")) ?>"
+                target="_blank">
+                <?php _e('Rate ', $this->plugin_name); ?>
+                <span style="color:#ffb900;">&starf;&starf;&starf;&starf;&starf;</span>
+            </a>
+            <a class="button"
+                href="<?php echo $this->url_targetting_self(array($this->plugin_name . "-target" => "later")) ?>">
+                <span><?php _e('Remind me later', $this->plugin_name); ?></span>
+            </a>
+            <a class="button"
+                href="<?php echo $this->url_targetting_self(array($this->plugin_name . "-target" => "never")) ?>">
+                <span><?php _e('Never', $this->plugin_name); ?></span>
+            </a>
+        </span>
     </div>
 </div>

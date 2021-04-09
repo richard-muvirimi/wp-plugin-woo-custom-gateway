@@ -119,7 +119,7 @@ class Woo_Custom_Gateway_Admin
 
         $link = add_query_arg($args, admin_url('edit.php'));
 
-        $plugin_links = array('<a href="' . $link . '">' . __('Payment Methods', 'woo-custom-gateway') . '</a>');
+        $plugin_links = array('<a href="' . $link . '">' . __('Payment Methods', $this->plugin_name) . '</a>');
 
         // Merge our new link with the default ones
 
@@ -144,26 +144,26 @@ class Woo_Custom_Gateway_Admin
             // 'map_meta_cap' => true,
             'hierarchical' => false,
             'labels' => array(
-                'name' => __('Payment Methods', 'woo-custom-gateway'),
-                'singular_name' => __('Payment Method', 'woo-custom-gateway'),
-                'add_new' => __('Add New', 'woo-custom-gateway'),
-                'add_new_item' => __('Add New Payment Method', 'woo-custom-gateway'),
-                'edit_item' => __('Edit Payment Method', 'woo-custom-gateway'),
-                'new_item' => __('New Payment Method', 'woo-custom-gateway'),
-                'view_item' => __('View Payment Method', 'woo-custom-gateway'),
-                'search_items' => __('Search Payment Methods', 'woo-custom-gateway'),
-                'not_found' => __('No Payment Methods Found', 'woo-custom-gateway'),
-                'not_found_in_trash' => __('No Payment Methods found in trash', 'woo-custom-gateway'),
-                'parent_item_colon' => __('Parent Payment Method:', 'woo-custom-gateway'),
-                'all_items' => __('Payment Methods', 'woo-custom-gateway'),
-                'archives' => __('Payment Method archives', 'woo-custom-gateway'),
-                'insert_into_item' => __('Insert into Payment Method profile', 'woo-custom-gateway'),
-                'uploaded_to_this_item' => __('Uploaded to Payment Method profile', 'woo-custom-gateway'),
-                'menu_name' => __('Payment Methods', 'woo-custom-gateway'),
-                'name_admin_bar' => __('Payment Methods', 'woo-custom-gateway')
+                'name' => __('Payment Methods', $this->plugin_name),
+                'singular_name' => __('Payment Method', $this->plugin_name),
+                'add_new' => __('Add New', $this->plugin_name),
+                'add_new_item' => __('Add New Payment Method', $this->plugin_name),
+                'edit_item' => __('Edit Payment Method', $this->plugin_name),
+                'new_item' => __('New Payment Method', $this->plugin_name),
+                'view_item' => __('View Payment Method', $this->plugin_name),
+                'search_items' => __('Search Payment Methods', $this->plugin_name),
+                'not_found' => __('No Payment Methods Found', $this->plugin_name),
+                'not_found_in_trash' => __('No Payment Methods found in trash', $this->plugin_name),
+                'parent_item_colon' => __('Parent Payment Method:', $this->plugin_name),
+                'all_items' => __('Payment Methods', $this->plugin_name),
+                'archives' => __('Payment Method archives', $this->plugin_name),
+                'insert_into_item' => __('Insert into Payment Method profile', $this->plugin_name),
+                'uploaded_to_this_item' => __('Uploaded to Payment Method profile', $this->plugin_name),
+                'menu_name' => __('Payment Methods', $this->plugin_name),
+                'name_admin_bar' => __('Payment Methods', $this->plugin_name)
             ),
-            'rewrite' => array('slug' => 'custom-gateway', 'woo-custom-gateway'),
-            'supports' => array('thumbnail', 'title', 'woo-custom-gateway'),
+            'rewrite' => array('slug' => 'custom-gateway', $this->plugin_name),
+            'supports' => array('thumbnail', 'title', $this->plugin_name),
             'delete_with_user' => false,
             'register_meta_box_cb' => array($this, 'addMetaBoxs')
         ));
@@ -190,25 +190,55 @@ class Woo_Custom_Gateway_Admin
      * Show rating request
      *
      * @since 1.1.0
+     * @version 1.1.1
      * @return void
      */
-    public function request_rating()
+    public function show_rating()
     {
-
-        //if has at least one post and has never been shown
+        /**
+         * Request Rating
+         */
+        //if has at least two custom gateways and has never been shown
         $args = array('post_type' => 'woocg-post', 'fields' => 'ids', 'no_found_rows' => true);
 
-        /**
-         * When shown, will persist for a minute then wait quarter year
-         */
-        if (boolval(get_transient("woocg-rate-persist")) === true || (boolval(get_transient("woocg-rate")) === false && count(get_posts($args)) >= 1)) {
-            include plugin_dir_path(__FILE__) . "/partials/woo-custom-gateway-admin-rating.php";
+        if (boolval(get_transient($this->plugin_name . "-rate")) === false && count(get_posts($args)) >= 2) {
+            include plugin_dir_path(__FILE__) . "partials/woo-custom-gateway-admin-rating.php";
+        }
+    }
 
-            if (boolval(get_transient("woocg-rate-persist")) === false) {
-                //remind again quarter year
-                set_transient("woocg-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
+    /**
+     * Handle requested action
+     * 
+     * @since 1.1.1
+     * @return void
+     */
+    function handle_action()
+    {
 
-                set_transient("woocg-rate-persist", true, MINUTE_IN_SECONDS * 1.5);
+        if (wp_verify_nonce(filter_input(INPUT_GET, $this->plugin_name . "-nonce"), $this->plugin_name)) {
+
+            switch (filter_input(INPUT_GET, $this->plugin_name . "-target")) {
+                case "rate":
+                    //remind again in three months
+                    set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
+
+                    wp_redirect("https://wordpress.org/support/plugin/woo-custom-gateway/reviews/");
+                    exit;
+                    break;
+                case "later":
+                    //remind after a week
+                    set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS * 7);
+
+                    wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
+                    exit;
+                    break;
+                case "never":
+                    set_transient($this->plugin_name . "-rate", true, YEAR_IN_SECONDS);
+
+                    wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
+                    exit;
+                    break;
+                default:
             }
         }
     }
@@ -221,7 +251,7 @@ class Woo_Custom_Gateway_Admin
     public function addMetaBoxs($post)
     {
 
-        add_meta_box('woocg-post-description', __('Payment Method Description', 'woo-custom-gateway'), array($this, 'descriptionMetaBox'), 'woocg-post', 'normal', 'high');
+        add_meta_box('woocg-post-description', __('Payment Method Description', $this->plugin_name), array($this, 'descriptionMetaBox'), 'woocg-post', 'normal', 'high');
     }
 
     /**
@@ -240,7 +270,7 @@ class Woo_Custom_Gateway_Admin
         $html = '<textarea rows="1" cols="40" name="woocg_post_description_editor" tabindex="6" id="excerpt">' . $description . '</textarea>';
 
         if (empty($description)) {
-            $html .= wpautop(__('Description for the payment method shown on the admin page.', 'woo-custom-gateway'));
+            $html .= wpautop(__('Description for the payment method shown on the admin page.', $this->plugin_name));
         }
 
         echo $html;
@@ -258,7 +288,7 @@ class Woo_Custom_Gateway_Admin
     {
 
         if (get_post_field('post_type', $post_id) === 'woocg-post' && $thumbnail_id == null) {
-            $content .= wpautop(__('If you want to show an image next to the gateway\'s name on the frontend, select an image.', 'woo-custom-gateway'));
+            $content .= wpautop(__('If you want to show an image next to the gateway\'s name on the frontend, select an image.', $this->plugin_name));
         }
 
         return $content;
@@ -275,7 +305,7 @@ class Woo_Custom_Gateway_Admin
     {
 
         if ('woocg-post' === $post->post_type) {
-            $input = __('Payment Method Name', 'woo-custom-gateway');
+            $input = __('Payment Method Name', $this->plugin_name);
         }
 
         return $input;
@@ -306,7 +336,7 @@ class Woo_Custom_Gateway_Admin
     public function add_columns($columns)
     {
 
-        $columns['thumbnail'] = __('Thumbnail', 'woo-custom-gateway');
+        $columns['thumbnail'] = __('Thumbnail', $this->plugin_name);
 
         return $columns;
     }
@@ -327,13 +357,14 @@ class Woo_Custom_Gateway_Admin
 
             $link = add_query_arg($args, admin_url('admin.php'));
 
-            $actions['settings'] = '<a href="' . $link . '">' . __('Settings', 'woo-custom-gateway') . '</a>';
+            $actions['settings'] = '<a href="' . $link . '">' . __('Settings', $this->plugin_name) . '</a>';
         }
 
         return $actions;
     }
 
     /**
+     * On delete custom post type
      *
      * @since 1.0.0
      * @param int $postid
@@ -344,5 +375,26 @@ class Woo_Custom_Gateway_Admin
         $method = new WC_Woo_Custom_Gateway($postid);
 
         delete_option($method->get_option_key());
+    }
+
+    /**
+     * Get a url targetting self
+     *
+     * @param array $arguments
+     * @since 1.1.1
+     * @return void
+     */
+    function url_targetting_self($arguments)
+    {
+        $arguments = array_merge(
+            array(
+                "action" => $this->plugin_name,
+                $this->plugin_name . "-nonce" => wp_create_nonce($this->plugin_name)
+            ),
+            filter_input_array(INPUT_GET) ?: array(),
+            $arguments
+        );
+
+        return admin_url(get_current_screen()->base . ".php") . "?" . http_build_query($arguments);
     }
 }
