@@ -77,7 +77,7 @@ class Woo_Custom_Gateway_Ajax
         if (check_ajax_referer("wcg-rate", "_ajax_nonce", false) !== false) {
 
             //remind again in three months
-            set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
+            set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 6 : YEAR_IN_SECONDS / 2);
 
             echo wp_send_json(array(
                 "redirect" => "https://wordpress.org/support/plugin/" . $this->plugin_name . "/reviews/"
@@ -98,7 +98,7 @@ class Woo_Custom_Gateway_Ajax
         if (check_ajax_referer("wcg-remind", "_ajax_nonce", false) !== false) {
 
             //remind after a week
-            set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS * 7);
+            set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS);
 
             echo wp_send_json(array(
                 "success" => true
