@@ -87,6 +87,7 @@ class Woo_Custom_Gateway_Main
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
+        $this->define_ajax_hooks();
     }
 
     /**
@@ -127,6 +128,12 @@ class Woo_Custom_Gateway_Main
          * side of the site.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-woo-custom-gateway-public.php';
+
+        /**
+         * The class responsible for defining all actions that occur in the ajax-facing
+         * side of the site.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'ajax/class-woo-custom-gateway-ajax.php';
 
         $this->loader = new Woo_Custom_Gateway_Loader();
     }
@@ -187,8 +194,6 @@ class Woo_Custom_Gateway_Main
 
         // request rating
         $this->loader->add_filter('admin_notices', $plugin_admin, 'show_rating');
-
-        $this->loader->add_filter('admin_action_' . $this->plugin_name, $plugin_admin, 'handle_action');
     }
 
     /**
@@ -207,6 +212,23 @@ class Woo_Custom_Gateway_Main
              */
             require_once plugin_dir_path(dirname(__FILE__)) . 'includes/custom-gateway-blueprint.php';
         }
+    }
+
+    /**
+     * Register all of the hooks related to the public-facing functionality
+     * of the plugin.
+     *
+     * @access private
+     * @since 1.0.0
+     */
+    private function define_ajax_hooks()
+    {
+
+        $plugin_ajax = new Woo_Custom_Gateway_Ajax($this->get_plugin_name(), $this->get_version());
+
+        $this->loader->add_action('wp_ajax_' . $this->get_plugin_name() . '-rate', $plugin_ajax, 'ajaxDoRate');
+        $this->loader->add_action('wp_ajax_' . $this->get_plugin_name() . '-remind', $plugin_ajax, 'ajaxDoRemind');
+        $this->loader->add_action('wp_ajax_' . $this->get_plugin_name() . '-cancel', $plugin_ajax, 'ajaxDoCancel');
     }
 
     /**

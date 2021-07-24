@@ -73,16 +73,7 @@ class Woo_Custom_Gateway_Admin
     public function enqueue_styles()
     {
 
-        /**
-         * This function is provided for demonstration purposes only.
-         * An instance of this class should be passed to the run() function
-         * defined in Woo_Custom_Gateway_Loader as all of the hooks are defined
-         * in that particular class.
-         * The Woo_Custom_Gateway_Loader will then create the relationship
-         * between the defined hooks and the functions defined in this
-         * class.
-         */
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/woo-custom-gateway-admin.css', array(), $this->version, 'all');
+        wp_register_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/woo-custom-gateway-admin.css', array(), $this->version, 'all');
     }
 
     /**
@@ -93,16 +84,11 @@ class Woo_Custom_Gateway_Admin
     public function enqueue_scripts()
     {
 
-        /**
-         * This function is provided for demonstration purposes only.
-         * An instance of this class should be passed to the run() function
-         * defined in Woo_Custom_Gateway_Loader as all of the hooks are defined
-         * in that particular class.
-         * The Woo_Custom_Gateway_Loader will then create the relationship
-         * between the defined hooks and the functions defined in this
-         * class.
-         */
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/woo-custom-gateway-admin.js', array('jquery'), $this->version, false);
+        wp_register_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/woo-custom-gateway-admin.js', array('jquery'), $this->version, false);
+        wp_localize_script($this->plugin_name, "wcg", array(
+            "ajax_url" => admin_url('admin-ajax.php'),
+            "name" => $this->plugin_name
+        ));
     }
 
     /**
@@ -202,44 +188,10 @@ class Woo_Custom_Gateway_Admin
         $args = array('post_type' => 'woocg-post', 'fields' => 'ids', 'no_found_rows' => true);
 
         if (boolval(get_transient($this->plugin_name . "-rate")) === false && count(get_posts($args)) >= 2) {
+            wp_enqueue_script($this->plugin_name);
+            wp_enqueue_style($this->plugin_name);
+
             include plugin_dir_path(__FILE__) . "partials/woo-custom-gateway-admin-rating.php";
-        }
-    }
-
-    /**
-     * Handle requested action
-     * 
-     * @since 1.1.1
-     * @return void
-     */
-    function handle_action()
-    {
-
-        if (wp_verify_nonce(filter_input(INPUT_GET, $this->plugin_name . "-nonce"), $this->plugin_name)) {
-
-            switch (filter_input(INPUT_GET, $this->plugin_name . "-target")) {
-                case "rate":
-                    //remind again in three months
-                    set_transient($this->plugin_name . "-rate", true, defined("MONTH_IN_SECONDS") ? MONTH_IN_SECONDS * 3 : YEAR_IN_SECONDS / 4);
-
-                    wp_redirect("https://wordpress.org/support/plugin/woo-custom-gateway/reviews/");
-                    exit;
-                    break;
-                case "later":
-                    //remind after a week
-                    set_transient($this->plugin_name . "-rate", true, WEEK_IN_SECONDS * 7);
-
-                    wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
-                    exit;
-                    break;
-                case "never":
-                    set_transient($this->plugin_name . "-rate", true, YEAR_IN_SECONDS);
-
-                    wp_redirect(remove_query_arg(array("action", $this->plugin_name . "-nonce", $this->plugin_name, $this->plugin_name . "-target"), $_SERVER['REQUEST_URI']));
-                    exit;
-                    break;
-                default:
-            }
         }
     }
 
