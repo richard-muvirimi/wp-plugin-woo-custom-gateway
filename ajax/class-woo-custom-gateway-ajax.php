@@ -65,6 +65,13 @@ class Woo_Custom_Gateway_Ajax
         $this->version     = $version;
     }
 
+    /**
+     * Set reminder for half a year and send redirect link
+     * 
+     * @since 1.0.2
+     *
+     * @return void
+     */
     public function ajaxDoRate()
     {
         if (check_ajax_referer("wcg-rate", "_ajax_nonce", false) !== false) {
@@ -78,6 +85,13 @@ class Woo_Custom_Gateway_Ajax
         }
     }
 
+    /**
+     * Remind again in a week
+     * 
+     * @since 1.0.2
+     *
+     * @return void
+     */
     public function ajaxDoRemind()
     {
 
@@ -92,6 +106,13 @@ class Woo_Custom_Gateway_Ajax
         }
     }
 
+    /**
+     * Remind in a year
+     * 
+     * @since 1.0.2
+     *
+     * @return void
+     */
     public function ajaxDoCancel()
     {
         if (check_ajax_referer("wcg-cancel", "_ajax_nonce", false) !== false) {
