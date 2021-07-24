@@ -12,17 +12,17 @@
         " a.btn-cancel"
     ).click(function (e) {
       e.preventDefault();
-      console.log(window.wcg.name + "-" + $(this).data("action"));
+
       $.post({
         url: window.wcg.ajax_url,
         data: {
           _ajax_nonce: $(this).data("nonce"),
           action: window.wcg.name + "-" + $(this).data("action"),
         },
+        async: false,
         success: function (response) {
-          console.log(response);
           if (response.redirect) {
-            window.location.assign(response.redirect);
+            window.open(response.redirect, "_blank").focus();
           }
           $("." + window.wcg.name + " .notice-dismiss").click();
         },
