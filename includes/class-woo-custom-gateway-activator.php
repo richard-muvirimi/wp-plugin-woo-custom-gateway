@@ -46,7 +46,14 @@ class Woo_Custom_Gateway_Activator
 
         if (empty(get_posts($args))) {
 
-            $id = wp_insert_post(array('post_status' => 'publish', 'post_type' => 'woocg-post', 'post_title' => __('Sample Custom Gateway', 'woo-custom-gateway'), 'meta_input' => array('woocg-desciption' => __('Sample payment gateway to just show off. ;)', 'woo-custom-gateway'))));
+            $id = wp_insert_post(array(
+                'post_status' => 'publish',
+                'post_type' => 'woocg-post',
+                'post_title' => __('Sample Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG),
+                'meta_input' => array(
+                    'woocg-desciption' => __('Sample payment gateway to just show off. ;)', WOO_CUSTOM_GATEWAY_SLUG) // ignore typo
+                )
+            ));
         }
 
         if (boolval(get_transient("woo-custom-gateway-rate")) === false) {

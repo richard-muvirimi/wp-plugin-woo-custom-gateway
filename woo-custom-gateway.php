@@ -12,7 +12,7 @@
  * Plugin Name:       Woo Custom Gateway
  * Plugin URI:        https://tyganeutronics.com/woo-custom-gateway/
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
- * Version:           1.1.3
+ * Version:           1.2.0
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com/
  * License:           GPL-2.0+
@@ -20,7 +20,7 @@
  * Text Domain:       woo-custom-gateway
  * Domain Path:       /languages
  * WC requires at least: 3.0.0
- * WC tested up to:   5.5.2
+ * WC tested up to:   5.8.0
  *
  *
  * @package Woo_Custom_Gateway
@@ -40,12 +40,13 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('WOO_CUSTOM_GATEWAY_VERSION', '1.1.3');
+define('WOO_CUSTOM_GATEWAY_VERSION', '1.2.0');
+define('WOO_CUSTOM_GATEWAY_SLUG', 'woo-custom-gateway');
 
 /**
  * Reference to this file and this file only.
  */
-define('WOO_CUSTOM_GATEWAY_FILE', __FILE__);
+define('WOO_CUSTOM_GATEWAY_NAME', plugin_basename(__FILE__));
 
 /**
  * The code that runs during plugin activation.

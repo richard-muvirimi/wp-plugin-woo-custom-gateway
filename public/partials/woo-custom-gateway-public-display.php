@@ -14,6 +14,17 @@ if (!defined('WPINC')) {
  *
  * @link https://tyganeutronics.com
  * @since 1.0.0
- */; ?>
+ */ ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<fieldset>
+    <p class="form-row form-row-wide">
+        <label
+            for="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG) ?>-note"><?php echo esc_html($this->description) ?: __("Please provide proof of payment.", WOO_CUSTOM_GATEWAY_SLUG) ?>
+            <span class="required">*</span></label>
+
+        <textarea id="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG) ?>-note" class="input-text"
+            name="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG) ?>-note"></textarea>
+
+    </p>
+    <div class="clear"></div>
+</fieldset>
