@@ -81,7 +81,7 @@ class Woo_Custom_Gateway_Main
             $this->version = '1.0.0';
         }
 
-        $this->plugin_name = 'woo-custom-gateway';
+        $this->plugin_name = WOO_CUSTOM_GATEWAY_SLUG;
 
         $this->load_dependencies();
         $this->set_locale();
@@ -170,7 +170,7 @@ class Woo_Custom_Gateway_Main
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
         // Add custom action links
-        $this->loader->add_filter('plugin_action_links_' . plugin_basename(WOO_CUSTOM_GATEWAY_FILE), $plugin_admin, 'plugins_list_options_link');
+        $this->loader->add_filter('plugin_action_links_' . WOO_CUSTOM_GATEWAY_NAME, $plugin_admin, 'plugins_list_options_link');
 
         $this->loader->add_filter('init', $plugin_admin, 'init');
 

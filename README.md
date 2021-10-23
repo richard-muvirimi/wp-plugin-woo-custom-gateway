@@ -6,8 +6,8 @@
 - **_ Requires at least: _** 4.0.0
 - **_ Tested up to: _** 5.8
 - **_ Requires PHP: _** 5.6
-- **_ WC tested up to: _** 5.5.2
-- **_ Stable tag: _** 1.1.3
+- **_ WC tested up to: _** 5.8.0
+- **_ Stable tag: _** 1.2.0
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,10 @@ Custom payment gateway settings in WooCommerce. These settings will to shown to 
 Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 ## Changelog
+
+**_ 1.2.0 _**
+
+- Add payment proof field
 
 **_ 1.1.2 - 1.1.3 _**
 

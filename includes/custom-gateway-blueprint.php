@@ -38,17 +38,17 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
             $this->icon = wp_get_attachment_image_url($thumbId, 'full');
         }
 
-        $this->has_fields         = false;
         $this->method_title       = get_post_field('post_title', $id);
-        $this->method_description = get_post_meta($id, 'woocg-desciption', true);
+        $this->method_description = get_post_meta($id, 'woocg-desciption', true); // ignore typo
 
         $this->init_form_fields();
         $this->init_settings();
 
         // Define user set variables
+        $this->has_fields   = $this->get_option('note') == "yes";
         $this->title        = $this->get_option('title');
         $this->description  = $this->get_option('description');
-        $this->instructions = $this->get_option('instructions', $this->description);
+        $this->instructions = $this->get_option('instructions');
 
         //append prefix if not present for compatibility with 1.0.7
         $status = $this->get_option('order_stat');
@@ -66,12 +66,50 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
      *
      * @param int $orderId
      * @since 1.0.0
+     * @version 1.2.0
      */
     public function thankyou_page($orderId)
     {
 
         if ($this->instructions) {
-            echo wpautop(wptexturize($this->instructions));
+            echo wp_kses_post(wpautop(wptexturize($this->instructions)));
+        }
+    }
+
+    /**
+     * Validate payment proof field
+     *
+     * @return bool
+     * @version 1.2.0
+     * @since 1.2.0
+     */
+    public function validate_fields()
+    {
+        if ($this->has_fields) {
+            $note = filter_input(INPUT_POST, WOO_CUSTOM_GATEWAY_SLUG . "-note", FILTER_SANITIZE_STRING);
+
+            $note = sanitize_textarea_field($note);
+            if (strlen($note) == 0) {
+                wc_add_notice(__('Please complete the payment information.', WOO_CUSTOM_GATEWAY_SLUG), 'error');
+                return false;
+            }
+        }
+        return parent::validate_fields();
+    }
+
+    /**
+     * show payment proof field
+     *
+     * @return void
+     * @version 1.2.0
+     * @since 1.2.0
+     */
+    public function payment_fields()
+    {
+        if ($this->has_fields) {
+            include plugin_dir_path(__DIR__) . "public/partials/woo-custom-gateway-public-display.php";
+        } else {
+            parent::payment_fields();
         }
     }
 
@@ -80,7 +118,7 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
      *
      * @access public
      * @since 1.0.0
-     * @version 1.1.0
+     * @version 1.2.0
      * @param WC_Order $order
      * @param bool     $sent_to_admin
      * @param bool     $plain_text
@@ -89,32 +127,65 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
     {
         // Go ahead only if the order was created by us.
         if ($this->instructions && !$sent_to_admin && $this->id === $order->get_payment_method()) {
-            echo wpautop(wptexturize($this->instructions)) . PHP_EOL;
+            if ($plain_text) {
+                echo wptexturize($this->instructions . PHP_EOL);
+            } else {
+                echo wp_kses_post(wpautop(wptexturize($this->instructions)));
+            }
         }
     }
 
     /**
      * Initialise Gateway Settings Form Fields
      * 
-     * @version 1.1.0
+     * @version 1.2.0
      * @since 1.0.0
      */
     public function init_form_fields()
     {
 
         $this->form_fields = array(
-            'enabled' => array('title' => __('Enable/Disable', 'woocommerce'), 'type' => 'checkbox', 'label' => __(sprintf('Enable %s?', $this->method_title), 'woocommerce'), 'default' => 'yes'),
+            'enabled' => array(
+                'title' => __('Enable/Disable', WOO_CUSTOM_GATEWAY_SLUG),
+                'type' => 'checkbox',
+                'label' => __(sprintf('Enable %s?', $this->method_title), WOO_CUSTOM_GATEWAY_SLUG),
+                'default' => 'yes'
+            ),
             'order_stat' => array(
-                'title' => __('Order Status', 'woocommerce'),
+                'title' => __('Order Status', WOO_CUSTOM_GATEWAY_SLUG),
                 'type' => 'select',
-                'description' => __('The setting controls the status that\'s being displayed on the order when it\'s placed.', 'woocommerce'),
+                'description' => __('Default order status when placed.', WOO_CUSTOM_GATEWAY_SLUG),
                 'default' => wc_get_is_pending_statuses()[0] ?: wc_get_order_statuses()[0],
                 'desc_tip' => false,
                 'options' => wc_get_order_statuses()
             ),
-            'title' => array('title' => __('Title', 'woocommerce'), 'type' => 'text', 'description' => __('This controls the title which the user sees during checkout.', 'woocommerce'), 'default' => __($this->method_title, 'woocommerce'), 'desc_tip' => false),
-            'description' => array('title' => __('Description', 'woocommerce'), 'type' => 'textarea', 'description' => __('Payment method description that the customer will see on your checkout.', 'woocommerce'), 'default' => __('', 'woocommerce'), 'desc_tip' => false),
-            'instructions' => array('title' => __('Instructions', 'woocommerce'), 'type' => 'textarea', 'description' => __('Instructions that will be added to the thank you page and emails.', 'woocommerce'), 'default' => '', 'desc_tip' => false)
+            'title' => array(
+                'title' => __('Title', WOO_CUSTOM_GATEWAY_SLUG),
+                'type' => 'text',
+                'description' => __('The payment gateway title displayed during checkout.', WOO_CUSTOM_GATEWAY_SLUG),
+                'default' => __($this->method_title, WOO_CUSTOM_GATEWAY_SLUG),
+                'desc_tip' => false
+            ),
+            'description' => array(
+                'title' => __('Description', WOO_CUSTOM_GATEWAY_SLUG),
+                'type' => 'textarea',
+                'description' => __('The payment gateway description displayed during checkout.', WOO_CUSTOM_GATEWAY_SLUG),
+                'default' => __('', WOO_CUSTOM_GATEWAY_SLUG),
+                'desc_tip' => false
+            ),
+            'note' => array(
+                'title' => __('Payment Proof', WOO_CUSTOM_GATEWAY_SLUG),
+                'type' => 'checkbox',
+                'label' => __('Allow users to provide payment proof when creating the order.', WOO_CUSTOM_GATEWAY_SLUG),
+                'default' => 'no'
+            ),
+            'instructions' => array(
+                'title' => __('Instructions', WOO_CUSTOM_GATEWAY_SLUG),
+                'type' => 'textarea',
+                'description' => __('Instructions that will be added to the thank you page and emails.', WOO_CUSTOM_GATEWAY_SLUG),
+                'default' => '',
+                'desc_tip' => false
+            )
         );
     }
 
@@ -123,6 +194,7 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
      *
      * @param  int     $order_id
      * @since 1.0.0
+     * @version 1.2.0
      * @return array
      */
     public function process_payment($order_id)
@@ -131,11 +203,17 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
         $order = wc_get_order($order_id);
 
         // Mark as set order status (we're awaiting the payment)
-        $order->update_status($this->order_stat, sprintf(__('Awaiting %s payment.', 'woo-custom-gateway'), $this->method_title));
+        $order->update_status($this->order_stat, sprintf(__('Awaiting %s payment.', WOO_CUSTOM_GATEWAY_SLUG), $this->method_title));
 
         // Reduce stock levels
-        // $order->reduce_order_stock();
         wc_reduce_stock_levels($order_id);
+
+        $note = filter_input(INPUT_POST, WOO_CUSTOM_GATEWAY_SLUG . "-note", FILTER_SANITIZE_STRING);
+
+        $note = sanitize_textarea_field($note);
+        if (strlen($note) == 0) {
+            $order->add_order_note(esc_html($note), 1, true);
+        }
 
         // Remove cart
         WC()->cart->empty_cart();
