@@ -194,7 +194,7 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
      *
      * @param  int     $order_id
      * @since 1.0.0
-     * @version 1.2.0
+     * @version 1.2.1
      * @return array
      */
     public function process_payment($order_id)
@@ -211,7 +211,7 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
         $note = filter_input(INPUT_POST, WOO_CUSTOM_GATEWAY_SLUG . "-note", FILTER_SANITIZE_STRING);
 
         $note = sanitize_textarea_field($note);
-        if (strlen($note) == 0) {
+        if (strlen($note) != 0) {
             $order->add_order_note(esc_html($note), 1, true);
         }
 
