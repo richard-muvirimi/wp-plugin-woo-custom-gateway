@@ -7,7 +7,7 @@
 - **_ Tested up to: _** 5.8
 - **_ Requires PHP: _** 5.6
 - **_ WC tested up to: _** 5.8.0
-- **_ Stable tag: _** 1.2.0
+- **_ Stable tag: _** 1.2.1
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,7 +67,7 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.2.0 _**
+**_ 1.2.0 - 1.2.1 _**
 
 - Add payment proof field
 
