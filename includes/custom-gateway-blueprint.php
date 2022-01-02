@@ -77,27 +77,6 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
     }
 
     /**
-     * Validate payment proof field
-     *
-     * @return bool
-     * @version 1.2.0
-     * @since 1.2.0
-     */
-    public function validate_fields()
-    {
-        if ($this->has_fields) {
-            $note = filter_input(INPUT_POST, WOO_CUSTOM_GATEWAY_SLUG . "-note", FILTER_SANITIZE_STRING);
-
-            $note = sanitize_textarea_field($note);
-            if (strlen($note) == 0) {
-                wc_add_notice(__('Please complete the payment information.', WOO_CUSTOM_GATEWAY_SLUG), 'error');
-                return false;
-            }
-        }
-        return parent::validate_fields();
-    }
-
-    /**
      * show payment proof field
      *
      * @return void

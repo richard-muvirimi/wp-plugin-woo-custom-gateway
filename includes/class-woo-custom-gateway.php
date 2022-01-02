@@ -75,12 +75,7 @@ class Woo_Custom_Gateway_Main
     public function __construct()
     {
 
-        if (defined('WOO_CUSTOM_GATEWAY_VERSION')) {
-            $this->version = WOO_CUSTOM_GATEWAY_VERSION;
-        } else {
-            $this->version = '1.0.0';
-        }
-
+        $this->version = WOO_CUSTOM_GATEWAY_VERSION;
         $this->plugin_name = WOO_CUSTOM_GATEWAY_SLUG;
 
         $this->load_dependencies();
