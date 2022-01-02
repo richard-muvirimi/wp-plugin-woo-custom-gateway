@@ -158,6 +158,7 @@ class Woo_Custom_Gateway_Admin
     /**
      *
      * @since 1.0.0
+     * @version 1.2.2
      * @param int      $post_id
      * @param \WP_Post $post
      * @param boolean  $update
@@ -165,10 +166,22 @@ class Woo_Custom_Gateway_Admin
     public function save_post($post_id, $post, $update)
     {
 
-        $description = sanitize_text_field(filter_input(INPUT_POST, 'woocg_post_description_editor'));
+        if (defined("DOING_AUTOSAVE") && DOING_AUTOSAVE) {
+            return;
+        }
 
-        if ($description) {
-            update_post_meta($post_id, 'woocg-desciption', $description);
+        if (!current_user_can("edit_post", $post_id)) {
+            return;
+        }
+
+        switch (get_post_type($post_id)) {
+            case 'woocg-post':
+                $description = sanitize_text_field(filter_input(INPUT_POST, 'woocg_post_description_editor'));
+
+                if ($description) {
+                    update_post_meta($post_id, 'woocg-desciption', $description);
+                }
+                break;
         }
     }
 
