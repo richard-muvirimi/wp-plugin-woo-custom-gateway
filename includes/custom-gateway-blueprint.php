@@ -24,13 +24,19 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
      *
      * @param int $id
      * 
-     * @version 1.1.0
+     * @version 1.2.3
      * @since 1.0.0
      */
     public function __construct($id)
     {
 
-        $this->id = get_post_field('post_type', $id) . '-' . $id;
+        /**
+         * Filter payment gateway id, has to be unique so that orders are not attributed to the wrong payment gateway
+         * 
+         * @since 1.2.3
+         * @version 1.2.3
+         */
+        $this->id = apply_filters(WOO_CUSTOM_GATEWAY_SLUG . "-gateway-id", get_post_field('post_type', $id) . '-' . $id, $id);
 
         $thumbId = get_post_thumbnail_id($id);
 
@@ -173,7 +179,7 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
      *
      * @param  int     $order_id
      * @since 1.0.0
-     * @version 1.2.1
+     * @version 1.2.3
      * @return array
      */
     public function process_payment($order_id)
@@ -188,7 +194,7 @@ class WC_Woo_Custom_Gateway extends WC_Payment_Gateway
         wc_reduce_stock_levels($order_id);
 
         if ($this->has_fields) {
-            $note = filter_input(INPUT_POST, WOO_CUSTOM_GATEWAY_SLUG . "-note", FILTER_SANITIZE_STRING);
+            $note = filter_input(INPUT_POST, WOO_CUSTOM_GATEWAY_SLUG . "-note");
 
             $note = sanitize_textarea_field($note);
             if (strlen($note) != 0) {
