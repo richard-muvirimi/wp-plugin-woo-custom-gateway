@@ -158,7 +158,7 @@ class Woo_Custom_Gateway_Admin
     /**
      *
      * @since 1.0.0
-     * @version 1.2.2
+     * @version 1.2.3
      * @param int      $post_id
      * @param \WP_Post $post
      * @param boolean  $update
@@ -176,10 +176,17 @@ class Woo_Custom_Gateway_Admin
 
         switch (get_post_type($post_id)) {
             case 'woocg-post':
-                $description = sanitize_text_field(filter_input(INPUT_POST, 'woocg_post_description_editor'));
 
-                if ($description) {
-                    update_post_meta($post_id, 'woocg-desciption', $description);
+                $nonce = filter_input(INPUT_POST, $this->plugin_name . "-nonce");
+                if ($nonce && wp_verify_nonce($nonce, $this->plugin_name)) {
+
+                    if (isset($_POST["woocg-description"])) {
+                        $description = sanitize_text_field(filter_input(INPUT_POST, 'woocg-description'));
+
+                        if ($description) {
+                            update_post_meta($post_id, 'woocg-desciption', $description);
+                        }
+                    }
                 }
                 break;
         }
@@ -222,28 +229,20 @@ class Woo_Custom_Gateway_Admin
     /**
      * 
      * @since 1.0.0
+     * @version 1.2.3
      * @param \WP_Post $post
      * @param array    $args
      */
     public function descriptionMetaBox($post, $args)
     {
 
-        $description = get_post_meta($post->ID, 'woocg-desciption', true);
-
-        $description = esc_html($description);
-
-        $html = '<textarea rows="1" cols="40" name="woocg_post_description_editor" tabindex="6" id="excerpt">' . $description . '</textarea>';
-
-        if (empty($description)) {
-            $html .= wpautop(__('Description for the payment method shown on the admin page.', $this->plugin_name));
-        }
-
-        echo $html;
+        include plugin_dir_path(__FILE__) . "partials/woo-custom-gateway-admin-post.php";
     }
 
     /**
      *
      * @since 1.0.0
+     * @version 1.0.0
      * @param  string   $content
      * @param  int      $post_id
      * @param  int      $thumbnail_id
@@ -260,8 +259,10 @@ class Woo_Custom_Gateway_Admin
     }
 
     /**
+     * Change the enter tilte here text
      *
      * @since 1.0.0
+     * @version 1.0.0
      * @param  string   $input
      * @param  \WP_Post $post
      * @return string
@@ -277,8 +278,10 @@ class Woo_Custom_Gateway_Admin
     }
 
     /**
+     * Output the column data
      * 
      * @since 1.0.0
+     * @version 1.0.0
      * @param $column
      * @param $post_id
      */
@@ -293,8 +296,10 @@ class Woo_Custom_Gateway_Admin
     }
 
     /**
+     * Add custom post thumbnail column
      * 
      * @since 1.0.0
+     * @version 1.0.0
      * @param  $columns
      * @return mixed
      */
@@ -307,8 +312,11 @@ class Woo_Custom_Gateway_Admin
     }
 
     /**
+     * 
+     * Add quicck link to the plugin settings on the plugins page
      *
      * @since 1.0.0
+     * @version 1.0.0
      * @param  array    $actions
      * @param  \WP_Post $post
      * @return string
@@ -332,6 +340,7 @@ class Woo_Custom_Gateway_Admin
      * On delete custom post type
      *
      * @since 1.0.0
+     * @version 1.0.0
      * @param int $postid
      */
     public function on_delete_method($postid)

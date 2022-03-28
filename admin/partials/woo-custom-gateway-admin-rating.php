@@ -15,7 +15,8 @@ if (!defined('WPINC')) {
  * @link https://tyganeutronics.com
  * @since 1.1.0
  * @version 1.1.1
- */; ?>
+ */
+?>
 
 <div class="<?php esc_attr_e($this->plugin_name) ?> notice notice-info is-dismissible">
     <div>
