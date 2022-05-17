@@ -5,8 +5,8 @@ Donate link: https://tyganeutronics.com/shop/woo-custom-gateway/
 Requires at least: 4.0.0
 Tested up to: 5.9
 Requires PHP: 5.6
-WC tested up to: 6.3.1
-Stable tag: 1.2.3
+WC tested up to: 6.5.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,8 @@ The steps of creating a payment gateway entail:
 
 1. Creating a payment gateway in WooCommerce → Payment Methods → Add New
 2. Customising the gateway in WooCommerce payment settings. (These options are shown to the customer).
-3. Creating another.
+3. Add a few urls to ping after an order is created.
+4. Creating another.
 
 Note: You will have to update the order status as the order progresses from On Hold/Processing as this gateway has no way of tracking the order.
 
@@ -39,7 +40,7 @@ In the search field type “Woo Custom Gateway,” then click “Search Plugins.
 1. What is this all about?
 ♦ This plugin addresses cases where you might want a payment gateway such as \"pay on deliver\" or \"cheque\" but this plugin goes a step further as it allows you to customize with a logo and email instructions after customer pays. This allows you to add local payment solutions in your area and you can easily update the order status of the order as the payment process progresses.
 
-2. So where do i start?
+2. So where do I start?
 ♦ After you install and activate plugin a menu option \"Payment Gateways\" is added under \"WooCommerce Menu Options\" in Admin sidebar, you then have to create a payment gateway. After you are done you go to the gateways settings in WooCommerce payment settings and further customize the payment gateway.
 
 3. Is there a limit on number of gateways I can create
@@ -52,6 +53,10 @@ In the search field type “Woo Custom Gateway,” then click “Search Plugins.
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
+= 1.3.0 =
+* Separate Email instructions from Thank you page instructions in gateway settings.
+* Add ability to ping a url after order is completed.
+
 = 1.2.3 =
 * Add gateway id filter
 

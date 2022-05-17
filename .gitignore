@@ -1,1 +1,4 @@
-woo-custom-gateway.code-workspace
+*.code-workspace
+/vendor/
+composer.lock
+rsync.sh
