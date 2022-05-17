@@ -1,0 +1,58 @@
+{
+    "name": "rich4rdmuvirimi/woo-custom-gateway",
+    "description": "Add multiple custom payment gateways to WooCommerce e-commerce plugin.",
+    "type": "wordpress-plugin",
+    "license": "GNU-V2",
+    "autoload": {
+        "psr-4": {
+            "Rich4rdMuvirimi\\WooCustomGateway\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rich4rdMuvirimi\\WooCustomGateway\\Tests\\": "tests/src/",
+            "Rich4rdMuvirimi\\WooCustomGateway\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "5.6"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@php-cs-setup"
+        ],
+        "php-cs-setup": [
+            "@phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/,vendor/phpcompatibility/phpcompatibility-wp,vendor/phpcompatibility/php-compatibility,vendor/phpcompatibility/phpcompatibility-paragonie",
+            "@phpcs -i"
+        ],
+        "phpcs": [
+            "vendor/bin/phpcs"
+        ],
+        "test": [
+            "phpunit"
+        ],
+        "dist": [
+            "bash rsync.sh"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Richard Muvirimi",
+            "email": "rich4rdmuvirimi@gmail.com",
+            "homepage": "https://tyganeutronics.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "5.6 || ^7.0 || ^8.0"
+    },
+    "require-dev": {
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "wp-coding-standards/wpcs": "^2.3",
+        "brain/monkey": "^2.6",
+        "phpunit/phpunit": "^5.7"
+    }
+}

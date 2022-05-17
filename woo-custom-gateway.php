@@ -12,7 +12,7 @@
  * Plugin Name:       Woo Custom Gateway
  * Plugin URI:        https://tyganeutronics.com/woo-custom-gateway/
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
- * Version:           1.2.3
+ * Version:           1.3.0
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com/
  * License:           GPL-2.0+
@@ -20,77 +20,48 @@
  * Text Domain:       woo-custom-gateway
  * Domain Path:       /languages
  * WC requires at least: 3.0.0
- * WC tested up to:   5.8.0
+ * WC tested up to:   6.5.1
  *
- *
- * @package Woo_Custom_Gateway
+ * @package WooCustomGateway
  *
  * @link https://tyganeutronics.com
  * @since 1.0.0
  */
 
+use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
+
 // If this file is called directly, abort.
 
-if (!defined('WPINC')) {
-    die();
+if ( ! defined( 'WPINC' ) ) {
+	die();
 }
 
-/**
- * Current plugin version.
- */
-define('WOO_CUSTOM_GATEWAY_VERSION', '1.2.3');
-define('WOO_CUSTOM_GATEWAY_SLUG', 'woo-custom-gateway');
+ /**
+  * The plugin slug, one source of truth for context
+  */
+  define( 'WOO_CUSTOM_GATEWAY_SLUG', 'woo-custom-gateway' );
+
+  /**
+   * Plugin version number
+   */
+  define( 'WOO_CUSTOM_GATEWAY_VERSION', '1.3.0' );
+
+  /**
+   * Reference to this file, and this file only, (well, plugin entry point)
+   */
+   define( 'WOO_CUSTOM_GATEWAY_FILE', __FILE__ );
+
+  /**
+   * Plugin name as known to WordPress
+   */
+  define( 'WOO_CUSTOM_GATEWAY_NAME', plugin_basename( WOO_CUSTOM_GATEWAY_FILE ) );
 
 /**
- * Reference to this file and this file only.
+ * Load composer
  */
-define('WOO_CUSTOM_GATEWAY_NAME', plugin_basename(__FILE__));
+require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 /**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-woo-custom-gateway-activator.php
+ * And away we go
  */
-function activate_Woo_Custom_Gateway()
-{
-
-    require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-activator.php';
-    Woo_Custom_Gateway_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-woo-custom-gateway-deactivator.php
- */
-function deactivate_Woo_Custom_Gateway()
-{
-
-    require_once plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway-deactivator.php';
-    Woo_Custom_Gateway_Deactivator::deactivate();
-}
-
-register_activation_hook(__FILE__, 'activate_Woo_Custom_Gateway');
-register_deactivation_hook(__FILE__, 'deactivate_Woo_Custom_Gateway');
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path(__FILE__) . 'includes/class-woo-custom-gateway.php';
-
-/**
- * Begins execution of the plugin.
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since 1.0.0
- */
-function run_Woo_Custom_Gateway()
-{
-
-    $plugin = new Woo_Custom_Gateway_Main();
-    $plugin->run();
-}
-
-// ... and off we go -------->>>
-run_Woo_Custom_Gateway();
+ WooCustomGateway::instance()->run();
