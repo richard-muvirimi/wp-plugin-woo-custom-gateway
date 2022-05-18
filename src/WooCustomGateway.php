@@ -81,11 +81,8 @@ class WooCustomGateway {
 	public function define_admin_hooks() {
 		$controller = new Admin();
 
-		// Gateway Hooks
-		$this->add_filter( WOO_CUSTOM_GATEWAY_SLUG . '-gateway-id', $controller, 'gateway_hooks', 10, 2 );
-
 		// add our custom gateways to woocommerce
-		$this->add_filter( 'woocommerce_payment_gateways', $controller, 'woo_add_gateways' );
+		$this->add_filter( 'woocommerce_payment_gateways', $controller, 'payment_gateways' );
 
 		$this->add_action( 'admin_enqueue_scripts', $controller, 'enqueue_styles' );
 		$this->add_action( 'admin_enqueue_scripts', $controller, 'enqueue_scripts' );
@@ -126,6 +123,8 @@ class WooCustomGateway {
 
 		// Customer Emails
 		$this->add_action( 'woocommerce_email_before_order_table', $controller, 'gateway_email_instructions', 10, 3 );
+
+		$this->add_action( 'woocommerce_thankyou', $controller, 'woocommerce_thankyou' );
 
 	}
 

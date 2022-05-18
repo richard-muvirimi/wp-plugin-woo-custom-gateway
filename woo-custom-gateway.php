@@ -2,17 +2,12 @@
 
 /**
  * The plugin bootstrap file
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area.
- * This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
  *
  * @wordpress-plugin
  * Plugin Name:       Woo Custom Gateway
  * Plugin URI:        https://tyganeutronics.com/woo-custom-gateway/
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
- * Version:           1.3.0
+ * Version:           1.3.1
  * Author:            Tyganeutronics
  * Author URI:        https://tyganeutronics.com/
  * License:           GPL-2.0+
@@ -44,7 +39,7 @@ if ( ! defined( 'WPINC' ) ) {
   /**
    * Plugin version number
    */
-  define( 'WOO_CUSTOM_GATEWAY_VERSION', '1.3.0' );
+  define( 'WOO_CUSTOM_GATEWAY_VERSION', '1.3.1' );
 
   /**
    * Reference to this file, and this file only, (well, plugin entry point)

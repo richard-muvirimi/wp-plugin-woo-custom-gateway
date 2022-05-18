@@ -20,9 +20,6 @@
         }
     },
     "scripts": {
-        "post-update-cmd": [
-            "@php-cs-setup"
-        ],
         "php-cs-setup": [
             "@phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/,vendor/phpcompatibility/phpcompatibility-wp,vendor/phpcompatibility/php-compatibility,vendor/phpcompatibility/phpcompatibility-paragonie",
             "@phpcs -i"

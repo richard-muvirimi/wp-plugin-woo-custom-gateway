@@ -26,10 +26,10 @@ $description = get_post_meta( $post->ID, 'woocg-desciption', true ); // ignore t
 
 <div class="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>">
 	<div style="margin: 10px 0;">
-		<label for="woocg-description"><?php _e( 'Gateway Description', WOO_CUSTOM_GATEWAY_SLUG ); ?></label>
+		<label for="woocg-description"><?php esc_html_e( 'Gateway Description', WOO_CUSTOM_GATEWAY_SLUG ); ?></label>
 	</div>
 	<textarea rows="5" style="width: 100%;" name="woocg-description"
-		placeholder="<?php _e( 'Gateway description', WOO_CUSTOM_GATEWAY_SLUG ); ?>"
+		placeholder="<?php esc_html_e( 'Gateway description', WOO_CUSTOM_GATEWAY_SLUG ); ?>"
 		id="woocg-description"><?php esc_html_e( $description ); ?></textarea>
 	<small><?php _e( 'Description for the payment method shown on the admin page.', WOO_CUSTOM_GATEWAY_SLUG ); ?></small>
 </div>

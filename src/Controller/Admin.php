@@ -35,7 +35,7 @@ class Admin extends BaseController {
 	 * @param array $gateways
 	 * @return void
 	 */
-	public function woo_add_gateways( $gateways ) {
+	public function payment_gateways( $gateways ) {
 
 		$args = array(
 			'post_type'     => Functions::gateway_slug(),
@@ -49,50 +49,10 @@ class Admin extends BaseController {
 
 		foreach ( $posts as $id ) {
 
-			array_push( $gateways, new Gateway( $id ) );
+			array_push( $gateways,  new Gateway( $id ));
 		}
 
 		return $gateways;
-	}
-
-		/**
-		 * Register gateway hooks
-		 *
-		 * @param string $gateway_id
-		 * @param int    $gateway_post_id
-		 *
-		 * @since 1.0.0
-		 * @version 1.3.0
-		 * @return string
-		 */
-	public function gateway_hooks( $gateway_id, $gateway_post_id ) {
-
-		$gateway = Functions::gateway_instance( $gateway_id );
-
-		if ( $gateway ) {
-
-			$loader = WooCustomGateway::instance();
-			$loader->add_action( 'woocommerce_thankyou_' . $gateway_id, $this, 'gateway_thankyou_page' );
-			$loader->add_action( 'woocommerce_update_options_payment_gateways_' . $gateway_id, $gateway, 'process_admin_options' );
-		}
-		return $gateway_id;
-	}
-
-	/**
-	 * Output for the order received page.
-	 *
-	 * @param string $method
-	 *
-	 * @since 1.0.0
-	 * @version 1.3.0
-	 */
-	public function gateway_thankyou_page( $method ) {
-
-		$gateway = Functions::gateway_instance( $method );
-
-		if ( $gateway ) {
-			echo wp_kses_post( wpautop( wptexturize( $gateway->get_option( 'instructions' ) ) ) );
-		}
 	}
 
 	/**

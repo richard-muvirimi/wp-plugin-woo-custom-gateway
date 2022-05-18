@@ -42,23 +42,43 @@ class Site extends BaseController {
 
 		$method = $order->get_payment_method();
 
-		// Go ahead only if the order was created by us.
-		if ( str_starts_with( $method, Functions::gateway_slug() ) ) {
+		$gateway = Functions::gateway_instance( $method );
 
-			$gateway = Functions::gateway_instance( $method );
+		if ( $gateway ) {
 
-			if ( $gateway ) {
-
-				$instructions = $gateway->get_option( 'email' );
-				if ( ! empty( $instructions ) && ! $sent_to_admin ) {
-					if ( $plain_text ) {
-						echo wptexturize( $instructions . PHP_EOL );
-					} else {
-						echo wp_kses_post( wpautop( wptexturize( $instructions ) ) );
-					}
+			$instructions = $gateway->get_option( 'email' );
+			if ( ! empty( $instructions ) && ! $sent_to_admin ) {
+				if ( $plain_text ) {
+					echo wptexturize( $instructions . PHP_EOL );
+				} else {
+					echo wp_kses_post( wpautop( wptexturize( $instructions ) ) );
 				}
 			}
 		}
 	}
+
+			/**
+	 * Output for the order received page.
+	 *
+	 * @param int $order
+	 *
+	 * @since 1.0.0
+	 * @version 1.3.0
+	 */
+	public function woocommerce_thankyou( $order ) {
+
+		$order = wc_get_order($order);
+		
+		if ($order){
+			
+			$method = $order->get_payment_method() ;
+			
+			$gateway = Functions::gateway_instance($method );
+		
+				if ( $gateway ) {
+					echo wp_kses_post( wpautop( wptexturize( $gateway->get_option( 'instructions' ) ) ) );
+				}
+			}
+		}
 
 }
