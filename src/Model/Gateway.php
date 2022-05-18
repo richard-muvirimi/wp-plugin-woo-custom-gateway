@@ -14,6 +14,7 @@
 namespace Rich4rdMuvirimi\WooCustomGateway\Model;
 
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
 use WC_Payment_Gateway;
 
 /**
@@ -64,6 +65,23 @@ class Gateway extends WC_Payment_Gateway {
 		$status           = $this->get_option( 'order_stat' );
 		$this->order_stat = str_starts_with( $status, 'wc-' ) ? $status : 'wc-' . $status;
 
+		$this->register_hooks();
+
+	}
+
+	/**
+	 * Register gateway hook
+	 *
+	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+	 * @since 1.0.0
+	 * @version 1.0.0
+	 *
+	 * @return void
+	 */
+	public function register_hooks()
+	{
+		$loader = WooCustomGateway::instance();
+		$loader->add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, $this, 'process_admin_options' );
 	}
 
 	/**

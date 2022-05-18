@@ -13,6 +13,8 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Helpers;
 
+use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
+
 /**
  * Class to handle plugin translations
  *
@@ -33,11 +35,16 @@ class Functions {
 	public static function gateway_instance( $gateway ) {
 		if ( function_exists( 'WC' ) ) {
 
-			if ( isset( WC()->payment_gateways ) ) {
+			if ( WC()->payment_gateways  ) {
 				$gateways = WC()->payment_gateways->payment_gateways();
 
 				if ( isset( $gateways[ $gateway ] ) ) {
-					return $gateways[ $gateway ];
+
+					$gateway = $gateways[ $gateway ];
+
+					if ( $gateway instanceof Gateway){
+						return $gateway;
+					}
 				}
 			}
 		}
