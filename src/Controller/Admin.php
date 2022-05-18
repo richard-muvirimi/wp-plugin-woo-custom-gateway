@@ -14,7 +14,6 @@ namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
 
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
 use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
-use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
 
 /**
  * Admin side controller

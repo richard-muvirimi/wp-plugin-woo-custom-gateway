@@ -78,8 +78,7 @@ class Gateway extends WC_Payment_Gateway {
 	 *
 	 * @return void
 	 */
-	public function register_hooks()
-	{
+	public function register_hooks() {
 		$loader = WooCustomGateway::instance();
 		$loader->add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, $this, 'process_admin_options' );
 	}
@@ -92,13 +91,12 @@ class Gateway extends WC_Payment_Gateway {
 	 * @since 1.2.0
 	 */
 	public function payment_fields() {
+		parent::payment_fields();
+
 		if ( $this->has_fields ) {
-
 			echo Functions::get_template( WOO_CUSTOM_GATEWAY_SLUG . '-proof-of-payment', array( 'description' => $this->description ), 'proof-of-payment.php' );
-
-		} else {
-			parent::payment_fields();
 		}
+
 	}
 
 	/**
@@ -135,28 +133,28 @@ class Gateway extends WC_Payment_Gateway {
 			),
 			'description'  => array(
 				'title'       => __( 'Description', WOO_CUSTOM_GATEWAY_SLUG ),
-				'type'        => 'textarea',
-				'description' => __( 'The payment gateway description displayed during checkout.', WOO_CUSTOM_GATEWAY_SLUG ),
+				'type'        => 'editor',
+				'description' => __( 'The payment gateway description displayed during checkout. Will be placed above the payment proof field if it is enabled.', WOO_CUSTOM_GATEWAY_SLUG ),
 				'default'     => __( '', WOO_CUSTOM_GATEWAY_SLUG ),
 				'desc_tip'    => false,
 			),
 			'note'         => array(
 				'title'   => __( 'Payment Proof', WOO_CUSTOM_GATEWAY_SLUG ),
 				'type'    => 'checkbox',
-				'label'   => __( 'Allow users to provide payment proof when creating the order.', WOO_CUSTOM_GATEWAY_SLUG ),
+				'label'   => __( 'Allow users to provide payment proof when creating the order. Only text based proof can be submitted by customers.', WOO_CUSTOM_GATEWAY_SLUG ),
 				'default' => 'no',
 			),
 			'instructions' => array(
 				'title'       => __( 'Thank you Instructions', WOO_CUSTOM_GATEWAY_SLUG ),
-				'type'        => 'textarea',
-				'description' => __( 'Instructions that will be added to the thank you page.', WOO_CUSTOM_GATEWAY_SLUG ),
+				'type'        => 'editor',
+				'description' => __( 'Instructions that will be shown on the thank you page.', WOO_CUSTOM_GATEWAY_SLUG ),
 				'default'     => '',
 				'desc_tip'    => false,
 			),
 			'email'        => array(
 				'title'       => __( 'Email Instructions', WOO_CUSTOM_GATEWAY_SLUG ),
-				'type'        => 'textarea',
-				'description' => __( 'Instructions that will be sent in order emails.', WOO_CUSTOM_GATEWAY_SLUG ),
+				'type'        => 'editor',
+				'description' => __( 'Instructions that will be sent in order emails. For plain text emails, html tags will be automatically stripped.', WOO_CUSTOM_GATEWAY_SLUG ),
 				'default'     => '',
 				'desc_tip'    => false,
 			),
@@ -183,10 +181,10 @@ class Gateway extends WC_Payment_Gateway {
 
 		$order = wc_get_order( $order_id );
 
-		// Mark as set order status (we're awaiting the payment)
+		// Mark as set order status (we're awaiting the payment).
 		$order->update_status( $this->order_stat, sprintf( __( 'Awaiting %s payment.', WOO_CUSTOM_GATEWAY_SLUG ), $this->method_title ) );
 
-		// Reduce stock levels
+		// Reduce stock levels.
 		wc_reduce_stock_levels( $order_id );
 
 		if ( $this->has_fields ) {
@@ -198,10 +196,10 @@ class Gateway extends WC_Payment_Gateway {
 			}
 		}
 
-		// Remove cart
+		// Remove cart.
 		WC()->cart->empty_cart();
 
-		// Ping urls
+		// Ping urls.
 		$endpoints = wp_parse_list( $this->get_option( 'endpoints' ), array() );
 		foreach ( $endpoints as $endpoint ) {
 
@@ -218,10 +216,42 @@ class Gateway extends WC_Payment_Gateway {
 			}
 		}
 
-		// Return thankyou redirect
+		// Return thankyou redirect.
 		return array(
 			'result'   => 'success',
 			'redirect' => $this->get_return_url( $order ),
 		);
+	}
+
+		/**
+		 * Generate Editor Textarea HTML.
+		 *
+		 * @param string $key Field key.
+		 * @param array  $data Field data.
+		 * @since  1.0.0
+		 * @return string
+		 */
+	public function generate_editor_html( $key, $data ) {
+		$field_key = $this->get_field_key( $key );
+		$defaults  = array(
+			'title'             => '',
+			'disabled'          => false,
+			'class'             => '',
+			'css'               => '',
+			'placeholder'       => '',
+			'type'              => 'text',
+			'desc_tip'          => false,
+			'description'       => '',
+			'custom_attributes' => array(),
+		);
+
+		$data = wp_parse_args( $data, $defaults );
+
+		$gateway = $this;
+
+		$args = compact( 'field_key', 'data', 'key', 'gateway' );
+
+		return Functions::get_template( WOO_CUSTOM_GATEWAY_SLUG . 'admin-gateway-editor', $args, 'admin-gateway-editor.php' );
+
 	}
 }

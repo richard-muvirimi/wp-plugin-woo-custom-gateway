@@ -49,7 +49,7 @@ class Site extends BaseController {
 			$instructions = $gateway->get_option( 'email' );
 			if ( ! empty( $instructions ) && ! $sent_to_admin ) {
 				if ( $plain_text ) {
-					echo wptexturize( $instructions . PHP_EOL );
+					echo wptexturize( wp_strip_all_tags( $instructions) . PHP_EOL );
 				} else {
 					echo wp_kses_post( wpautop( wptexturize( $instructions ) ) );
 				}
