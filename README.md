@@ -7,7 +7,7 @@
 - **_ Tested up to: _** 5.9
 - **_ Requires PHP: _** 5.6
 - **_ WC tested up to: _** 6.5.1
-- **_ Stable tag: _** 1.3.1
+- **_ Stable tag: _** 1.4.0
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,7 +68,11 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.3.0 _**
+**_ 1.4.0 _**
+
+- Allow use of html for gateway instructions and description.
+
+**_ 1.3.0 - 1.3.1 _**
 
 - Separate Email instructions from Thank you page instructions in gateway settings.
 - Add ability to ping a url after order is completed.

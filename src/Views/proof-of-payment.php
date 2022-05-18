@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 <fieldset>
 	<p class="form-row form-row-wide">
 		<label
-			for="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>-note"><?php echo esc_html( $description ) ?: __( 'Please provide proof of payment.', WOO_CUSTOM_GATEWAY_SLUG ); ?></label>
+			for="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>-note"><?php if (empty($description)) : _e( 'Payment Details.', WOO_CUSTOM_GATEWAY_SLUG ); endif; ?></label>
 
 		<textarea id="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>-note" class="input-text"
 			name="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>-note"></textarea>
