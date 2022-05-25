@@ -37,7 +37,7 @@ class Ajax extends BaseController {
 	 * @return void
 	 */
 	public function ajaxDoRate() {
-		if ( check_ajax_referer( 'wcg-rate', '_ajax_nonce', false ) !== false ) {
+		if ( check_ajax_referer( Functions::get_plugin_slug('-rate'), '_ajax_nonce', false ) !== false ) {
 
 			// remind again in three months
 			set_transient( Functions::get_plugin_slug( '-rate' ), true, YEAR_IN_SECONDS / 2 );
@@ -60,7 +60,7 @@ class Ajax extends BaseController {
 	 */
 	public function ajaxDoRemind() {
 
-		if ( check_ajax_referer( 'wcg-remind', '_ajax_nonce', false ) !== false ) {
+		if ( check_ajax_referer( Functions::get_plugin_slug('-remind'), '_ajax_nonce', false ) !== false ) {
 
 			// remind after a week
 			set_transient( Functions::get_plugin_slug( '-rate' ), true, WEEK_IN_SECONDS );
@@ -82,7 +82,7 @@ class Ajax extends BaseController {
 	 * @return void
 	 */
 	public function ajaxDoCancel() {
-		if ( check_ajax_referer( 'wcg-cancel', '_ajax_nonce', false ) !== false ) {
+		if ( check_ajax_referer( Functions::get_plugin_slug('-cancel'), '_ajax_nonce', false ) !== false ) {
 
 			set_transient( Functions::get_plugin_slug( '-rate' ), true, YEAR_IN_SECONDS );
 
