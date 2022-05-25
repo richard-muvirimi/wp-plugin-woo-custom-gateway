@@ -61,7 +61,7 @@ class Admin extends BaseController {
 	 */
 	public function enqueue_styles() {
 
-		wp_register_style( WOO_CUSTOM_GATEWAY_SLUG, Functions::get_style_path( 'admin-rating.css' ), array(), WOO_CUSTOM_GATEWAY_VERSION, 'all' );
+		wp_register_style( WOO_CUSTOM_GATEWAY_SLUG, Functions::get_style_url( 'admin-rating.css' ), array(), WOO_CUSTOM_GATEWAY_VERSION, 'all' );
 	}
 
 	/**
@@ -71,7 +71,7 @@ class Admin extends BaseController {
 	 */
 	public function enqueue_scripts() {
 
-		wp_register_script( WOO_CUSTOM_GATEWAY_SLUG, Functions::get_script_path( 'admin-rating.js' ), array( 'jquery' ), WOO_CUSTOM_GATEWAY_VERSION, false );
+		wp_register_script( WOO_CUSTOM_GATEWAY_SLUG, Functions::get_script_url( 'admin-rating.js' ), array( 'jquery' ), WOO_CUSTOM_GATEWAY_VERSION, false );
 		wp_localize_script(
 			WOO_CUSTOM_GATEWAY_SLUG,
 			'wcg',
