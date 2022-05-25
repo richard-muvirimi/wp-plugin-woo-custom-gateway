@@ -138,9 +138,9 @@ class WooCustomGateway {
 	public function define_ajax_hooks() {
 		$controller = new Ajax();
 
-		$this->add_action( 'wp_ajax_' . WOO_CUSTOM_GATEWAY_SLUG . ' - rate', $controller, 'ajaxDoRate' );
-		$this->add_action( 'wp_ajax_' . WOO_CUSTOM_GATEWAY_SLUG . ' - remind', $controller, 'ajaxDoRemind' );
-		$this->add_action( 'wp_ajax_' . WOO_CUSTOM_GATEWAY_SLUG . ' - cancel', $controller, 'ajaxDoCancel' );
+		$this->add_action( 'wp_ajax_' . WOO_CUSTOM_GATEWAY_SLUG . '-rate', $controller, 'ajaxDoRate' );
+		$this->add_action( 'wp_ajax_' . WOO_CUSTOM_GATEWAY_SLUG . '-remind', $controller, 'ajaxDoRemind' );
+		$this->add_action( 'wp_ajax_' . WOO_CUSTOM_GATEWAY_SLUG . '-cancel', $controller, 'ajaxDoCancel' );
 
 	}
 

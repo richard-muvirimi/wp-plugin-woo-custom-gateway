@@ -4,10 +4,10 @@
 - **_ Tags: _** woocommerce gateway, gateway, payment, gateways, payment gateways, payment gateway, woocommerce payment gateway, woocommerce payment gateways, woocommerce, woo custom gateway, woo gateway
 - **_ Donate link: _** https://tyganeutronics.com/shop/woo-custom-gateway/
 - **_ Requires at least: _** 4.0.0
-- **_ Tested up to: _** 5.9
+- **_ Tested up to: _** 6.0
 - **_ Requires PHP: _** 5.6
 - **_ WC tested up to: _** 6.5.1
-- **_ Stable tag: _** 1.4.0
+- **_ Stable tag: _** 1.4.1
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,7 +68,7 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.4.0 _**
+**_ 1.4.0 - 1.4.1 _**
 
 - Allow use of html for gateway instructions and description.
 
