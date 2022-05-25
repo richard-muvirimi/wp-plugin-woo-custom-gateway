@@ -51,7 +51,6 @@
     },
     "require-dev": {
         "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "wp-coding-standards/wpcs": "^2.3",
         "brain/monkey": "^2.6",
         "phpunit/phpunit": "^5.7"
     }
