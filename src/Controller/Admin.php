@@ -74,7 +74,7 @@ class Admin extends BaseController {
 		wp_register_script( WOO_CUSTOM_GATEWAY_SLUG, Functions::get_script_url( 'admin-rating.js' ), array( 'jquery' ), WOO_CUSTOM_GATEWAY_VERSION, false );
 		wp_localize_script(
 			WOO_CUSTOM_GATEWAY_SLUG,
-			'wcg',
+			'wooCustomGateway',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'name'     => WOO_CUSTOM_GATEWAY_SLUG,
