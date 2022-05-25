@@ -39,6 +39,15 @@ use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
  */
 class WooCustomGateway {
 
+	/**
+	 * Hold reference to a single instance of this class
+	 *
+	 * @var self
+	 *
+	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+	 * @since 1.0.0
+	 * @version 1.0.0
+	 */
 	private static $instance;
 
 	/**
