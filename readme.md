@@ -68,7 +68,7 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.4.0 - 1.4.1 _**
+**_ 1.4.0 - 1.4.2 _**
 
 - Allow use of html for gateway instructions and description.
 
