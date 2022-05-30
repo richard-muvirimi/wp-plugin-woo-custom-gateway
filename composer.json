@@ -24,16 +24,14 @@
     },
     "scripts": {
         "qc": [
-            "@phpcs ."
+            "@phpcs",
+            "@test"
         ],
         "phpcs": [
-            "vendor/bin/phpcs"
+            "vendor/bin/phpcs ."
         ],
         "test": [
             "phpunit"
-        ],
-        "dist": [
-            "bash rsync.sh"
         ]
     },
     "authors": [
