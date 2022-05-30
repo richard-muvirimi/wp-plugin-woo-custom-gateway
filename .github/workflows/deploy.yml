@@ -1,0 +1,50 @@
+name: Deploy
+
+on:
+  # On push
+  push:
+    branches: [ production ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout build
+      uses: actions/checkout@v3
+    
+    - name: Cache Composer dependencies
+      uses: actions/cache@v2
+      with:
+        path: /tmp/composer-cache
+        key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+      
+    - name: Composer Setup
+      uses: php-actions/composer@v6
+      with:
+        dev: yes
+        php_version: "7.4"
+        version: latest
+        args: --no-dev --optimize-autoloader
+        command: install
+      
+    - name: Extract Version
+      run:
+        echo "STABLE_TAG=$(find . -iname README.TXT -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
+      
+    - name: Copy to build dir
+      run: |
+        mkdir build
+        rsync -rvt --delete --include 'vendor' --exclude-from='.gitignore' --exclude '.git*' --exclude 'build' ./ build/
+      
+    - name: WordPress Plugin Deploy
+      id: deploy
+      uses: 10up/action-wordpress-plugin-deploy@stable
+      env:
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        SLUG: force-reinstall
+        VERSION: ${{ env.STABLE_TAG }}
+        BUILD_DIR: build
