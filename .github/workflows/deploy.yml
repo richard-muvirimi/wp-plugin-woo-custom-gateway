@@ -45,6 +45,6 @@ jobs:
       env:
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-        SLUG: force-reinstall
+        SLUG: woo-custom-gateway
         VERSION: ${{ env.STABLE_TAG }}
         BUILD_DIR: build
