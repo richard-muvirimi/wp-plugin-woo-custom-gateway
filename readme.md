@@ -2,14 +2,14 @@
 
 - **_ Contributors: _** @tygalive
 - **_ Tags: _** woocommerce gateway, gateway, payment, gateways, payment gateways, payment gateway, woocommerce payment gateway, woocommerce payment gateways, woocommerce, woo custom gateway, woo gateway
-- **_ Donate link: _** https://tyganeutronics.com/shop/woo-custom-gateway/
+- **_ Donate link: _** [Buy Me A Coffee](https://buymeacoffee.com/fpjyrXk)
 - **_ Requires at least: _** 4.0.0
 - **_ Tested up to: _** 6.0
 - **_ Requires PHP: _** 5.6
 - **_ WC tested up to: _** 6.5.1
 - **_ Stable tag: _** 1.4.2
 - **_ License: _** GPLv2 or later
-- **_ License URI: _** http://www.gnu.org/licenses/gpl-2.0.html
+- **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
 The plugin helps you create an infinite number of custom payment gateways.
 
