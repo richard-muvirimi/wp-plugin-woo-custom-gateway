@@ -30,10 +30,6 @@ jobs:
         args: --no-dev --optimize-autoloader
         command: install
       
-    - name: Extract Version
-      run:
-        echo "STABLE_TAG=$(find . -iname README.TXT -exec grep -oiP -m 1 'stable\s+tag\s*:\s\K.*' {} \;)" >> $GITHUB_ENV
-      
     - name: Copy to build dir
       run: |
         mkdir build
