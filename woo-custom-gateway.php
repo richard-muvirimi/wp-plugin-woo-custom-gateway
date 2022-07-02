@@ -39,7 +39,7 @@ if ( ! defined( 'WPINC' ) ) {
   /**
    * Plugin version number
    */
-  define( 'WOO_CUSTOM_GATEWAY_VERSION', '1.4.2' );
+  define( 'WOO_CUSTOM_GATEWAY_VERSION', '1.4.3' );
 
   /**
    * Reference to this file, and this file only, (well, plugin entry point)

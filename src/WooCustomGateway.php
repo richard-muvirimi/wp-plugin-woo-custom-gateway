@@ -200,12 +200,12 @@ class WooCustomGateway {
 			case 'register_activation_hook':
 			case 'register_deactivation_hook':
 			case 'register_uninstall_hook':
-				// Hook file
+				// Hook file.
 				$file = array_shift( $arguments );
 
 				assert( file_exists( $file ), new BadMethodCallException( 'Please provide a valid file path for ' . $name ) );
 
-				// Function to call
+				// Function to call.
 				$component = array_shift( $arguments );
 				if ( is_array( $component ) || ( is_string( $component ) && is_callable($component) )) {
 					$callable = $component;
@@ -216,17 +216,17 @@ class WooCustomGateway {
 
 				assert( is_callable( $callable, true ), new BadMethodCallException( 'Please provide a callable function for ' . $name ) );
 
-				// Register Hook
+				// Register Hook.
 				$name( $file, $callable );
 				break;
 			case 'add_filter':
 			case 'add_action':
-				// The hook
+				// The hook.
 				$hook = array_shift( $arguments );
 
 				assert( is_string( $hook ), new BadMethodCallException( 'Please provide the name of the hook for ' . $name ) );
 
-				// Function to call
+				// Function to call.
 				$component = array_shift( $arguments );
 				if ( is_array( $component ) || ( is_string( $component ) && is_callable($component) )) {
 					$callable = $component;
@@ -237,7 +237,7 @@ class WooCustomGateway {
 
 				assert( is_callable( $callable, true ), new BadMethodCallException( 'Please provide a callable function for ' . $name ) );
 
-				// Function Priority
+				// Function Priority.
 				$priority = array_shift( $arguments );
 				if ( is_null( $priority ) ) {
 					$priority = 10;
@@ -245,7 +245,7 @@ class WooCustomGateway {
 
 				assert( is_numeric( $priority ), new BadMethodCallException( 'Priority should be numeric for ' . $name ) );
 
-				// Arguments Count
+				// Arguments Count.
 				$args = array_shift( $arguments );
 				if ( is_null( $args ) ) {
 					$args = 1;
@@ -253,7 +253,7 @@ class WooCustomGateway {
 
 				assert( is_numeric( $args ), new BadMethodCallException( 'Number of arguments should be numeric for ' . $name ) );
 
-				// Register hook
+				// Register hook.
 				return $name( $hook, $callable, $priority, $args );
 
 			default:
