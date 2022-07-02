@@ -59,8 +59,8 @@ class WooCustomGateway {
 	 */
 	public static function instance() {
 
-		if ( ! ( self::$instance instanceof WooCustomGateway ) ) {
-			self::$instance = new WooCustomGateway();
+		if ( ! ( self::$instance instanceof static ) ) {
+			self::$instance = new static();
 		}
 		return self::$instance;
 	}
@@ -185,8 +185,8 @@ class WooCustomGateway {
 	 *
 	 * Allows us to hook the functions to this class so that we have a unified api
 	 *
-	 * @since 1.0.0
-	 * @version 1.0.2
+	 * @since 1.4.0
+	 * @version 1.4.3
 	 * @param string $name
 	 * @param array  $arguments
 	 * @return mixed #type intentionally left out.
@@ -207,7 +207,7 @@ class WooCustomGateway {
 
 				// Function to call
 				$component = array_shift( $arguments );
-				if ( is_array( $component ) || is_string( $component ) ) {
+				if ( is_array( $component ) || ( is_string( $component ) && is_callable($component) )) {
 					$callable = $component;
 				} else {
 					$callable = array( $component, array_shift( $arguments ) );
@@ -228,7 +228,7 @@ class WooCustomGateway {
 
 				// Function to call
 				$component = array_shift( $arguments );
-				if ( is_array( $component ) || is_string( $component ) ) {
+				if ( is_array( $component ) || ( is_string( $component ) && is_callable($component) )) {
 					$callable = $component;
 				} else {
 					$callable = array( $component, array_shift( $arguments ) );

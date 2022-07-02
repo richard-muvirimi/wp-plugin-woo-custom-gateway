@@ -26,7 +26,7 @@ use WC_Payment_Gateway;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Model
  *
- * @author https://tyganeutronics.com <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
  * @since 1.0.0
  */
 class Gateway extends WC_Payment_Gateway {
