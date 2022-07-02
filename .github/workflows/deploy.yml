@@ -41,10 +41,9 @@ jobs:
       
     - name: WordPress Plugin Deploy
       id: deploy
-      uses: 10up/action-wordpress-plugin-deploy@stable
-      env:
-        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-        SLUG: woo-custom-gateway
-        VERSION: ${{ env.STABLE_TAG }}
-        BUILD_DIR: build
+      uses: richard-muvirimi/deploy-wordpress-plugin@development
+      with:
+        svn-username: ${{ secrets.SVN_USERNAME }}
+        svn-password: ${{ secrets.SVN_PASSWORD }}
+        plugin-repository: woo-custom-gateway
+        working-directory: build

@@ -13,7 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Views
  *
- * @link https://tyganeutronics.com
+ * @link http://richard.co.zw
  * @since 1.2.3
  * @version 1.2.3
  */
