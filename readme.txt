@@ -1,7 +1,7 @@
 === Woo Custom Gateway ===
 Contributors: tygalive
 Tags: woocommerce, custom, woocommerce gateway, gateway, payment, gateways, payment gateways, payment gateway, woocommerce payment gateway, woocommerce payment gateways, woocommerce, woo custom gateway, woo gateway
-Donate link: https://www.buymeacoffee.com/fpjyrXk
+Donate link: https://buymeacoffee.com/fpjyrXk
 Requires at least: 4.0.0
 Tested up to: 6.0
 Requires PHP: 5.6
