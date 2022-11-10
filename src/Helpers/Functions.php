@@ -28,6 +28,17 @@ use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
 class Functions {
 
 	/**
+	 * URL separator character
+	 *
+	 * @var string
+	 *
+	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+	 * @since 1.4.5
+	 * @version 1.4.5
+	 */
+	public static $URL_SEPARATOR = "/";
+
+	/**
 	 * Get initialized payment gateway class
 	 *
 	 * @return Rich4rdMuvirimi\WooCustomGateway\Model\Gateway|false
@@ -158,7 +169,7 @@ class Functions {
 	 * @return string
 	 */
 	public static function get_views_url( $url ) {
-		return plugin_dir_url( WOO_CUSTOM_GATEWAY_FILE ) . 'src' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . ltrim( $url, '\\/' );
+		return plugin_dir_url( WOO_CUSTOM_GATEWAY_FILE ) . 'src' . self::$URL_SEPARATOR  . 'Views' . self::$URL_SEPARATOR  . ltrim( $url, '\\/' );
 	}
 
 	/**
@@ -173,7 +184,7 @@ class Functions {
 	 * @return string
 	 */
 	public static function get_script_url( $url ) {
-		return self::get_views_url( 'js' . DIRECTORY_SEPARATOR . $url );
+		return self::get_views_url( 'js' . self::$URL_SEPARATOR  . $url );
 	}
 
 	/**
@@ -188,7 +199,7 @@ class Functions {
 	 * @return string
 	 */
 	public static function get_style_url( $url ) {
-		return self::get_views_url( 'css' . DIRECTORY_SEPARATOR . $url );
+		return self::get_views_url( 'css' . self::$URL_SEPARATOR  . $url );
 	}
 
 
