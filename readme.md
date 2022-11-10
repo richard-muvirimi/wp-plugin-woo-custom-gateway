@@ -7,7 +7,7 @@
 - **_ Tested up to: _** 6.1
 - **_ Requires PHP: _** 5.6
 - **_ WC tested up to: _** 7.1.0
-- **_ Stable tag: _** 1.4.4
+- **_ Stable tag: _** 1.4.5
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -68,7 +68,7 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.4.0 - 1.4.4 _**
+**_ 1.4.0 - 1.4.5 _**
 
 - Allow use of html for gateway instructions and description.
 
