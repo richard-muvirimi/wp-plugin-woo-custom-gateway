@@ -40,6 +40,10 @@ class Functions {
 
 	/**
 	 * Get initialized payment gateway class
+	 * 
+	 * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+	 * @since 1.0.0
+	 * @version 1.0.0
 	 *
 	 * @return Rich4rdMuvirimi\WooCustomGateway\Model\Gateway|false
 	 */
@@ -96,6 +100,8 @@ class Functions {
 	 * @param string $template_name Template name.
 	 * @param array  $args          Arguments. (default: array).
 	 * @param string $template_path Template path. (default: '').
+	 * 
+	 * @return string
 	 */
 	public static function get_template( $template_name, $args = array(), $template_path = '' ) {
 
