@@ -7,7 +7,7 @@
 - **_ Tested up to: _** 6.1
 - **_ Requires PHP: _** 7.3
 - **_ WC tested up to: _** 7.4
-- **_ Stable tag: _** 1.5.0
+- **_ Stable tag: _** 1.5.1
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
