@@ -390,12 +390,12 @@ class Admin extends BaseController
      *
      * @param string $content
      * @param WP_Post|int $post
-     * @param int $thumbnail_id
+     * @param int|string $thumbnail_id
      * @return string
      * @since 1.0.0
      * @version 1.3.0
      */
-    public function filter_featured_image_admin_text(string $content, $post, int $thumbnail_id): string
+    public function filter_featured_image_admin_text(string $content, $post, $thumbnail_id): string
     {
 
         if (get_post_type($post) === Functions::gateway_slug() && $thumbnail_id == null) {

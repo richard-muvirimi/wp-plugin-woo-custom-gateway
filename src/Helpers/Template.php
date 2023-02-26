@@ -23,7 +23,7 @@ class Template
      * @since 1.5.0
      * @version 1.5.0
      */
-    public static string $URL_SEPARATOR = "/";
+    public static $URL_SEPARATOR = "/";
 
     /**
      * Get the scripts path

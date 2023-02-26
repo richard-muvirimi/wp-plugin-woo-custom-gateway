@@ -4,7 +4,7 @@ Tags: woocommerce, custom, woocommerce gateway, gateway, payment, gateways, paym
 Donate link: https://buymeacoffee.com/fpjyrXk
 Requires at least: 4.0.0
 Tested up to: 6.1
-Requires PHP: 7.4
+Requires PHP: 7.3
 WC tested up to: 7.4
 Stable tag: 1.5.0
 License: GPLv2 or later
@@ -58,8 +58,8 @@ In the search field, type "Woo Custom Gateway," and click on "Search Plugins." O
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
-= 1.5.0 =
-* Set minimum supported version to 7.4.
+= 1.5.0 - 1.5.1 =
+* Set minimum supported version to 7.3.
 * Allow opting in to usage analytics collection.
 
 = 1.4.0 - 1.4.5 =

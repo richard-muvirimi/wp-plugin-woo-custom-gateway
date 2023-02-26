@@ -49,7 +49,7 @@ class WooCustomGateway
      * @since 1.0.0
      * @version 1.0.0
      */
-    private static WooCustomGateway $instance;
+    private static $instance;
 
     /**
      * Init plugin Loader

@@ -5,7 +5,7 @@
 - **_ Donate link: _** [Buy Me A Coffee](https://buymeacoffee.com/fpjyrXk)
 - **_ Requires at least: _** 4.0.0
 - **_ Tested up to: _** 6.1
-- **_ Requires PHP: _** 7.4
+- **_ Requires PHP: _** 7.3
 - **_ WC tested up to: _** 7.4
 - **_ Stable tag: _** 1.5.0
 - **_ License: _** GPLv2 or later
@@ -71,9 +71,9 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.5.0 _**
+**_ 1.5.0 - 1.5.1 _**
 
-- Set minimum supported version to 7.4.
+- Set minimum supported version to 7.3.
 - Allow opting in to usage analytics collection.
 
 **_ 1.4.0 - 1.4.5 _**

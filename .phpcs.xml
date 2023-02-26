@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <ruleset name="WooCustomGateway" namespace="Rich4rdMuvirimi\WooCustomGateway\">
-<description>Coding Standards for Woo-Custom-Gateway and Php 7.4</description>
+<description>Coding Standards for Woo-Custom-Gateway and Php 7.3</description>
 
- <config name="testVersion" value="7.4-"/>
+ <config name="testVersion" value="7.3-"/>
   <arg name="extensions" value="php"/>
 
   <exclude-pattern>*/vendor/*</exclude-pattern>

@@ -8,3 +8,5 @@ docker_tag
 Dockerfile-php-build
 DOCKER_ENV
 output.log
+
+.phpunit.result.cache
