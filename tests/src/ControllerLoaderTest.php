@@ -9,9 +9,9 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Tests;
 
-use PHPUnit\Framework\TestCase;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use PHPUnit\Framework\TestCase;
 use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
 
 /**
@@ -21,50 +21,54 @@ use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
  * @since 1.0.0
  * @version 1.0.0
  */
-class ControllerLoaderTest extends TestCase {
+class ControllerLoaderTest extends TestCase
+{
 
-	// Adds Mockery expectations to the PHPUnit assertions count.
-	use MockeryPHPUnitIntegration;
+    // Adds Mockery expectations to the PHPUnit assertions count.
+    use MockeryPHPUnitIntegration;
 
-	/**
-	 * Tear Down
-	 *
-	 * @return void
-	 */
-	protected function tearDown():void {
-		Monkey\tearDown();
-		parent::tearDown();
-	}
+    /**
+     * Test the loader class magic methods
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public function testHooks(): void
+    {
+        $loader = WooCustomGateway::instance();
+        $loader->add_action('init', '__return_true', 25);
+        $loader->add_filter('the_title', '__return_true', 25);
 
-	/**
-	 * SetUp
-	 *
-	 * @return void
-	 */
-	protected function setUp():void {
-		parent::setUp();
-		Monkey\setUp();
-	}
+        // assert added
+        self::assertNotFalse(has_action('init', '__return_true'));
+        self::assertNotFalse(has_filter('the_title', '__return_true'));
 
-	/**
-	 * Test the loader class magic methods
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public function testHooks():void {
-		$loader = WooCustomGateway::instance();
-		$loader->add_action( 'init', '__return_true', 25 );
-		$loader->add_filter( 'the_title', '__return_true', 25 );
+        // assert priority
+        self::assertSame(25, has_action('init', '__return_true'));
+        self::assertSame(25, has_filter('the_title', '__return_true'));
+    }
 
-		// assert added
-		self::assertNotFalse( has_action( 'init', '__return_true' ) );
-		self::assertNotFalse( has_filter( 'the_title', '__return_true' ) );
+    /**
+     * Tear Down
+     *
+     * @return void
+     */
+    protected function tearDown(): void
+    {
+        Monkey\tearDown();
+        parent::tearDown();
+    }
 
-		// assert priority
-		self::assertSame( 25, has_action( 'init', '__return_true' ) );
-		self::assertSame( 25, has_filter( 'the_title', '__return_true' ) );
-	}
+    /**
+     * SetUp
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Monkey\setUp();
+    }
 
 }

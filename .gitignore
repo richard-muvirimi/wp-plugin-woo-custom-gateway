@@ -1,6 +1,7 @@
 *.code-workspace
 /vendor/
 composer.lock
+.idea
 
 #Docker
 docker_tag

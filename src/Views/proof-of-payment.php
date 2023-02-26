@@ -2,8 +2,8 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Views;
 
-if ( ! defined( 'WPINC' ) ) {
-	die(); // Exit if accessed directly.
+if (!defined('WPINC')) {
+    die(); // Exit if accessed directly.
 }
 
 /**
@@ -13,18 +13,22 @@ if ( ! defined( 'WPINC' ) ) {
  * @subpackage WooCustomGateway/Views
  *
  * @link http://richard.co.zw
+ * @author Richard Muvirimi <tygalive@gmail.com>
  * @since 1.0.0
+ * @version 1.0.0
  */
 ?>
 
 <fieldset>
-	<p class="form-row form-row-wide">
-		<label
-			for="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>-note"><?php if (empty($description)) : _e( 'Payment Details.', WOO_CUSTOM_GATEWAY_SLUG ); endif; ?></label>
+    <p class="form-row form-row-wide">
+        <label for="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG); ?>-note">
+            <?php if (empty($description)) : _e('Payment Details.', WOO_CUSTOM_GATEWAY_SLUG); endif; ?>
+        </label>
 
-		<textarea id="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>-note" class="input-text"
-			name="<?php esc_attr_e( WOO_CUSTOM_GATEWAY_SLUG ); ?>-note"></textarea>
+        <textarea id="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG); ?>-note" class="input-text"
+                  name="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG); ?>-note">
+        </textarea>
 
-	</p>
-	<div class="clear"></div>
+    </p>
+    <div class="clear"></div>
 </fieldset>

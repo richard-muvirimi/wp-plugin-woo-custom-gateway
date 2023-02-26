@@ -1,0 +1,15 @@
+.woo-custom-gateway .center {
+    text-align: center;
+}
+
+.woo-custom-gateway {
+    margin-top: 1cm;
+}
+
+.woo-custom-gateway input[type='checkbox'] {
+    margin-bottom: 15px;
+}
+
+.woo-custom-gateway .wrap{
+    margin-top: 2cm;
+}

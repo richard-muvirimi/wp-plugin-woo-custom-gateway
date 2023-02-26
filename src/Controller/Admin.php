@@ -13,7 +13,10 @@
 namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
 
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
+use Rich4rdMuvirimi\WooCustomGateway\Helpers\Template;
 use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
+use WP_Post;
 
 /**
  * Admin side controller
@@ -25,324 +28,483 @@ use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
  * @since 1.0.0
  * @version 1.0.1
  */
-class Admin extends BaseController {
+class Admin extends BaseController
+{
 
-	/**
-	 * Register gateways in Woocommerce
-	 *
-	 * @since 1.0.0
-	 * @param array $gateways
-	 * @return void
-	 */
-	public function payment_gateways( $gateways ) {
+    /**
+     * Register gateways in Woocommerce
+     *
+     * @param array $gateways
+     * @return array
+     * @since 1.0.0
+     */
+    public function payment_gateways(array $gateways): array
+    {
 
-		$args = array(
-			'post_type'     => Functions::gateway_slug(),
-			'fields'        => 'ids',
-			'no_found_rows' => true,
-			'post_status'   => 'publish',
-			'numberposts'   => -1,
-		);
+        $args = array(
+            'post_type' => Functions::gateway_slug(),
+            'fields' => 'ids',
+            'no_found_rows' => true,
+            'post_status' => 'publish',
+            'numberposts' => -1,
+        );
 
-		$posts = get_posts( $args );
+        $posts = get_posts($args);
 
-		foreach ( $posts as $id ) {
+        foreach ($posts as $id) {
 
-			array_push( $gateways,  new Gateway( $id ));
-		}
+            $gateways[] = new Gateway($id);
+        }
 
-		return $gateways;
-	}
+        return $gateways;
+    }
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since 1.0.0
-	 */
-	public function enqueue_styles() {
+    /**
+     * Register plugin options
+     *
+     * @return void
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @since 1.5.0
+     * @version 1.5.0
+     */
+    public function registerOptions(): void
+    {
 
-		wp_register_style( WOO_CUSTOM_GATEWAY_SLUG, Functions::get_style_url( 'admin-rating.css' ), array(), WOO_CUSTOM_GATEWAY_VERSION, 'all' );
-	}
+        register_setting(
+            Functions::get_plugin_slug("-about"),
+            Functions::get_plugin_slug("-analytics"),
+            array("sanitize_callback" => "sanitize_text_field")
+        );
 
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since 1.0.0
-	 */
-	public function enqueue_scripts() {
+        add_settings_section(
+            Functions::get_plugin_slug("-settings"),
+            __("Settings", Functions::get_plugin_slug()),
+            array($this, "renderSectionHeader"),
+            Functions::get_plugin_slug("-about")
+        );
 
-		wp_register_script( WOO_CUSTOM_GATEWAY_SLUG, Functions::get_script_url( 'admin-rating.js' ), array( 'jquery' ), WOO_CUSTOM_GATEWAY_VERSION, false );
-		wp_localize_script(
-			WOO_CUSTOM_GATEWAY_SLUG,
-			'wooCustomGateway',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'name'     => WOO_CUSTOM_GATEWAY_SLUG,
-			)
-		);
-	}
+        add_settings_field(
+            Functions::get_plugin_slug("-analytics"),
+            __('Collect Anonymous Usage Data', WOO_CUSTOM_GATEWAY_SLUG),
+            array($this, 'renderInputField'),
+            Functions::get_plugin_slug("-about"),
+            Functions::get_plugin_slug("-settings"),
+            array(
+                'label_for' => Functions::get_plugin_slug("-analytics"),
+                'class' => WOO_CUSTOM_GATEWAY_SLUG . '-row',
+                "value" => get_option(Functions::get_plugin_slug("-analytics"), "off"),
+                'description' => Template::get_template(Functions::get_plugin_slug("-about-analytics-disclaimer"), [], "about-analytics-disclaimer.php"),
+                "type" => "checkbox",
+            )
+        );
+    }
 
-	/**
-	 * Add setings page link
-	 *
-	 * @since 1.0.0
-	 * @param array $links
-	 * @return array
-	 */
-	public function plugins_list_options_link( $links ) {
+    /**
+     * Display the chaturbate header
+     *
+     * @return void
+     * @since 1.5.0
+     * @version 1.5.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function renderSectionHeader(): void
+    {
+        echo Template::get_template(Functions::get_plugin_slug("-about-section-header"), [], "about-section-header.php");
+    }
 
-		$args = array( 'post_type' => Functions::gateway_slug() );
+    /**
+     * Display input field
+     *
+     * @param array $args
+     *
+     * @return void
+     * @since 1.0.0
+     * @version 1.0.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function renderInputField(array $args): void
+    {
+        echo Template::get_template(Functions::get_plugin_slug("-about-input-field"), $args, "about-input-field.php");
+    }
 
-		$link = add_query_arg( $args, admin_url( 'edit.php' ) );
-		$link = sprintf( '<a href="%s">%s</a>', $link, __( 'Payment Methods', WOO_CUSTOM_GATEWAY_SLUG ) );
+    /**
+     * Register the stylesheets for the admin area.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function enqueue_styles(): void
+    {
 
-		array_push( $links, $link );
+        wp_register_style(Functions::get_plugin_slug(), Template::get_style_url('admin-rating.css'), array(), WOO_CUSTOM_GATEWAY_VERSION);
 
-		return $links;
-	}
+        wp_register_style(Functions::get_plugin_slug("-about"), Template::get_style_url('admin-about.css'), array(), WOO_CUSTOM_GATEWAY_VERSION);
+    }
 
-	/**
-	 * Register custom post typre
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function init() {
+    /**
+     * Register the JavaScript for the admin area.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function enqueue_scripts(): void
+    {
 
-		register_post_type(
-			Functions::gateway_slug(),
-			array(
-				'show_ui'              => true,
-				'show_in_menu'         => current_user_can( 'manage_woocommerce' ) ? 'woocommerce' : true,
-				'description'          => Functions::gateway_slug(),
-				// 'has_archive' => true,
-				'exclude_from_search'  => true,
-				// 'map_meta_cap' => true,
-				'hierarchical'         => false,
-				'labels'               => array(
-					'name'                  => __( 'Payment Methods', WOO_CUSTOM_GATEWAY_SLUG ),
-					'singular_name'         => __( 'Payment Method', WOO_CUSTOM_GATEWAY_SLUG ),
-					'add_new'               => __( 'Add New', WOO_CUSTOM_GATEWAY_SLUG ),
-					'add_new_item'          => __( 'Add New Payment Method', WOO_CUSTOM_GATEWAY_SLUG ),
-					'edit_item'             => __( 'Edit Payment Method', WOO_CUSTOM_GATEWAY_SLUG ),
-					'new_item'              => __( 'New Payment Method', WOO_CUSTOM_GATEWAY_SLUG ),
-					'view_item'             => __( 'View Payment Method', WOO_CUSTOM_GATEWAY_SLUG ),
-					'search_items'          => __( 'Search Payment Methods', WOO_CUSTOM_GATEWAY_SLUG ),
-					'not_found'             => __( 'No Payment Methods Found', WOO_CUSTOM_GATEWAY_SLUG ),
-					'not_found_in_trash'    => __( 'No Payment Methods found in trash', WOO_CUSTOM_GATEWAY_SLUG ),
-					'parent_item_colon'     => __( 'Parent Payment Method:', WOO_CUSTOM_GATEWAY_SLUG ),
-					'all_items'             => __( 'Payment Methods', WOO_CUSTOM_GATEWAY_SLUG ),
-					'archives'              => __( 'Payment Method archives', WOO_CUSTOM_GATEWAY_SLUG ),
-					'insert_into_item'      => __( 'Insert into Payment Method profile', WOO_CUSTOM_GATEWAY_SLUG ),
-					'uploaded_to_this_item' => __( 'Uploaded to Payment Method profile', WOO_CUSTOM_GATEWAY_SLUG ),
-					'menu_name'             => __( 'Payment Methods', WOO_CUSTOM_GATEWAY_SLUG ),
-					'name_admin_bar'        => __( 'Payment Methods', WOO_CUSTOM_GATEWAY_SLUG ),
-				),
-				'rewrite'              => array(
-					'slug' => 'custom-gateway',
-					WOO_CUSTOM_GATEWAY_SLUG,
-				),
-				'supports'             => array( 'thumbnail', 'title', WOO_CUSTOM_GATEWAY_SLUG ),
-				'delete_with_user'     => false,
-				'register_meta_box_cb' => array( $this, 'addMetaBoxs' ),
-			)
-		);
-	}
+        wp_register_script(Functions::get_plugin_slug(), Template::get_script_url('admin-rating.js'), array('jquery'), WOO_CUSTOM_GATEWAY_VERSION);
+        wp_localize_script(
+            Functions::get_plugin_slug(),
+            'wooCustomGateway',
+            array(
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'name' => Functions::get_plugin_slug(),
+            )
+        );
+    }
 
-	/**
-	 *
-	 * @since 1.0.0
-	 * @version 1.2.3
-	 * @param int      $post_id
-	 * @param \WP_Post $post
-	 * @param boolean  $update
-	 */
-	public function save_post( $post_id, $post, $update ) {
+    /**
+     * On create the about menu
+     *
+     * @since 1.0.0
+     */
+    public function on_admin_menu()
+    {
+        add_menu_page(
+            __('Woo Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG),
+            __('Woo Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG),
+            'manage_options',
+            Functions::get_plugin_slug(),
+            "",
+            Template::get_image_url('logo.svg'),
+            59 // Right below Woocommerce
+        );
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return;
-		}
+        add_submenu_page(
+            Functions::get_plugin_slug(),
+            __('About', WOO_CUSTOM_GATEWAY_SLUG),
+            __('About', WOO_CUSTOM_GATEWAY_SLUG),
+            'manage_options',
+            Functions::get_plugin_slug("-about"),
+            [$this, 'renderAboutPage'],
+        );
+    }
 
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return;
-		}
+    /**
+     * Render the about page
+     *
+     * @return void
+     * @since 1.5.0
+     * @version 1.5.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function renderAboutPage(): void
+    {
 
-		switch ( get_post_type( $post_id ) ) {
-			case Functions::gateway_slug():
-				$nonce = filter_input( INPUT_POST, Functions::get_plugin_slug( '-nonce' ) );
-				if ( $nonce && wp_verify_nonce( $nonce, WOO_CUSTOM_GATEWAY_SLUG ) ) {
+        wp_enqueue_style(Functions::get_plugin_slug("-about"));
 
-					if ( isset( $_POST['woocg-description'] ) ) {
-						$description = sanitize_text_field( filter_input( INPUT_POST, 'woocg-description' ) );
+        $plugin = get_plugin_data(
+            WOO_CUSTOM_GATEWAY_FILE
+        );
 
-						if ( $description ) {
-							update_post_meta( $post_id, 'woocg-desciption', $description ); // ignore typo
-						}
-					}
-				}
-				break;
-		}
-	}
+        echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . "admin-about", compact("plugin"), "admin-about.php");
+    }
 
-	/**
-	 * Show rating request
-	 *
-	 * @since 1.1.0
-	 * @version 1.1.1
-	 * @return void
-	 */
-	public function show_rating() {
-		/**
-		 * Request Rating
-		 */
-		// if has at least two custom gateways and has never been shown
-		$args = array(
-			'post_type'     => Functions::gateway_slug(),
-			'fields'        => 'ids',
-			'no_found_rows' => true,
-		);
+    /**
+     * Add settings page link
+     *
+     * @param array $links
+     * @return array
+     * @since 1.0.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function plugins_list_options_link(array $links): array
+    {
 
-		if ( boolval( get_transient( Functions::get_plugin_slug( '-rate' ) ) ) === false && count( get_posts( $args ) ) >= 2 ) {
-			wp_enqueue_script( WOO_CUSTOM_GATEWAY_SLUG );
-			wp_enqueue_style( WOO_CUSTOM_GATEWAY_SLUG );
+        $args = array('post_type' => Functions::gateway_slug());
 
-			echo Functions::get_template( WOO_CUSTOM_GATEWAY_SLUG . '-admin-rating', array(), 'admin-rating.php' );
+        $link = add_query_arg($args, admin_url('edit.php'));
+        $link = sprintf('<a href="%s">%s</a>', $link, __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG));
 
-		}
-	}
+        $links[] = $link;
 
-	/**
-	 *
-	 * @since 1.0.0
-	 * @param \WP_Post $post
-	 */
-	public function addMetaBoxs( $post ) {
+        return $links;
+    }
 
-		add_meta_box( 'woocg-post-description', __( 'Payment Method Description', WOO_CUSTOM_GATEWAY_SLUG ), array( $this, 'descriptionMetaBox' ), Functions::gateway_slug(), 'normal', 'high' );
-	}
+    /**
+     * Register custom post typre
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function init(): void
+    {
 
-	/**
-	 *
-	 * @since 1.0.0
-	 * @version 1.2.3
-	 * @param \WP_Post $post
-	 * @param array    $args
-	 */
-	public function descriptionMetaBox( $post, $args ) {
-		echo Functions::get_template( WOO_CUSTOM_GATEWAY_SLUG . '-admin-edit-post', compact( 'post', 'args' ), 'admin-edit-post.php' );
-	}
+        register_post_type(
+            Functions::gateway_slug(),
+            array(
+                'show_ui' => true,
+                'show_in_menu' => current_user_can('manage_woocommerce') ? Functions::get_plugin_slug() : true,
+                'description' => Functions::gateway_slug(),
+                // 'has_archive' => true,
+                'exclude_from_search' => true,
+                // 'map_meta_cap' => true,
+                'hierarchical' => false,
+                'labels' => array(
+                    'name' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
+                    'singular_name' => __('Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
+                    'add_new' => __('Add New', WOO_CUSTOM_GATEWAY_SLUG),
+                    'add_new_item' => __('Add New Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
+                    'edit_item' => __('Edit Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
+                    'new_item' => __('New Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
+                    'view_item' => __('View Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
+                    'search_items' => __('Search Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
+                    'not_found' => __('No Payment Methods Found', WOO_CUSTOM_GATEWAY_SLUG),
+                    'not_found_in_trash' => __('No Payment Methods found in trash', WOO_CUSTOM_GATEWAY_SLUG),
+                    'parent_item_colon' => __('Parent Payment Method:', WOO_CUSTOM_GATEWAY_SLUG),
+                    'all_items' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
+                    'archives' => __('Payment Method archives', WOO_CUSTOM_GATEWAY_SLUG),
+                    'insert_into_item' => __('Insert into Payment Method profile', WOO_CUSTOM_GATEWAY_SLUG),
+                    'uploaded_to_this_item' => __('Uploaded to Payment Method profile', WOO_CUSTOM_GATEWAY_SLUG),
+                    'menu_name' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
+                    'name_admin_bar' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
+                ),
+                'rewrite' => array(
+                    'slug' => 'custom-gateway',
+                    WOO_CUSTOM_GATEWAY_SLUG,
+                ),
+                'supports' => array('thumbnail', 'title', WOO_CUSTOM_GATEWAY_SLUG),
+                'delete_with_user' => false,
+                'register_meta_box_cb' => array($this, 'addMetaBoxes'),
+            )
+        );
+    }
 
-	/**
-	 *
-	 * @since 1.0.0
-	 * @version 1.3.0
-	 * @param  string $content
-	 * @param  int    $post
-	 * @param  int    $thumbnail_id
-	 * @return string
-	 */
-	public function filter_featured_image_admin_text( $content, $post, $thumbnail_id ) {
+    /**
+     * Save Post
+     *
+     * @param int $post_id
+     * @param WP_Post $post
+     * @param boolean $update
+     * @version 1.2.3
+     * @since 1.0.0
+     */
+    public function save_post(int $post_id, WP_Post $post, bool $update): void
+    {
 
-		if ( get_post_type( $post ) === Functions::gateway_slug() && $thumbnail_id == null ) {
-			$content .= wpautop( __( 'If you want to show an image next to the gateway\'s name on the frontend, select an image.', WOO_CUSTOM_GATEWAY_SLUG ) );
-		}
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
 
-		return $content;
-	}
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
 
-	/**
-	 * Change the enter tilte here text
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @param  string   $input
-	 * @param  \WP_Post $post
-	 * @return string
-	 */
-	public function custom_enter_title( $input, $post ) {
+        switch (get_post_type($post_id)) {
+            case Functions::gateway_slug():
+                $nonce = filter_input(INPUT_POST, Functions::get_plugin_slug('-nonce'));
+                if ($nonce && wp_verify_nonce($nonce, WOO_CUSTOM_GATEWAY_SLUG)) {
 
-		if ( Functions::gateway_slug() === get_post_type( $post ) ) {
-			$input = __( 'Payment Method Name', WOO_CUSTOM_GATEWAY_SLUG );
-		}
+                    if (isset($_POST['woo-cg-description'])) {
+                        $description = sanitize_text_field(filter_input(INPUT_POST, 'woo-cg-description'));
 
-		return $input;
-	}
+                        if ($description) {
+                            update_post_meta($post_id, 'woocg-desciption', $description); // ignore typo
+                        }
 
-	/**
-	 * Output the column data
-	 *
-	 * @since 1.0.0
-	 * @version 1.3.0
-	 * @param $column
-	 * @param $post
-	 */
-	public function add_column_data( $column, $post ) {
+                        Logger::logEvent("save_payment_gateway");
+                    }
+                }
+                break;
+        }
+    }
 
-		if ( Functions::gateway_slug() === get_post_type( $post ) ) {
-			switch ( $column ) {
-				case 'thumbnail':
-					echo the_post_thumbnail( 'thumb' );
-					break;
-			}
-		}
-	}
+    /**
+     * Show rating request
+     *
+     * @return void
+     * @version 1.5.0
+     * @since 1.1.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public function showAdminNotices(): void
+    {
+        /**
+         * Request Rating
+         */
+        // if it has at least two custom gateways and has never been shown
+        $args = array(
+            'post_type' => Functions::gateway_slug(),
+            'fields' => 'ids',
+            'no_found_rows' => true,
+        );
 
-	/**
-	 * Add custom post thumbnail column
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @param  $columns
-	 * @return mixed
-	 */
-	public function add_columns( $columns ) {
+        if (boolval(get_transient(Functions::get_plugin_slug('-rate'))) === false && count(get_posts($args)) >= 2) {
+            wp_enqueue_script(WOO_CUSTOM_GATEWAY_SLUG);
+            wp_enqueue_style(WOO_CUSTOM_GATEWAY_SLUG);
 
-		$columns['thumbnail'] = __( 'Thumbnail', WOO_CUSTOM_GATEWAY_SLUG );
+            echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-admin-notice-rating', array(), 'admin-notice-rating.php');
 
-		return $columns;
-	}
+            Logger::logEvent("request_plugin_rating");
+        }
 
-	/**
-	 *
-	 * Add quick link to the plugin settings on the plugins page
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @param  array    $actions
-	 * @param  \WP_Post $post
-	 * @return string
-	 */
-	public function post_row_actions( $actions, $post ) {
+        if (get_option(Functions::get_plugin_slug("-analytics"), "off") !== "on" && boolval(get_transient(Functions::get_plugin_slug('-analytics'))) === false) {
+            wp_enqueue_script(WOO_CUSTOM_GATEWAY_SLUG);
+            wp_enqueue_style(WOO_CUSTOM_GATEWAY_SLUG);
 
-		if ( get_post_type( $post ) === Functions::gateway_slug() ) {
+            echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-admin-notice-analytics', array(), 'admin-notice-analytics.php');
 
-			$args = array(
-				'page'    => 'wc-settings',
-				'tab'     => 'checkout',
-				'section' => Functions::gateway_id( $post->ID ),
-			);
+            Logger::logEvent("request_plugin_analytics");
+        }
+    }
 
-			$link = add_query_arg( $args, admin_url( 'admin.php' ) );
+    /**
+     *
+     * @param WP_Post|int $post
+     * @since 1.0.0
+     */
+    public function addMetaBoxes($post): void
+    {
 
-			$actions['settings'] = sprintf( '<a href="%s">%s</a>', $link, __( 'Settings', WOO_CUSTOM_GATEWAY_SLUG ) );
-		}
+        add_meta_box('woocg-post-description', __('Payment Method Description', WOO_CUSTOM_GATEWAY_SLUG), array($this, 'descriptionMetaBox'), Functions::gateway_slug(), 'normal', 'high');
+    }
 
-		return $actions;
-	}
+    /**
+     *
+     * @param WP_Post|int $post
+     * @param array $args
+     * @since 1.0.0
+     * @version 1.2.3
+     */
+    public function descriptionMetaBox($post, array $args): void
+    {
+        echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-admin-edit-post', compact('post', 'args'), 'admin-edit-post.php');
 
-	/**
-	 * On delete custom post type
-	 *
-	 * @since 1.0.0
-	 * @version 1.3.0
-	 * @param int $post
-	 */
-	public function on_delete_method( $post ) {
+        Logger::logEvent("edit_payment_gateway");
+    }
 
-		if ( get_post_type( $post ) === Functions::gateway_slug() ) {
-			$method = new Gateway( $post );
-			delete_option( $method->get_option_key() );
-		}
-	}
+    /**
+     *
+     * @param string $content
+     * @param WP_Post|int $post
+     * @param int $thumbnail_id
+     * @return string
+     * @since 1.0.0
+     * @version 1.3.0
+     */
+    public function filter_featured_image_admin_text(string $content, $post, int $thumbnail_id): string
+    {
+
+        if (get_post_type($post) === Functions::gateway_slug() && $thumbnail_id == null) {
+            $content .= wpautop(__('If you want to show an image next to the gateway\'s name on the frontend, select an image.', WOO_CUSTOM_GATEWAY_SLUG));
+        }
+
+        return $content;
+    }
+
+    /**
+     * Change enter title here text
+     *
+     * @param string $input
+     * @param WP_Post|int $post
+     * @return string
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public function custom_enter_title(string $input, $post): string
+    {
+
+        if (Functions::gateway_slug() === get_post_type($post)) {
+            $input = __('Payment Method Name', WOO_CUSTOM_GATEWAY_SLUG);
+        }
+
+        return $input;
+    }
+
+    /**
+     * Output the column data
+     *
+     * @param string $column
+     * @param WP_Post|int $post
+     * @since 1.0.0
+     * @version 1.3.0
+     */
+    public function add_column_data(string $column, $post): void
+    {
+
+        if (Functions::gateway_slug() === get_post_type($post)) {
+            switch ($column) {
+                case 'thumbnail':
+                    the_post_thumbnail('thumb');
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Add custom post thumbnail column
+     *
+     * @param array $columns
+     * @return array
+     * @since 1.0.0
+     * @version 1.0.0
+     */
+    public function add_columns(array $columns): array
+    {
+
+        $columns['thumbnail'] = __('Thumbnail', WOO_CUSTOM_GATEWAY_SLUG);
+
+        return $columns;
+    }
+
+    /**
+     *
+     * Add quick link to the plugin settings on the plugins page
+     *
+     * @param array $actions
+     * @param WP_Post|int $post
+     * @return array
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public function post_row_actions(array $actions, $post): array
+    {
+
+        if (get_post_type($post) === Functions::gateway_slug()) {
+
+            $args = array(
+                'page' => 'wc-settings',
+                'tab' => 'checkout',
+                'section' => Functions::gateway_id($post->ID),
+            );
+
+            $link = add_query_arg($args, admin_url('admin.php'));
+
+            $actions['settings'] = sprintf('<a href="%s">%s</a>', $link, __('Settings', WOO_CUSTOM_GATEWAY_SLUG));
+        }
+
+        return $actions;
+    }
+
+    /**
+     * On delete custom post type
+     *
+     * @param WP_Post|int $post
+     * @version 1.3.0
+     * @since 1.0.0
+     */
+    public function on_delete_method($post): void
+    {
+
+        if (get_post_type($post) === Functions::gateway_slug()) {
+            $method = new Gateway($post);
+            delete_option($method->get_option_key());
+
+            Logger::logEvent("delete_payment_gateway");
+        }
+    }
 
 }

@@ -1,55 +1,69 @@
 {
-    "name": "rich4rdmuvirimi/woo-custom-gateway",
-    "description": "Add multiple custom payment gateways to WooCommerce e-commerce plugin.",
-    "type": "wordpress-plugin",
-    "license": "GNU-V2",
-    "autoload": {
-        "psr-4": {
-            "Rich4rdMuvirimi\\WooCustomGateway\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Rich4rdMuvirimi\\WooCustomGateway\\Tests\\": "tests/src/",
-            "Rich4rdMuvirimi\\WooCustomGateway\\": "src/"
-        }
-    },
-    "config": {
-        "platform": {
-            "php": "5.6"
-        },
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
-    },
-    "scripts": {
-        "qc": [
-            "@phpcs",
-            "@test"
-        ],
-        "phpcs": [
-            "vendor/bin/phpcs ."
-        ],
-        "test": [
-            "phpunit"
-        ]
-    },
-    "authors": [
-        {
-            "name": "Richard Muvirimi",
-            "email": "rich4rdmuvirimi@gmail.com",
-            "homepage": "http://richard.co.zw",
-            "role": "Developer"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {
-        "php": ">=5.6"
-    },
-    "require-dev": {
-        "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "brain/monkey": "^2.6",
-        "phpunit/phpunit": "^5.7",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2"
+  "name": "rich4rdmuvirimi/woo-custom-gateway",
+  "description": "Add multiple custom payment gateways to WooCommerce e-commerce plugin.",
+  "type": "wordpress-plugin",
+  "license": "GNU-V2",
+  "autoload": {
+    "psr-4": {
+      "Rich4rdMuvirimi\\WooCustomGateway\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Rich4rdMuvirimi\\WooCustomGateway\\Tests\\": "tests/src/",
+      "Rich4rdMuvirimi\\WooCustomGateway\\": "src/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.4"
+    },
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "process-timeout": 0
+  },
+  "scripts": {
+    "qc": [
+      "@phpcs",
+      "@test"
+    ],
+    "phpcs": [
+      "vendor/bin/phpcs ."
+    ],
+    "php-cs-setup": [
+      "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+      "@phpcs -i"
+    ],
+    "phpunit": [
+      "@php vendor/bin/phpunit"
+    ],
+    "test": [
+      "@phpunit"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Richard Muvirimi",
+      "email": "rich4rdmuvirimi@gmail.com",
+      "homepage": "https://richard.co.zw",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.4",
+    "symfony/polyfill-php80": "*",
+    "symfony/polyfill-php81": "*",
+    "br33f/php-ga4-mp": "^0.1.2",
+    "yidas/client-ip": "^1.0",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "brain/monkey": "^2.6",
+    "phpunit/phpunit": "^9",
+    "squizlabs/php_codesniffer": "^3.7",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+  }
 }

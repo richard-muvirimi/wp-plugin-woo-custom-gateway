@@ -1,6 +1,6 @@
 <?php
 /**
- * File for the plugin Specific func]\tions
+ * File for the plugin Specific functions
  *
  * All plugin specific functions are handled in one place
  *
@@ -15,6 +15,7 @@
 namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
 
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
 
 /**
  * Plugin controller
@@ -26,78 +27,86 @@ use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
  * @since 1.0.0
  * @version 1.0.0
  */
-class Plugin extends BaseController {
+class Plugin extends BaseController
+{
 
 
-	/**
-	 * On plugin activation
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function on_activation() {
+    /**
+     * On plugin activation
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public static function on_activation(): void
+    {
 
-		// insert sample posts
-		$args = array(
-			'post_type'     => Functions::gateway_slug(),
-			'fields'        => 'ids',
-			'no_found_rows' => true,
-		);
+        // insert sample posts
+        $args = array(
+            'post_type' => Functions::gateway_slug(),
+            'fields' => 'ids',
+            'no_found_rows' => true,
+        );
 
-		if ( empty( get_posts( $args ) ) ) {
+        if (empty(get_posts($args))) {
 
-			$id = wp_insert_post(
-				array(
-					'post_status' => 'publish',
-					'post_type'   => Functions::gateway_slug(),
-					'post_title'  => __( 'Sample Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG ),
-					'meta_input'  => array(
-						'woocg-desciption' => __( 'Sample payment gateway to just show off. ;)', WOO_CUSTOM_GATEWAY_SLUG ), // ignore typo
-					),
-				)
-			);
-		}
+            $id = wp_insert_post(
+                array(
+                    'post_status' => 'publish',
+                    'post_type' => Functions::gateway_slug(),
+                    'post_title' => __('Sample Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG),
+                    'meta_input' => array(
+                        'woocg-desciption' => __('Sample payment gateway to just show off. ;)', WOO_CUSTOM_GATEWAY_SLUG), // ignore typo
+                    ),
+                )
+            );
+        }
 
-		if ( boolval( get_transient( Functions::get_plugin_slug( '-rate' ) ) ) === false ) {
-			set_transient( Functions::get_plugin_slug( '-rate' ), true, YEAR_IN_SECONDS / 4 );
-		}
+        if (boolval(get_transient(Functions::get_plugin_slug('-rate'))) === false) {
+            set_transient(Functions::get_plugin_slug('-rate'), true, YEAR_IN_SECONDS / 4);
+        }
 
-	}
+        Logger::logEvent("activate_plugin");
 
-	/**
-	 * On plugin deactivation
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function on_deactivation() {
+    }
 
-	}
+    /**
+     * On plugin deactivation
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public static function on_deactivation(): void
+    {
+        Logger::logEvent("deactivate_plugin");
+    }
 
-	/**
-	 * On plugin uninstall
-	 *
-	 * @since 1.0.0
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function on_uninstall() {
+    /**
+     * On plugin uninstall
+     *
+     * @return void
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    public static function on_uninstall(): void
+    {
 
-		$args = array(
-			'post_type'     => Functions::gateway_slug(),
-			'fields'        => 'ids',
-			'no_found_rows' => true,
-			'numberposts'   => -1,
-		);
+        $args = array(
+            'post_type' => Functions::gateway_slug(),
+            'fields' => 'ids',
+            'no_found_rows' => true,
+            'numberposts' => -1,
+        );
 
-		$posts = get_posts( $args );
+        $posts = get_posts($args);
 
-		foreach ( $posts as $id ) {
+        foreach ($posts as $id) {
 
-			wp_delete_post( $id, true );
-		}
+            wp_delete_post($id, true);
+        }
 
-	}
+        Logger::logEvent("uninstall_plugin");
+
+    }
 }

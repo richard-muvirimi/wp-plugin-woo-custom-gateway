@@ -1,32 +1,29 @@
 (function ($) {
-  "use strict";
+    "use strict";
 
-  $(document).ready(function () {
-    $(
-      "." +
-      window.wooCustomGateway.name +
-      " a.btn-rate, ." +
-      window.wooCustomGateway.name +
-      " a.btn-remind, ." +
-      window.wooCustomGateway.name +
-      " a.btn-cancel"
-    ).click(function (e) {
-      e.preventDefault();
+    $(document).ready(function () {
 
-      $.post({
-        url: window.wooCustomGateway.ajax_url,
-        data: {
-          _ajax_nonce: $(this).data("nonce"),
-          action: window.wooCustomGateway.name + "-" + $(this).data("action"),
-        },
-        async: false,
-        success: function (response) {
-          if (response.redirect) {
-            window.open(response.redirect, "_blank").focus();
-          }
-          $("." + window.wooCustomGateway.name + " .notice-dismiss").click();
-        },
-      });
+        const pluginName = window["wooCustomGateway"].name;
+
+        $("." + pluginName + " a.btn-yield, ." + pluginName + " a.btn-remind, ." + pluginName + " a.btn-cancel")
+            .click(function (e) {
+                e.preventDefault();
+
+                const element = this;
+
+                $.post({
+                    url: window["wooCustomGateway"].ajax_url,
+                    data: {
+                        _ajax_nonce: $(element).data("nonce"),
+                        action: pluginName + "-" + $(element).data("action"),
+                    },
+                    success: function (response) {
+                        if (response.redirect) {
+                            window.open(response.redirect, "_blank").focus();
+                        }
+                        $(element).closest(".notice").find(".notice-dismiss").click();
+                    },
+                });
+            });
     });
-  });
 })(jQuery);

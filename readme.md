@@ -5,52 +5,55 @@
 - **_ Donate link: _** [Buy Me A Coffee](https://buymeacoffee.com/fpjyrXk)
 - **_ Requires at least: _** 4.0.0
 - **_ Tested up to: _** 6.1
-- **_ Requires PHP: _** 5.6
-- **_ WC tested up to: _** 7.1.0
-- **_ Stable tag: _** 1.4.5
+- **_ Requires PHP: _** 7.4
+- **_ WC tested up to: _** 7.4
+- **_ Stable tag: _** 1.5.0
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
-The plugin helps you create an infinite number of custom payment gateways.
+Add multiple custom payment gateways to WooCommerce e-commerce plugin.
 
 ## Description
 
-The plugin helps you create an infinite number of custom payment gateways. After a payment gateway is created, its instructions and email sent to customer can be edited in the WooCommerce payment settings menu.
-The steps of creating a payment gateway entail:
+This plugin allows you to create an infinite number of custom payment gateways for WooCommerce. After a payment gateway is created, you can edit its instructions and email sent to the customer directly in the WooCommerce payment settings menu.
 
-1. Creating a payment gateway in WooCommerce → Payment Methods → Add New
-2. Customising the gateway in WooCommerce payment settings. (These options are shown to the customer).
-3. Add a few urls to ping after an order is created.
-4. Creating another.
+Features:
 
-Note: You will have to update the order status as the order progresses from On Hold/Processing as this gateway has no way of tracking the order.
+* Create unlimited custom payment gateways
+* Edit payment gateway instructions and customer emails in WooCommerce settings
+* Easy customization of gateway options for customers
+* Add multiple URLs to ping after an order is created
+* Simple creation process for new payment gateways
+
+Note: You will need to manually update the order status as the order progresses from On Hold/Processing, as this gateway has no way of tracking the order.
+
+This plugin also includes non-intrusive ads (shown only in the backend) that help support the ongoing development and maintenance of the plugin. Please see our privacy policy for information on data collection.
 
 ## Installation
 
 ### Automatic installation
 
-Automatic installation is the easiest option -- WordPress will handle the file transfer, and you won’t need to leave your web browser. To do an automatic install of Woo Custom Gateway, log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
+The easiest way to install Woo Custom Gateway is through the automatic installation option. To do this, simply log in to your WordPress dashboard, navigate to the Plugins menu, and click on "Add New."
 
-In the search field type “Woo Custom Gateway,” then click “Search Plugins.” Once you’ve found us, you can view details about it such as the point release, rating, and description. Most importantly of course, you can install it by! Clicking “Install Now,” and WordPress will take it from there.
+In the search field, type "Woo Custom Gateway," and click on "Search Plugins." Once you find our plugin, you can view details such as the rating, description, and the current version. To install the plugin, click on "Install Now," and let WordPress handle the file transfer for you.
 
 ### Manual installation
 
-1. Upload \'woo-custom-gateway\' to the \'/wp-content/plugins/\' directory
-2. Activate the plugin through the \'Plugins\' menu in WordPress
-3. Access \'edit.php?post_type=woocg-post\' in order to add new custom payment gateways
+1. Download the plugin zip file from the source (such as the WordPress plugin repository).
+2. Log in to your WordPress dashboard, navigate to the Plugins menu, and click “Add New.”
+3. Click the “Upload Plugin” button at the top of the page.
+4. Choose the plugin zip file you downloaded and click “Install Now.”
+5. Once the installation is complete, click the “Activate Plugin” button.
+6. You can now access the plugin through “Woo Custom Gateways” option in the admin menu.
 
 ## Frequently Asked Questions
 
 1. What is this all about?
-
-   - This plugin addresses cases where you might want a payment gateway such as \"pay on deliver\" or \"cheque\" but this plugin goes a step further as it allows you to customize with a logo and email instructions after customer pays. This allows you to add local payment solutions in your area and you can easily update the order status of the order as the payment process progresses.
-
+   - This plugin allows you to create custom payment gateways for WooCommerce, including options for adding a logo and customizing email instructions to customers after payment. This makes it easy to add local payment solutions in your area, and you can easily update the order status of the order as the payment process progresses.
 2. So where do I start?
-
-   - After you install and activate plugin a menu option \"Payment Gateways\" is added under \"WooCommerce Menu Options\" in Admin sidebar, you then have to create a payment gateway. After you are done you go to the gateways settings in WooCommerce payment settings and further customize the payment gateway.
-
-3. Is there a limit on number of gateways I can create
-   - Currently there\'s no limit. You can create as many as you can.
+   - After you install and activate the plugin, a new menu item "Woo Custom Gateway" will appear in the WooCommerce menu in the WordPress admin sidebar. Click on this menu item to create a payment gateway, and then further customize the payment gateway in the WooCommerce payment settings.
+3. Is there a limit on the number of gateways I can create?
+   - Currently, there is no limit. You can create as many custom payment gateways as you need.
 
 ## Screenshots
 
@@ -67,6 +70,11 @@ Custom payment gateway settings in WooCommerce. These settings will to shown to 
 Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 ## Changelog
+
+**_ 1.5.0 _**
+
+- Set minimum supported version to 7.4.
+- Allow opting in to usage analytics collection.
 
 **_ 1.4.0 - 1.4.5 _**
 
