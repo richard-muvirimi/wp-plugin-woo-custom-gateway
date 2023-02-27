@@ -41,7 +41,7 @@ class Functions
     {
         if (function_exists('WC')) {
 
-            if (isset(WC()->payment_gateways)) {
+            if (WC()->payment_gateways) {
                 $gateways = WC()->payment_gateways->payment_gateways();
 
                 if (isset($gateways[$gateway])) {
