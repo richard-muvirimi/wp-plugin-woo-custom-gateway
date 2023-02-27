@@ -163,9 +163,9 @@ class Logger
     public static function getSessionId(): string
     {
 
-        $cookie_name = "woo-custom-gateway-session-id";
+        $cookie_name = Functions::get_plugin_slug("-session-id");
 
-        $unique_id = $_COOKIE[$cookie_name] ?? uniqid("woo-cg", true);
+        $unique_id = $_COOKIE[$cookie_name] ?? uniqid("woo-cg-", true);
         $domain = parse_url(site_url(), PHP_URL_HOST);
 
         setcookie($cookie_name, $unique_id, time() + MONTH_IN_SECONDS, "/", $domain, true, true);
@@ -185,13 +185,15 @@ class Logger
      */
     public static function getEngagementTime(): float
     {
-        $start_time = $_COOKIE['woo-custom-gateway-session-start'] ?? time();
+        $cookie_name =  Functions::get_plugin_slug("-session-start");
+
+        $start_time = $_COOKIE[$cookie_name] ?? time();
         $time_now = time();
 
         $domain = parse_url(site_url(), PHP_URL_HOST);
 
         // Update the start time cookie
-        setcookie('woo-custom-gateway-session-start', $time_now, time() + HOUR_IN_SECONDS, '/', $domain, true, true);
+        setcookie($cookie_name, $time_now, time() + HOUR_IN_SECONDS, '/', $domain, true, true);
 
         // Calculate the engagement time
         return ($time_now - $start_time) * 1000;

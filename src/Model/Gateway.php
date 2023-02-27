@@ -17,6 +17,7 @@ use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Template;
 use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
+use WC_Order;
 use WC_Payment_Gateway;
 
 /**
@@ -186,7 +187,7 @@ class Gateway extends WC_Payment_Gateway
     /**
      * Process the payment and return the result
      *
-     * @param int $order_id
+     * @param int|WC_Order $order_id
      * @return array
      * @version 1.2.3
      * @since 1.0.0
