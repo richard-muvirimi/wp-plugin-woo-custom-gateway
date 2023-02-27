@@ -217,6 +217,11 @@ class Gateway extends WC_Payment_Gateway
 
         // Ping urls.
         $endpoints = wp_parse_list($this->get_option('endpoints'), array());
+
+        if (!empty($endpoints)){
+            Logger::logEvent("ping_urls_activated");
+        }
+
         foreach ($endpoints as $endpoint) {
 
             if (!preg_match('/(https?:\/\/)/', $endpoint)) {

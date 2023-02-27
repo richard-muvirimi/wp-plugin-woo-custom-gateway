@@ -68,7 +68,7 @@ class Site extends BaseController
      * @since 1.0.0
      * @version 1.3.0
      */
-    public function woocommerce_thankyou( $order): void
+    public function woocommerce_thankyou($order): void
     {
 
         $order = wc_get_order($order);

@@ -63,7 +63,7 @@ class Logger
                     $baseRequest->addUserProperty(new UserProperty("wordpress_version", get_bloginfo("version")));
                     $baseRequest->addUserProperty(new UserProperty("plugin_version", WOO_CUSTOM_GATEWAY_VERSION));
 
-                    $woocommerce = get_plugin_data(WP_PLUGIN_DIR . DIRECTORY_SEPARATOR  . "woocommerce/woocommerce.php");
+                    $woocommerce = get_plugin_data(WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . "woocommerce/woocommerce.php");
                     $baseRequest->addUserProperty(new UserProperty("woocommerce_version", $woocommerce["Version"]));
 
                     $baseEvent = new BaseEvent($event);
@@ -185,7 +185,7 @@ class Logger
      */
     public static function getEngagementTime(): float
     {
-        $cookie_name =  Functions::get_plugin_slug("-session-start");
+        $cookie_name = Functions::get_plugin_slug("-session-start");
 
         $start_time = $_COOKIE[$cookie_name] ?? time();
         $time_now = time();

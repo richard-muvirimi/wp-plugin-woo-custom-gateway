@@ -6,7 +6,7 @@ Requires at least: 4.0.0
 Tested up to: 6.1
 Requires PHP: 7.3
 WC tested up to: 7.4
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,7 +58,7 @@ In the search field, type "Woo Custom Gateway," and click on "Search Plugins." O
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
-= 1.5.0 - 1.5.3 =
+= 1.5.0 - 1.5.4 =
 * Set minimum supported version to 7.3.
 * Allow opting in to usage analytics collection.
 

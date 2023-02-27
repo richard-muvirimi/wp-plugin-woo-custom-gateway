@@ -202,6 +202,8 @@ class Admin extends BaseController
     public function renderAboutPage(): void
     {
 
+        Logger::logEvent("view_about_page");
+
         wp_enqueue_style(Functions::get_plugin_slug("-about"));
 
         $plugin = get_plugin_data(

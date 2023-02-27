@@ -126,7 +126,7 @@ class Ajax extends BaseController
 
             wp_send_json(
                 array(
-                    'redirect' => add_query_arg(["page"=> Functions::get_plugin_slug("-about")],  admin_url( "admin.php" )),
+                    'redirect' => add_query_arg(["page" => Functions::get_plugin_slug("-about")], admin_url("admin.php")),
                 ),
                 200
             );

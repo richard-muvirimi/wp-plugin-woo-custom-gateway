@@ -42,6 +42,22 @@ class Template
     }
 
     /**
+     * Get the views path
+     *
+     * @param string $path
+     *
+     * @return string
+     * @since 1.0.0
+     * @version 1.0.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public static function get_views_path(string $path): string
+    {
+        return plugin_dir_path(WOO_CUSTOM_GATEWAY_FILE) . 'src' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . ltrim($path, '\\/');
+    }
+
+    /**
      * Get other templates (e.g. product attributes) passing attributes and including the file.
      *
      * @param string $template_name Template name.
@@ -69,22 +85,6 @@ class Template
     }
 
     /**
-     * Get the views url
-     *
-     * @param string $url
-     *
-     * @return string
-     * @since 1.0.0
-     * @version 1.0.0
-     *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
-     */
-    public static function get_views_url(string $url): string
-    {
-        return plugin_dir_url(WOO_CUSTOM_GATEWAY_FILE) . 'src' . self::$URL_SEPARATOR . 'Views' . self::$URL_SEPARATOR . ltrim($url, '\\/');
-    }
-
-    /**
      * Get the scripts url
      *
      * @param string $url
@@ -101,6 +101,22 @@ class Template
     }
 
     /**
+     * Get the views url
+     *
+     * @param string $url
+     *
+     * @return string
+     * @since 1.0.0
+     * @version 1.0.0
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    public static function get_views_url(string $url): string
+    {
+        return plugin_dir_url(WOO_CUSTOM_GATEWAY_FILE) . 'src' . self::$URL_SEPARATOR . 'Views' . self::$URL_SEPARATOR . ltrim($url, '\\/');
+    }
+
+    /**
      * Get the styles path
      *
      * @param string $path
@@ -114,22 +130,6 @@ class Template
     public static function get_style_path(string $path): string
     {
         return self::get_views_path('css' . DIRECTORY_SEPARATOR . $path);
-    }
-
-    /**
-     * Get the views path
-     *
-     * @param string $path
-     *
-     * @return string
-     * @since 1.0.0
-     * @version 1.0.0
-     *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
-     */
-    public static function get_views_path(string $path): string
-    {
-        return plugin_dir_path(WOO_CUSTOM_GATEWAY_FILE) . 'src' . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . ltrim($path, '\\/');
     }
 
     /**

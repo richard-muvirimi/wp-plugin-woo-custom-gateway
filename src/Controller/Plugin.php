@@ -14,6 +14,7 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
 
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
 use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
 
@@ -108,5 +109,21 @@ class Plugin extends BaseController
 
         Logger::logEvent("uninstall_plugin");
 
+    }
+
+    /**
+     * Mark plugin as compatible with the new woocommerce order feature
+     *
+     * @return void
+     * @version 1.5.4
+     * @since 1.5.4
+     *
+     * @link https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
+     */
+    public static function before_woocommerce_init(): void
+    {
+        if (class_exists(FeaturesUtil::class)) {
+            FeaturesUtil::declare_compatibility('custom_order_tables', WOO_CUSTOM_GATEWAY_FILE, false);
+        }
     }
 }

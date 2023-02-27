@@ -65,6 +65,8 @@ class WooCustomGateway
         $this->register_activation_hook(WOO_CUSTOM_GATEWAY_FILE, Plugin::class, 'on_activation');
         $this->register_deactivation_hook(WOO_CUSTOM_GATEWAY_FILE, Plugin::class, 'on_deactivation');
         $this->register_uninstall_hook(WOO_CUSTOM_GATEWAY_FILE, Plugin::class, 'on_uninstall');
+
+        $this->add_action("before_woocommerce_init", Plugin::class, "before_woocommerce_init");
     }
 
     /**
