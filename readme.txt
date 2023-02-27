@@ -44,12 +44,18 @@ In the search field, type "Woo Custom Gateway," and click on "Search Plugins." O
 6. You can now access the plugin through “Woo Custom Gateways” option in the admin menu.
 
 == Frequently Asked Questions ==
-1. What is this all about?
-♦ This plugin allows you to create custom payment gateways for WooCommerce, including options for adding a logo and customizing email instructions to customers after payment. This makes it easy to add local payment solutions in your area, and you can easily update the order status of the order as the payment process progresses.
-2. So where do I start?
-♦ After you install and activate the plugin, a new menu item "Woo Custom Gateway" will appear in the WooCommerce menu in the WordPress admin sidebar. Click on this menu item to create a payment gateway, and then further customize the payment gateway in the WooCommerce payment settings.
-3. Is there a limit on the number of gateways I can create?
-♦ Currently, there is no limit. You can create as many custom payment gateways as you need.
+
+= What is this all about? =
+
+This plugin allows you to create custom payment gateways for WooCommerce, including options for adding a logo and customizing email instructions to customers after payment. This makes it easy to add local payment solutions in your area, and you can easily update the order status of the order as the payment process progresses.
+
+= So where do I start? =
+
+After you install and activate the plugin, a new menu item "Woo Custom Gateway" will appear in the WooCommerce menu in the WordPress admin sidebar. Click on this menu item to create a payment gateway, and then further customize the payment gateway in the WooCommerce payment settings.
+
+= Is there a limit on the number of gateways I can create? =
+
+Currently, there is no limit. You can create as many custom payment gateways as you need.
 
 == Screenshots ==
 1. Adding and Editing Screen. A good name, logo and desciption will help the admin to identify this gateway when customising in WooCommerce payment settings.
