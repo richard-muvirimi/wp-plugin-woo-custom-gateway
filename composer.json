@@ -33,23 +33,23 @@
       "@test"
     ],
     "phpcs": [
-      "vendor/bin/phpcs ."
+      "./vendor/bin/phpcs ."
     ],
     "php-cs-setup": [
       "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
       "@phpcs -i"
     ],
     "phpunit": [
-      "@php vendor/bin/phpunit"
+      "@php ./vendor/bin/phpunit"
     ],
     "test": [
       "@phpunit"
     ],
     "mozart": [
-      "@php vendor/bin/mozart compose"
+      "@php ./vendor/bin/mozart compose"
     ],
     "mk-dependencies-dir": [
-      "@php -r \"if (!file_exists('vendor/woo-custom-gateway/classes')) { mkdir('vendor/woo-custom-gateway/classes', 0777, true); }\""
+      "@php -r \"if (!file_exists('./vendor/woo-custom-gateway/classes')) { mkdir('./vendor/woo-custom-gateway/classes', 0777, true); }\""
     ],
     "pre-install-cmd": [
       "@mk-dependencies-dir"
