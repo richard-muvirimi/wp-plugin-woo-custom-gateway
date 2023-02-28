@@ -2,13 +2,13 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Helpers;
 
-use Br33f\Ga4\MeasurementProtocol\Dto\Common\UserProperty;
-use Br33f\Ga4\MeasurementProtocol\Dto\Event\BaseEvent;
-use Br33f\Ga4\MeasurementProtocol\Dto\Parameter\BaseParameter;
-use Br33f\Ga4\MeasurementProtocol\Dto\Request\BaseRequest;
-use Br33f\Ga4\MeasurementProtocol\Service;
-use ClientIP;
+use WooCustomGateway_ClientIP as ClientIP;
 use Exception;
+use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Common\UserProperty;
+use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Event\BaseEvent;
+use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Parameter\BaseParameter;
+use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Request\BaseRequest;
+use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Service;
 
 /**
  * Class to handle plugin logging functions

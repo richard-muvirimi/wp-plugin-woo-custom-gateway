@@ -5,8 +5,12 @@
   "license": "GNU-V2",
   "autoload": {
     "psr-4": {
-      "Rich4rdMuvirimi\\WooCustomGateway\\": "src/"
-    }
+      "Rich4rdMuvirimi\\WooCustomGateway\\": "src/",
+      "Rich4rdMuvirimi\\WooCustomGateway\\Vendor\\": "vendor/woo-custom-gateway/psr-4"
+    },
+    "classmap": [
+      "vendor/woo-custom-gateway/classes/"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
@@ -40,6 +44,26 @@
     ],
     "test": [
       "@phpunit"
+    ],
+    "mozart": [
+      "@php vendor/bin/mozart compose"
+    ],
+    "mk-dependencies-dir": [
+      "@php -r \"if (!file_exists('vendor/woo-custom-gateway/classes')) { mkdir('vendor/woo-custom-gateway/classes', 0777, true); }\""
+    ],
+    "pre-install-cmd": [
+      "@mk-dependencies-dir"
+    ],
+    "pre-update-cmd": [
+      "@mk-dependencies-dir"
+    ],
+    "post-install-cmd": [
+      "@mozart",
+      "composer dump-autoload"
+    ],
+    "post-update-cmd": [
+      "@mozart",
+      "composer dump-autoload"
     ]
   },
   "authors": [
@@ -66,6 +90,16 @@
     "brain/monkey": "^2.6",
     "phpunit/phpunit": "^8",
     "squizlabs/php_codesniffer": "^3.7",
-    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "coenjacobs/mozart": "^0.7.1"
+  },
+  "extra": {
+    "mozart": {
+      "dep_namespace": "Rich4rdMuvirimi\\WooCustomGateway\\Vendor\\",
+      "dep_directory": "/vendor/woo-custom-gateway/psr-4/",
+      "classmap_directory": "/vendor/woo-custom-gateway/classes/",
+      "classmap_prefix": "WooCustomGateway_",
+      "delete_vendor_directories": true
+    }
   }
 }
