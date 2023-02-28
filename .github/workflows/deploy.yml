@@ -30,6 +30,9 @@ jobs:
           out-file-path: ./vendor/bin
           tarBall: false
           zipBall: false
+
+    - name: Rename Mozart Phar
+      run: mv ./vendor/bin/mozart.phar ./vendor/bin/mozart
       
     - name: Composer Setup
       uses: php-actions/composer@v6
