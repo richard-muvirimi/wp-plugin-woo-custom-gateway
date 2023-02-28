@@ -59,11 +59,11 @@
     ],
     "post-install-cmd": [
       "@mozart",
-      "composer dump-autoload"
+      "@composer dump-autoload"
     ],
     "post-update-cmd": [
       "@mozart",
-      "composer dump-autoload"
+      "@composer dump-autoload"
     ]
   },
   "authors": [
