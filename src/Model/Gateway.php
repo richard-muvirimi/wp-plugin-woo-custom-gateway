@@ -85,8 +85,6 @@ class Gateway extends WC_Payment_Gateway
     public function init_form_fields(): void
     {
 
-        $pending = wc_get_is_pending_statuses();
-
         $this->form_fields = array(
             'enabled' => array(
                 'title' => __('Enable/Disable', WOO_CUSTOM_GATEWAY_SLUG),
@@ -98,7 +96,7 @@ class Gateway extends WC_Payment_Gateway
                 'title' => __('Order Status', WOO_CUSTOM_GATEWAY_SLUG),
                 'type' => 'select',
                 'description' => __('Default order status when placed.', WOO_CUSTOM_GATEWAY_SLUG),
-                'default' => empty($pending) ? current(wc_get_order_statuses()) : current($pending),
+                'default' => $this->get_default_order_status(),
                 'desc_tip' => false,
                 'options' => wc_get_order_statuses(),
             ),
@@ -153,6 +151,22 @@ class Gateway extends WC_Payment_Gateway
     }
 
     /**
+     * Get the default order status
+     *
+     * @return string
+     * @since 1.5.5
+     * @version 1.5.5
+     *
+     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     */
+    private function get_default_order_status(): string
+    {
+        $pending = wc_get_is_pending_statuses();
+
+        return empty($pending) ? current(wc_get_order_statuses()) : current($pending);
+    }
+
+    /**
      * Register gateway hook
      *
      * @return void
@@ -179,7 +193,7 @@ class Gateway extends WC_Payment_Gateway
         parent::payment_fields();
 
         if ($this->has_fields) {
-            echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-proof-of-payment', array('description' => $this->description), 'proof-of-payment.php');
+            echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-proof-of-payment', array('description' => $this->description, "id" => $this->id), 'proof-of-payment.php');
         }
 
     }
@@ -204,7 +218,7 @@ class Gateway extends WC_Payment_Gateway
         wc_reduce_stock_levels($order_id);
 
         if ($this->has_fields) {
-            $note = filter_input(INPUT_POST, Functions::get_plugin_slug('-note'));
+            $note = filter_input(INPUT_POST, Functions::get_plugin_slug('-note-' . $this->id));
 
             $note = sanitize_textarea_field($note);
             if (strlen($note) != 0) {
@@ -216,9 +230,9 @@ class Gateway extends WC_Payment_Gateway
         WC()->cart->empty_cart();
 
         // Ping urls.
-        $endpoints = wp_parse_list($this->get_option('endpoints'), array());
+        $endpoints = wp_parse_list($this->get_option('endpoints', array()));
 
-        if (!empty($endpoints)){
+        if (!empty($endpoints)) {
             Logger::logEvent("ping_urls_activated");
         }
 
@@ -286,16 +300,16 @@ class Gateway extends WC_Payment_Gateway
      *
      * @param string $key
      * @param string $value
-     * @return bool
+     * @return string
      * @since  1.5.0
      * @version 1.5.0
      *
      * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
      */
-    public function validate_order_stat_field(string $key, string $value): bool
+    public function validate_order_stat_field(string $key, string $value): string
     {
         $value = parent::validate_select_field($key, $value);
 
-        return in_array($value, array_keys(wc_get_order_statuses()));
+        return in_array($value, array_keys(wc_get_order_statuses())) ? $value : $this->get_default_order_status();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Views;
 
+use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+
 if (!defined('WPINC')) {
     die(); // Exit if accessed directly.
 }
@@ -16,17 +18,20 @@ if (!defined('WPINC')) {
  * @author Richard Muvirimi <tygalive@gmail.com>
  * @since 1.0.0
  * @version 1.0.0
+ *
+ * @var string $description
+ * @var string $id
  */
 ?>
 
 <fieldset>
     <p class="form-row form-row-wide">
-        <label for="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG); ?>-note">
+        <label for="<?php esc_attr_e(Functions::get_plugin_slug("-note-" . $id)); ?>">
             <?php if (empty($description)) : _e('Payment Details.', WOO_CUSTOM_GATEWAY_SLUG); endif; ?>
         </label>
 
-        <textarea id="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG); ?>-note" class="input-text"
-                  name="<?php esc_attr_e(WOO_CUSTOM_GATEWAY_SLUG); ?>-note">
+        <textarea id="<?php esc_attr_e(Functions::get_plugin_slug("-note-" . $id)); ?>" class="input-text"
+                  name="<?php esc_attr_e(Functions::get_plugin_slug("-note-" . $id)); ?>">
         </textarea>
 
     </p>

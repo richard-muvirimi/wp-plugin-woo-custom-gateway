@@ -100,7 +100,7 @@ class Admin extends BaseController
     }
 
     /**
-     * Display the chaturbate header
+     * Display the settings header
      *
      * @return void
      * @since 1.5.0
@@ -210,7 +210,7 @@ class Admin extends BaseController
             WOO_CUSTOM_GATEWAY_FILE
         );
 
-        echo Template::get_template(Functions::get_plugin_slug( "admin-about"), compact("plugin"), "admin-about.php");
+        echo Template::get_template(Functions::get_plugin_slug("admin-about"), compact("plugin"), "admin-about.php");
     }
 
     /**
