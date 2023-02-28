@@ -24,7 +24,7 @@ jobs:
     - name: Composer Setup
       uses: php-actions/composer@v6
       with:
-        dev: yes
+        dev: no
         php_version: "7.4"
         version: latest
         command: install
@@ -32,7 +32,7 @@ jobs:
     - name: Copy to build dir
       run: |
         mkdir build
-        rsync -rvt --delete --include 'vendor' --exclude-from='.gitignore' --exclude '.git*' --exclude 'build' ./ build/
+        rsync -rvt --delete --include 'vendor/woo-custom-gateway' --include 'vendor/autoload.php' --exclude-from='.gitignore' --exclude '.git*' --exclude 'build' ./ build/
       
     - name: WordPress Plugin Deploy
       id: deploy
