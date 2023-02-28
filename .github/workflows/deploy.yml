@@ -27,7 +27,7 @@ jobs:
         dev: yes
         php_version: "7.4"
         version: latest
-        args: --no-dev --optimize-autoloader
+        args: --optimize-autoloader
         command: install
       
     - name: Copy to build dir
