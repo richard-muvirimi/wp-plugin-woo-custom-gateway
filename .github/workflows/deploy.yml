@@ -24,7 +24,7 @@ jobs:
     - name: Composer Setup
       uses: php-actions/composer@v6
       with:
-        dev: yes
+        dev: no
         php_version: "7.4"
         version: latest
         command: install

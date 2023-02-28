@@ -45,9 +45,6 @@
     "test": [
       "@phpunit"
     ],
-    "mozart": [
-      "@php ./vendor/bin/mozart compose"
-    ],
     "mk-dependencies-dir": [
       "@php -r \"if (!file_exists('./vendor/woo-custom-gateway/classes')) { mkdir('./vendor/woo-custom-gateway/classes', 0777, true); }\""
     ],
@@ -58,12 +55,16 @@
       "@mk-dependencies-dir"
     ],
     "post-install-cmd": [
-      "@mozart",
-      "@composer dump-autoload"
+      "@deploy"
     ],
     "post-update-cmd": [
-      "@mozart",
-      "@composer dump-autoload"
+      "@deploy"
+    ],
+    "deploy": [
+      "@php -r \"copy('https://github.com/coenjacobs/mozart/releases/download/0.7.1/mozart.phar', './mozart.phar');\"",
+      "@php ./mozart.phar compose",
+      "@composer dump-autoload",
+      "@php -r \"@unlink('./mozart.phar');\""
     ]
   },
   "authors": [
@@ -90,8 +91,7 @@
     "brain/monkey": "^2.6",
     "phpunit/phpunit": "^8",
     "squizlabs/php_codesniffer": "^3.7",
-    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-    "coenjacobs/mozart": "^0.7.1"
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
   },
   "extra": {
     "mozart": {
