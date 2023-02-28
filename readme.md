@@ -7,7 +7,7 @@
 - **_ Tested up to: _** 6.1
 - **_ Requires PHP: _** 7.3
 - **_ WC tested up to: _** 7.4
-- **_ Stable tag: _** 1.5.4
+- **_ Stable tag: _** 1.5.5
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -76,7 +76,7 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.5.0 - 1.5.4 _**
+**_ 1.5.0 - 1.5.5 _**
 
 - Set minimum supported version to 7.3.
 - Allow opting in to usage analytics collection.
