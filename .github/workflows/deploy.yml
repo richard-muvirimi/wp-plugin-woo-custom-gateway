@@ -20,24 +20,11 @@ jobs:
       with:
         path: /tmp/composer-cache
         key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-
-    - name: Mozart Setup
-      uses: robinraju/release-downloader@v1.7
-      with:
-          latest: true
-          repository: coenjacobs/mozart
-          fileName: '*.phar'
-          out-file-path: ./vendor/bin
-          tarBall: false
-          zipBall: false
-
-    - name: Rename Mozart Phar
-      run: mv ./vendor/bin/mozart.phar ./vendor/bin/mozart
       
     - name: Composer Setup
       uses: php-actions/composer@v6
       with:
-        dev: no
+        dev: yes
         php_version: "7.4"
         version: latest
         command: install
