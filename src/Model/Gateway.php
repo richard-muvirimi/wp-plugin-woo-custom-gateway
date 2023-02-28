@@ -114,7 +114,6 @@ class Gateway extends WC_Payment_Gateway
                 'description' => __('The payment gateway description displayed during checkout. Will be placed above the payment proof field if it is enabled.', WOO_CUSTOM_GATEWAY_SLUG),
                 'default' => __('', WOO_CUSTOM_GATEWAY_SLUG),
                 'desc_tip' => false,
-                "sanitize_callback" => "sanitize_textarea_field"
             ),
             'note' => array(
                 'title' => __('Payment Proof', WOO_CUSTOM_GATEWAY_SLUG),
@@ -128,7 +127,6 @@ class Gateway extends WC_Payment_Gateway
                 'description' => __('Instructions that will be shown on the thank you page.', WOO_CUSTOM_GATEWAY_SLUG),
                 'default' => '',
                 'desc_tip' => false,
-                "sanitize_callback" => "sanitize_textarea_field"
             ),
             'email' => array(
                 'title' => __('Email Instructions', WOO_CUSTOM_GATEWAY_SLUG),
@@ -136,7 +134,6 @@ class Gateway extends WC_Payment_Gateway
                 'description' => __('Instructions that will be sent in order emails. For plain text emails, html tags will be automatically stripped.', WOO_CUSTOM_GATEWAY_SLUG),
                 'default' => '',
                 'desc_tip' => false,
-                "sanitize_callback" => "sanitize_textarea_field"
             ),
             'endpoints' => array(
                 'title' => __('Endpoints', WOO_CUSTOM_GATEWAY_SLUG),
