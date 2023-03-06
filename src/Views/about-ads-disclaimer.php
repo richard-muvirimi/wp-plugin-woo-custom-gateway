@@ -2,6 +2,8 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Views;
 
+use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+
 if (!defined('WPINC')) {
     die(); // Exit if accessed directly.
 }
@@ -24,6 +26,6 @@ if (!defined('WPINC')) {
 <span>
     <?php _e("Our plugin relies on advertising revenue to continue development and support for our users. By displaying non-intrusive ads in the backend, we can keep our plugin free for all users and ensure its ongoing maintenance. We take care to only show ads that are relevant to our users and respect their privacy. For more information on how we collect and handle data, please refer to our", WOO_CUSTOM_GATEWAY_SLUG) ?>
     <a href="https://site.tyganeutronics.com/privacy-policy">
-       <?php _e("privacy policy", WOO_CUSTOM_GATEWAY_SLUG) ?>
+       <?php _e("privacy policy", Functions::get_plugin_slug()) ?>
     </a>.
 </span>

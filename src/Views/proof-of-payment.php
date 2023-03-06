@@ -27,7 +27,7 @@ if (!defined('WPINC')) {
 <fieldset>
     <p class="form-row form-row-wide">
         <label for="<?php esc_attr_e(Functions::get_plugin_slug("-note-" . $id)); ?>">
-            <?php if (empty($description)) : _e('Payment Details.', WOO_CUSTOM_GATEWAY_SLUG); endif; ?>
+            <?php if (empty($description)) : _e('Payment Details.', Functions::get_plugin_slug()); endif; ?>
         </label>
 
         <textarea id="<?php esc_attr_e(Functions::get_plugin_slug("-note-" . $id)); ?>" class="input-text"

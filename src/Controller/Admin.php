@@ -85,13 +85,13 @@ class Admin extends BaseController
 
         add_settings_field(
             Functions::get_plugin_slug("-analytics"),
-            __('Collect Anonymous Usage Data', WOO_CUSTOM_GATEWAY_SLUG),
+            __('Collect Anonymous Usage Data', Functions::get_plugin_slug()),
             array($this, 'renderInputField'),
             Functions::get_plugin_slug("-about"),
             Functions::get_plugin_slug("-settings"),
             array(
                 'label_for' => Functions::get_plugin_slug("-analytics"),
-                'class' => WOO_CUSTOM_GATEWAY_SLUG . '-row',
+                'class' => Functions::get_plugin_slug( '-row'),
                 "value" => get_option(Functions::get_plugin_slug("-analytics"), "off"),
                 'description' => Template::get_template(Functions::get_plugin_slug("-about-analytics-disclaimer"), [], "about-analytics-disclaimer.php"),
                 "type" => "checkbox",
@@ -171,8 +171,8 @@ class Admin extends BaseController
     public function on_admin_menu()
     {
         add_menu_page(
-            __('Woo Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG),
-            __('Woo Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG),
+            __('Woo Custom Gateway', Functions::get_plugin_slug()),
+            __('Woo Custom Gateway', Functions::get_plugin_slug()),
             'manage_options',
             Functions::get_plugin_slug(),
             "",
@@ -182,8 +182,8 @@ class Admin extends BaseController
 
         add_submenu_page(
             Functions::get_plugin_slug(),
-            __('About', WOO_CUSTOM_GATEWAY_SLUG),
-            __('About', WOO_CUSTOM_GATEWAY_SLUG),
+            __('About', Functions::get_plugin_slug()),
+            __('About', Functions::get_plugin_slug()),
             'manage_options',
             Functions::get_plugin_slug("-about"),
             [$this, 'renderAboutPage'],
@@ -228,7 +228,7 @@ class Admin extends BaseController
         $args = array('post_type' => Functions::gateway_slug());
 
         $link = add_query_arg($args, admin_url('edit.php'));
-        $link = sprintf('<a href="%s">%s</a>', $link, __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG));
+        $link = sprintf('<a href="%s">%s</a>', $link, __('Payment Methods', Functions::get_plugin_slug()));
 
         $links[] = $link;
 
@@ -255,29 +255,29 @@ class Admin extends BaseController
                 // 'map_meta_cap' => true,
                 'hierarchical' => false,
                 'labels' => array(
-                    'name' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
-                    'singular_name' => __('Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
-                    'add_new' => __('Add New', WOO_CUSTOM_GATEWAY_SLUG),
-                    'add_new_item' => __('Add New Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
-                    'edit_item' => __('Edit Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
-                    'new_item' => __('New Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
-                    'view_item' => __('View Payment Method', WOO_CUSTOM_GATEWAY_SLUG),
-                    'search_items' => __('Search Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
-                    'not_found' => __('No Payment Methods Found', WOO_CUSTOM_GATEWAY_SLUG),
-                    'not_found_in_trash' => __('No Payment Methods found in trash', WOO_CUSTOM_GATEWAY_SLUG),
-                    'parent_item_colon' => __('Parent Payment Method:', WOO_CUSTOM_GATEWAY_SLUG),
-                    'all_items' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
-                    'archives' => __('Payment Method archives', WOO_CUSTOM_GATEWAY_SLUG),
-                    'insert_into_item' => __('Insert into Payment Method profile', WOO_CUSTOM_GATEWAY_SLUG),
-                    'uploaded_to_this_item' => __('Uploaded to Payment Method profile', WOO_CUSTOM_GATEWAY_SLUG),
-                    'menu_name' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
-                    'name_admin_bar' => __('Payment Methods', WOO_CUSTOM_GATEWAY_SLUG),
+                    'name' => __('Payment Methods', Functions::get_plugin_slug()),
+                    'singular_name' => __('Payment Method', Functions::get_plugin_slug()),
+                    'add_new' => __('Add New', Functions::get_plugin_slug()),
+                    'add_new_item' => __('Add New Payment Method', Functions::get_plugin_slug()),
+                    'edit_item' => __('Edit Payment Method', Functions::get_plugin_slug()),
+                    'new_item' => __('New Payment Method', Functions::get_plugin_slug()),
+                    'view_item' => __('View Payment Method', Functions::get_plugin_slug()),
+                    'search_items' => __('Search Payment Methods', Functions::get_plugin_slug()),
+                    'not_found' => __('No Payment Methods Found', Functions::get_plugin_slug()),
+                    'not_found_in_trash' => __('No Payment Methods found in trash', Functions::get_plugin_slug()),
+                    'parent_item_colon' => __('Parent Payment Method:', Functions::get_plugin_slug()),
+                    'all_items' => __('Payment Methods', Functions::get_plugin_slug()),
+                    'archives' => __('Payment Method archives', Functions::get_plugin_slug()),
+                    'insert_into_item' => __('Insert into Payment Method profile', Functions::get_plugin_slug()),
+                    'uploaded_to_this_item' => __('Uploaded to Payment Method profile', Functions::get_plugin_slug()),
+                    'menu_name' => __('Payment Methods', Functions::get_plugin_slug()),
+                    'name_admin_bar' => __('Payment Methods', Functions::get_plugin_slug()),
                 ),
                 'rewrite' => array(
                     'slug' => 'custom-gateway',
-                    WOO_CUSTOM_GATEWAY_SLUG,
+                    Functions::get_plugin_slug(),
                 ),
-                'supports' => array('thumbnail', 'title', WOO_CUSTOM_GATEWAY_SLUG),
+                'supports' => array('thumbnail', 'title', Functions::get_plugin_slug()),
                 'delete_with_user' => false,
                 'register_meta_box_cb' => array($this, 'addMetaBoxes'),
             )
@@ -307,7 +307,7 @@ class Admin extends BaseController
         switch (get_post_type($post_id)) {
             case Functions::gateway_slug():
                 $nonce = filter_input(INPUT_POST, Functions::get_plugin_slug('-nonce'));
-                if ($nonce && wp_verify_nonce($nonce, WOO_CUSTOM_GATEWAY_SLUG)) {
+                if ($nonce && wp_verify_nonce($nonce, Functions::get_plugin_slug())) {
 
                     if (isset($_POST['woo-cg-description'])) {
                         $description = sanitize_text_field(filter_input(INPUT_POST, 'woo-cg-description'));
@@ -345,19 +345,19 @@ class Admin extends BaseController
         );
 
         if (boolval(get_transient(Functions::get_plugin_slug('-rate'))) === false && count(get_posts($args)) >= 2) {
-            wp_enqueue_script(WOO_CUSTOM_GATEWAY_SLUG);
-            wp_enqueue_style(WOO_CUSTOM_GATEWAY_SLUG);
+            wp_enqueue_script(Functions::get_plugin_slug());
+            wp_enqueue_style(Functions::get_plugin_slug());
 
-            echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-admin-notice-rating', array(), 'admin-notice-rating.php');
+            echo Template::get_template(Functions::get_plugin_slug( '-admin-notice-rating'), array(), 'admin-notice-rating.php');
 
             Logger::logEvent("request_plugin_rating");
         }
 
         if (get_option(Functions::get_plugin_slug("-analytics"), "off") !== "on" && boolval(get_transient(Functions::get_plugin_slug('-analytics'))) === false) {
-            wp_enqueue_script(WOO_CUSTOM_GATEWAY_SLUG);
-            wp_enqueue_style(WOO_CUSTOM_GATEWAY_SLUG);
+            wp_enqueue_script(Functions::get_plugin_slug());
+            wp_enqueue_style(Functions::get_plugin_slug());
 
-            echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-admin-notice-analytics', array(), 'admin-notice-analytics.php');
+            echo Template::get_template(Functions::get_plugin_slug( '-admin-notice-analytics'), array(), 'admin-notice-analytics.php');
 
             Logger::logEvent("request_plugin_analytics");
         }
@@ -371,7 +371,7 @@ class Admin extends BaseController
     public function addMetaBoxes($post): void
     {
 
-        add_meta_box('woocg-post-description', __('Payment Method Description', WOO_CUSTOM_GATEWAY_SLUG), array($this, 'descriptionMetaBox'), Functions::gateway_slug(), 'normal', 'high');
+        add_meta_box('woocg-post-description', __('Payment Method Description', Functions::get_plugin_slug()), array($this, 'descriptionMetaBox'), Functions::gateway_slug(), 'normal', 'high');
     }
 
     /**
@@ -383,7 +383,7 @@ class Admin extends BaseController
      */
     public function descriptionMetaBox($post, array $args): void
     {
-        echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-admin-edit-post', compact('post', 'args'), 'admin-edit-post.php');
+        echo Template::get_template(Functions::get_plugin_slug( '-admin-edit-post'), compact('post', 'args'), 'admin-edit-post.php');
 
         Logger::logEvent("edit_payment_gateway");
     }
@@ -401,7 +401,7 @@ class Admin extends BaseController
     {
 
         if (get_post_type($post) === Functions::gateway_slug() && $thumbnail_id == null) {
-            $content .= wpautop(__('If you want to show an image next to the gateway\'s name on the frontend, select an image.', WOO_CUSTOM_GATEWAY_SLUG));
+            $content .= wpautop(__('If you want to show an image next to the gateway\'s name on the frontend, select an image.', Functions::get_plugin_slug()));
         }
 
         return $content;
@@ -420,7 +420,7 @@ class Admin extends BaseController
     {
 
         if (Functions::gateway_slug() === get_post_type($post)) {
-            $input = __('Payment Method Name', WOO_CUSTOM_GATEWAY_SLUG);
+            $input = __('Payment Method Name', Functions::get_plugin_slug());
         }
 
         return $input;
@@ -457,7 +457,7 @@ class Admin extends BaseController
     public function add_columns(array $columns): array
     {
 
-        $columns['thumbnail'] = __('Thumbnail', WOO_CUSTOM_GATEWAY_SLUG);
+        $columns['thumbnail'] = __('Thumbnail', Functions::get_plugin_slug());
 
         return $columns;
     }
@@ -485,7 +485,7 @@ class Admin extends BaseController
 
             $link = add_query_arg($args, admin_url('admin.php'));
 
-            $actions['settings'] = sprintf('<a href="%s">%s</a>', $link, __('Settings', WOO_CUSTOM_GATEWAY_SLUG));
+            $actions['settings'] = sprintf('<a href="%s">%s</a>', $link, __('Settings', Functions::get_plugin_slug()));
         }
 
         return $actions;

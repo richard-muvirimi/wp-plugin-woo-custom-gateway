@@ -64,7 +64,7 @@ class Ajax extends BaseController
      * @since 1.0.2
      *
      */
-    public function ajaxDoRemind(): void
+    public function ajaxDoRemindRate(): void
     {
 
         if (check_ajax_referer(Functions::get_plugin_slug('-rate-remind'), '_ajax_nonce', false) !== false) {
@@ -90,7 +90,7 @@ class Ajax extends BaseController
      * @since 1.0.2
      *
      */
-    public function ajaxDoCancel(): void
+    public function ajaxDoCancelRate(): void
     {
         if (check_ajax_referer(Functions::get_plugin_slug('-rate-cancel'), '_ajax_nonce', false) !== false) {
 

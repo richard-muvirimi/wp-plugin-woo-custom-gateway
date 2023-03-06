@@ -2,6 +2,8 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Views;
 
+use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+
 /**
  * Section options header
  *
@@ -16,4 +18,4 @@ namespace Rich4rdMuvirimi\WooCustomGateway\Views;
 
 ?>
 
-<p><?php _e("Analytics Options", WOO_CUSTOM_GATEWAY_SLUG) ?></p>
+<p><?php _e("Analytics Options", Functions::get_plugin_slug()) ?></p>
