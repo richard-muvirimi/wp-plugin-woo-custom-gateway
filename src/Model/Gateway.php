@@ -87,58 +87,58 @@ class Gateway extends WC_Payment_Gateway
 
         $this->form_fields = array(
             'enabled' => array(
-                'title' => __('Enable/Disable', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Enable/Disable', Functions::get_plugin_slug()),
                 'type' => 'checkbox',
-                'label' => __(sprintf('Enable %s?', $this->method_title), WOO_CUSTOM_GATEWAY_SLUG),
+                'label' => __(sprintf('Enable %s?', $this->method_title), Functions::get_plugin_slug()),
                 'default' => 'yes',
             ),
             'order_stat' => array(
-                'title' => __('Order Status', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Order Status', Functions::get_plugin_slug()),
                 'type' => 'select',
-                'description' => __('Default order status when placed.', WOO_CUSTOM_GATEWAY_SLUG),
+                'description' => __('Default order status when placed.', Functions::get_plugin_slug()),
                 'default' => $this->get_default_order_status(),
                 'desc_tip' => false,
                 'options' => wc_get_order_statuses(),
             ),
             'title' => array(
-                'title' => __('Title', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Title', Functions::get_plugin_slug()),
                 'type' => 'text',
-                'description' => __('The payment gateway title displayed during checkout.', WOO_CUSTOM_GATEWAY_SLUG),
-                'default' => __($this->method_title, WOO_CUSTOM_GATEWAY_SLUG),
+                'description' => __('The payment gateway title displayed during checkout.', Functions::get_plugin_slug()),
+                'default' => __($this->method_title, Functions::get_plugin_slug()),
                 'desc_tip' => false,
                 "sanitize_callback" => "sanitize_text_field"
             ),
             'description' => array(
-                'title' => __('Description', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Description', Functions::get_plugin_slug()),
                 'type' => 'editor',
-                'description' => __('The payment gateway description displayed during checkout. Will be placed above the payment proof field if it is enabled.', WOO_CUSTOM_GATEWAY_SLUG),
-                'default' => __('', WOO_CUSTOM_GATEWAY_SLUG),
+                'description' => __('The payment gateway description displayed during checkout. Will be placed above the payment proof field if it is enabled.', Functions::get_plugin_slug()),
+                'default' => __('', Functions::get_plugin_slug()),
                 'desc_tip' => false,
             ),
             'note' => array(
-                'title' => __('Payment Proof', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Payment Proof', Functions::get_plugin_slug()),
                 'type' => 'checkbox',
-                'label' => __('Allow users to provide payment proof when creating the order. Only text based proof can be submitted by customers.', WOO_CUSTOM_GATEWAY_SLUG),
+                'label' => __('Allow users to provide payment proof when creating the order. Only text based proof can be submitted by customers.', Functions::get_plugin_slug()),
                 'default' => 'no',
             ),
             'instructions' => array(
-                'title' => __('Thank you Instructions', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Thank you Instructions', Functions::get_plugin_slug()),
                 'type' => 'editor',
-                'description' => __('Instructions that will be shown on the thank you page.', WOO_CUSTOM_GATEWAY_SLUG),
+                'description' => __('Instructions that will be shown on the thank you page.', Functions::get_plugin_slug()),
                 'default' => '',
                 'desc_tip' => false,
             ),
             'email' => array(
-                'title' => __('Email Instructions', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Email Instructions', Functions::get_plugin_slug()),
                 'type' => 'editor',
-                'description' => __('Instructions that will be sent in order emails. For plain text emails, html tags will be automatically stripped.', WOO_CUSTOM_GATEWAY_SLUG),
+                'description' => __('Instructions that will be sent in order emails. For plain text emails, html tags will be automatically stripped.', Functions::get_plugin_slug()),
                 'default' => '',
                 'desc_tip' => false,
             ),
             'endpoints' => array(
-                'title' => __('Endpoints', WOO_CUSTOM_GATEWAY_SLUG),
+                'title' => __('Endpoints', Functions::get_plugin_slug()),
                 'type' => 'textarea',
-                'description' => __('Endpoints to ping after an order has been placed, each on a new line. (Only GET requests are supported at the moment)', WOO_CUSTOM_GATEWAY_SLUG),
+                'description' => __('Endpoints to ping after an order has been placed, each on a new line. (Only GET requests are supported at the moment)', Functions::get_plugin_slug()),
                 'default' => '',
                 'placeholder' => site_url(),
                 'desc_tip' => false,
@@ -190,7 +190,7 @@ class Gateway extends WC_Payment_Gateway
         parent::payment_fields();
 
         if ($this->has_fields) {
-            echo Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . '-proof-of-payment', array('description' => $this->description, "id" => $this->id), 'proof-of-payment.php');
+            echo Template::get_template(Functions::get_plugin_slug( '-proof-of-payment'), array('description' => $this->description, "id" => $this->id), 'proof-of-payment.php');
         }
 
     }
@@ -209,7 +209,7 @@ class Gateway extends WC_Payment_Gateway
         $order = wc_get_order($order_id);
 
         // Mark as set order status (we're awaiting the payment).
-        $order->update_status($this->order_stat, sprintf(__('Awaiting %s payment.', WOO_CUSTOM_GATEWAY_SLUG), $this->method_title));
+        $order->update_status($this->order_stat, sprintf(__('Awaiting %s payment.', Functions::get_plugin_slug()), $this->method_title));
 
         // Reduce stock levels.
         wc_reduce_stock_levels($order_id);
@@ -242,9 +242,9 @@ class Gateway extends WC_Payment_Gateway
             $response = wp_remote_get($endpoint);
 
             if (!is_wp_error($response)) {
-                $order->add_order_note(sprintf(__('Failed to ping %s', $endpoint), WOO_CUSTOM_GATEWAY_SLUG));
+                $order->add_order_note(sprintf(__('Failed to ping %s', $endpoint), Functions::get_plugin_slug()));
             } else {
-                $order->add_order_note(sprintf(__('Successfully pinged %s', $endpoint), WOO_CUSTOM_GATEWAY_SLUG));
+                $order->add_order_note(sprintf(__('Successfully pinged %s', $endpoint), Functions::get_plugin_slug()));
             }
         }
 
@@ -288,7 +288,7 @@ class Gateway extends WC_Payment_Gateway
 
         $args = compact('field_key', 'data', 'key', 'gateway');
 
-        return Template::get_template(WOO_CUSTOM_GATEWAY_SLUG . 'admin-gateway-editor', $args, 'admin-gateway-editor.php');
+        return Template::get_template(Functions::get_plugin_slug( 'admin-gateway-editor'), $args, 'admin-gateway-editor.php');
 
     }
 

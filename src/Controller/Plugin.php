@@ -55,9 +55,9 @@ class Plugin extends BaseController
                 array(
                     'post_status' => 'publish',
                     'post_type' => Functions::gateway_slug(),
-                    'post_title' => __('Sample Custom Gateway', WOO_CUSTOM_GATEWAY_SLUG),
+                    'post_title' => __('Sample Custom Gateway', Functions::get_plugin_slug()),
                     'meta_input' => array(
-                        'woocg-desciption' => __('Sample payment gateway to just show off. ;)', WOO_CUSTOM_GATEWAY_SLUG), // ignore typo
+                        'woocg-desciption' => __('Sample payment gateway to just show off. ;)', Functions::get_plugin_slug()), // ignore typo
                     ),
                 )
             );

@@ -12,6 +12,8 @@
 
 namespace Rich4rdMuvirimi\WooCustomGateway\Locale;
 
+use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+
 /**
  * Class to handle plugin translations
  *
@@ -37,6 +39,6 @@ class I18n
      */
     public function load_plugin_textdomain(): void
     {
-        load_plugin_textdomain(WOO_CUSTOM_GATEWAY_SLUG, false, plugin_dir_path(WOO_CUSTOM_GATEWAY_FILE) . 'languages');
+        load_plugin_textdomain(Functions::get_plugin_slug(), false, plugin_dir_path(WOO_CUSTOM_GATEWAY_FILE) . 'languages');
     }
 }
