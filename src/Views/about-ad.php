@@ -16,11 +16,10 @@ if (!defined('WPINC')) {
  * @link http://richard.co.zw
  * @author Richard Muvirimi <tygalive@gmail.com>
  * @since 1.5.0
- * @version 1.5.0
+ * @version 1.5.9
  */
 
 ?>
 
-<!-- Revive Adserver Asynchronous JS Tag - Generated with Revive Adserver v5.4.1 -->
-<ins data-revive-zoneid="2" data-revive-target="_blank" data-revive-id="cdbf9664f0d05e7bc5400890473ae2ce"></ins>
-<script async src="//adverti.tyganeutronics.com/www/delivery/asyncjs.php"></script>
+<!-- Revive Adserver iFrame Tag - Generated with Revive Adserver v5.4.1 -->
+<iframe id='a2ff92fa' name='a2ff92fa' src='https://adverti.tyganeutronics.com/www/delivery/afr.php?zoneid=2&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE' frameborder='0' scrolling='no' width='200' height='160' allow='autoplay'><a href='https://adverti.tyganeutronics.com/www/delivery/ck.php?n=a1f633a3&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='https://adverti.tyganeutronics.com/www/delivery/avw.php?zoneid=2&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a1f633a3' border='0' alt='' /></a></iframe>
