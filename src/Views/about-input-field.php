@@ -9,7 +9,7 @@ namespace RichardMuvirimi\WooCustomGateway\Views;
  * @subpackage WooCustomGateway/Views
  *
  * @link http://richard.co.zw
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.5.0
  * @version 1.5.0
  *

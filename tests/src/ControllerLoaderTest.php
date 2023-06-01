@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 /**
- * File for php unit testcases
+ * File for plugin loader tests
  *
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -15,9 +15,9 @@ use PHPUnit\Framework\TestCase;
 use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 
 /**
- * Test Cases class
+ * Controller Test Cases class
  *
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
