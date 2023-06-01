@@ -1,14 +1,14 @@
 <?php
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Helpers;
+namespace RichardMuvirimi\WooCustomGateway\Helpers;
 
 use WooCustomGateway_ClientIP as ClientIP;
 use Exception;
-use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Common\UserProperty;
-use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Event\BaseEvent;
-use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Parameter\BaseParameter;
-use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Request\BaseRequest;
-use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Service;
+use RichardMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Common\UserProperty;
+use RichardMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Event\BaseEvent;
+use RichardMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Parameter\BaseParameter;
+use RichardMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Dto\Request\BaseRequest;
+use RichardMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Service;
 
 /**
  * Class to handle plugin logging functions
@@ -16,7 +16,7 @@ use Rich4rdMuvirimi\WooCustomGateway\Vendor\Br33f\Ga4\MeasurementProtocol\Servic
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Helpers
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.5.0
  * @version 1.5.0
  */
@@ -31,7 +31,7 @@ class Logger
      * @since 1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function logEvent(string $event): void
     {
@@ -109,7 +109,7 @@ class Logger
      * @since 1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function fetchAnalyticsCredentials()
     {
@@ -144,7 +144,7 @@ class Logger
      * @since 1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function getUserAgent(): string
     {
@@ -158,7 +158,7 @@ class Logger
      * @since 1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function getSessionId(): string
     {
@@ -181,7 +181,7 @@ class Logger
      * @since 1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function getEngagementTime(): float
     {

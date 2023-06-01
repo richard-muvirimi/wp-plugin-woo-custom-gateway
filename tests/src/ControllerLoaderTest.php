@@ -7,12 +7,12 @@
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Tests;
+namespace RichardMuvirimi\WooCustomGateway\Tests;
 
 use Brain\Monkey;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
-use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
+use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 
 /**
  * Test Cases class

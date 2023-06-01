@@ -23,7 +23,7 @@
  * @since 1.0.0
  */
 
-use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
+use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 
 // If this file is called directly, abort.
 

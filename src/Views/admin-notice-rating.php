@@ -1,8 +1,8 @@
 <?php
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Views;
+namespace RichardMuvirimi\WooCustomGateway\Views;
 
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
 
 if (!defined('WPINC')) {
     die(); // Exit if accessed directly.

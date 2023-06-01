@@ -6,14 +6,14 @@
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Helpers
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Helpers;
+namespace RichardMuvirimi\WooCustomGateway\Helpers;
 
-use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
+use RichardMuvirimi\WooCustomGateway\Model\Gateway;
 
 /**
  * Class to handle plugin generic functions
@@ -21,7 +21,7 @@ use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Helpers
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -35,7 +35,7 @@ class Functions
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function gateway_instance($gateway)
     {
@@ -66,7 +66,7 @@ class Functions
      * @since 1.3.0
      * @version 1.3.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function gateway_id(int $id): string
     {
@@ -89,7 +89,7 @@ class Functions
      * @since 1.3.0
      * @version 1.3.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_plugin_slug(string $suffix = ''): string
     {
@@ -103,7 +103,7 @@ class Functions
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function gateway_slug(): string
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WooCustomGateway" namespace="Rich4rdMuvirimi\WooCustomGateway\">
+<ruleset name="WooCustomGateway" namespace="RichardMuvirimi\WooCustomGateway\">
 <description>Coding Standards for Woo-Custom-Gateway and Php 7.3</description>
 
  <config name="testVersion" value="7.3-"/>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Views;
+namespace RichardMuvirimi\WooCustomGateway\Views;
 
 if (!defined('WPINC')) {
     die(); // Exit if accessed directly.
