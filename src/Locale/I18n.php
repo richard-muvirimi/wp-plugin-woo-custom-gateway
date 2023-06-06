@@ -5,14 +5,14 @@
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Locale
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Locale;
+namespace RichardMuvirimi\WooCustomGateway\Locale;
 
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
 
 /**
  * Class to handle plugin translations
@@ -20,7 +20,7 @@ use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Locale
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -35,7 +35,7 @@ class I18n
      * @version 1.0.0
      * @since 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function load_plugin_textdomain(): void
     {

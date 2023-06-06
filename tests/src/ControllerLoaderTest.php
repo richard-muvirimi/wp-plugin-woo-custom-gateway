@@ -1,23 +1,23 @@
 <?php declare(strict_types=1);
 /**
- * File for php unit testcases
+ * File for plugin loader tests
  *
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Tests;
+namespace RichardMuvirimi\WooCustomGateway\Tests;
 
 use Brain\Monkey;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
-use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
+use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 
 /**
- * Test Cases class
+ * Controller Test Cases class
  *
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
@@ -39,6 +39,12 @@ class ControllerLoaderTest extends TestCase
         $loader = WooCustomGateway::instance();
         $loader->add_action('init', '__return_true', 25);
         $loader->add_filter('the_title', '__return_true', 25);
+
+        // constants loaded
+        self::assertTrue(WOO_CUSTOM_GATEWAY_VERSION !== null);
+        self::assertTrue(WOO_CUSTOM_GATEWAY_NAME !== null);
+        self::assertTrue(WOO_CUSTOM_GATEWAY_FILE !== null);
+        self::assertTrue(WOO_CUSTOM_GATEWAY_SLUG !== null);
 
         // assert added
         self::assertNotFalse(has_action('init', '__return_true'));

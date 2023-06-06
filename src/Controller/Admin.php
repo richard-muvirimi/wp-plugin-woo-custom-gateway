@@ -5,17 +5,17 @@
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
+namespace RichardMuvirimi\WooCustomGateway\Controller;
 
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Template;
-use Rich4rdMuvirimi\WooCustomGateway\Model\Gateway;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Helpers\Logger;
+use RichardMuvirimi\WooCustomGateway\Helpers\Template;
+use RichardMuvirimi\WooCustomGateway\Model\Gateway;
 use WP_Post;
 
 /**
@@ -24,7 +24,7 @@ use WP_Post;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.1
  */
@@ -63,7 +63,7 @@ class Admin extends BaseController
      * Register plugin options
      *
      * @return void
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      * @since 1.5.0
      * @version 1.5.0
      */
@@ -106,7 +106,7 @@ class Admin extends BaseController
      * @since 1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function renderSectionHeader(): void
     {
@@ -122,7 +122,7 @@ class Admin extends BaseController
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function renderInputField(array $args): void
     {
@@ -176,8 +176,8 @@ class Admin extends BaseController
             'manage_options',
             Functions::get_plugin_slug(),
             "",
-            Template::get_image_url('logo.svg'),
-            59 // Right below Woocommerce
+            Template::get_file_base64(Template::get_image_path('logo.svg'), "data:image/svg+xml;base64,"),
+            59 // Right below WooCommerce
         );
 
         add_submenu_page(
@@ -197,7 +197,7 @@ class Admin extends BaseController
      * @since 1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function renderAboutPage(): void
     {
@@ -220,7 +220,7 @@ class Admin extends BaseController
      * @return array
      * @since 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function plugins_list_options_link(array $links): array
     {
@@ -330,7 +330,7 @@ class Admin extends BaseController
      * @version 1.5.0
      * @since 1.1.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function showAdminNotices(): void
     {

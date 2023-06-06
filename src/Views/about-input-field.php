@@ -1,6 +1,6 @@
 <?php
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Views;
+namespace RichardMuvirimi\WooCustomGateway\Views;
 
 /**
  * Display text field option
@@ -8,8 +8,8 @@ namespace Rich4rdMuvirimi\WooCustomGateway\Views;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Views
  *
- * @link http://richard.co.zw
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @link https://richard.co.zw
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.5.0
  * @version 1.5.0
  *

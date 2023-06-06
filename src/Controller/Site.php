@@ -7,14 +7,14 @@
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.2
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
+namespace RichardMuvirimi\WooCustomGateway\Controller;
 
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
 use WC_Order;
 
 /**
@@ -23,7 +23,7 @@ use WC_Order;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard Muvirimi <erich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <erichard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.2
  */

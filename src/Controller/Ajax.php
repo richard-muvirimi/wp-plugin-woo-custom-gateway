@@ -8,15 +8,15 @@
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
+namespace RichardMuvirimi\WooCustomGateway\Controller;
 
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Helpers\Logger;
 
 /**
  * Ajax side controller
@@ -24,7 +24,7 @@ use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard <erich4rdmuvirimi@gmail.com>
+ * @author Richard <erichard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */

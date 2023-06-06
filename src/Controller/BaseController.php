@@ -7,12 +7,12 @@
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.3.0
  * @version 1.3.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
+namespace RichardMuvirimi\WooCustomGateway\Controller;
 
 /**
  * Base controller to rule them all
@@ -20,7 +20,7 @@ namespace Rich4rdMuvirimi\WooCustomGateway\Controller;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Controller
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.3.0
  * @version 1.3.0
  */

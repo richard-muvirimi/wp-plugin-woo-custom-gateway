@@ -1,8 +1,8 @@
 <?php
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Views;
+namespace RichardMuvirimi\WooCustomGateway\Views;
 
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
 
 if (!defined('WPINC')) {
     die(); // Exit if accessed directly.
@@ -15,8 +15,8 @@ if (!defined('WPINC')) {
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Views
  *
- * @link http://richard.co.zw
- * @author Richard Muvirimi <tygalive@gmail.com>
+ * @link https://richard.co.zw
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.5.0
  * @version 1.5.0
  *

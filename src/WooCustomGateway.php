@@ -4,25 +4,25 @@
  *
  * This file is the entry point into the plugin, registering all functions
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.2
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway;
+namespace RichardMuvirimi\WooCustomGateway;
 
 use BadMethodCallException;
-use Rich4rdMuvirimi\WooCustomGateway\Controller\Admin;
-use Rich4rdMuvirimi\WooCustomGateway\Controller\Ajax;
-use Rich4rdMuvirimi\WooCustomGateway\Controller\Plugin;
-use Rich4rdMuvirimi\WooCustomGateway\Controller\Site;
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
-use Rich4rdMuvirimi\WooCustomGateway\Locale\I18n;
+use RichardMuvirimi\WooCustomGateway\Controller\Admin;
+use RichardMuvirimi\WooCustomGateway\Controller\Ajax;
+use RichardMuvirimi\WooCustomGateway\Controller\Plugin;
+use RichardMuvirimi\WooCustomGateway\Controller\Site;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Locale\I18n;
 
 /**
  * Class to bootstrap the plugin
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.2
  *
@@ -45,7 +45,7 @@ class WooCustomGateway
      *
      * @var self
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      * @since 1.0.0
      * @version 1.0.0
      */
@@ -58,7 +58,7 @@ class WooCustomGateway
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     protected function __construct()
     {

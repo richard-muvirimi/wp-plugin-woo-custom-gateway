@@ -6,17 +6,17 @@
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Model
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  * @version 1.0.0
  */
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Model;
+namespace RichardMuvirimi\WooCustomGateway\Model;
 
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Functions;
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Logger;
-use Rich4rdMuvirimi\WooCustomGateway\Helpers\Template;
-use Rich4rdMuvirimi\WooCustomGateway\WooCustomGateway;
+use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
+use RichardMuvirimi\WooCustomGateway\Helpers\Logger;
+use RichardMuvirimi\WooCustomGateway\Helpers\Template;
+use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 use WC_Order;
 use WC_Payment_Gateway;
 
@@ -31,7 +31,7 @@ use WC_Payment_Gateway;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Model
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.0.0
  */
 class Gateway extends WC_Payment_Gateway
@@ -154,7 +154,7 @@ class Gateway extends WC_Payment_Gateway
      * @since 1.5.5
      * @version 1.5.5
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     private function get_default_order_status(): string
     {
@@ -170,7 +170,7 @@ class Gateway extends WC_Payment_Gateway
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function register_hooks(): void
     {
@@ -265,7 +265,7 @@ class Gateway extends WC_Payment_Gateway
      * @return string
      * @since  1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function generate_editor_html(string $key, array $data): string
     {
@@ -301,7 +301,7 @@ class Gateway extends WC_Payment_Gateway
      * @since  1.5.0
      * @version 1.5.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public function validate_order_stat_field(string $key, string $value): string
     {

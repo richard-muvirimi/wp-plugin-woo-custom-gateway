@@ -1,6 +1,6 @@
 <?php
 
-namespace Rich4rdMuvirimi\WooCustomGateway\Helpers;
+namespace RichardMuvirimi\WooCustomGateway\Helpers;
 
 /**
  * Class to handle plugin template functions
@@ -8,7 +8,7 @@ namespace Rich4rdMuvirimi\WooCustomGateway\Helpers;
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Helpers
  *
- * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+ * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.5.0
  * @version 1.5.0
  */
@@ -19,7 +19,7 @@ class Template
      *
      * @var string
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      * @since 1.5.0
      * @version 1.5.0
      */
@@ -34,7 +34,7 @@ class Template
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_script_path(string $path): string
     {
@@ -50,7 +50,7 @@ class Template
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_views_path(string $path): string
     {
@@ -66,7 +66,7 @@ class Template
      *
      * @return string
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_template(string $template_name, array $args = array(), string $template_path = ''): string
     {
@@ -93,7 +93,7 @@ class Template
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_script_url(string $url): string
     {
@@ -109,7 +109,7 @@ class Template
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_views_url(string $url): string
     {
@@ -125,7 +125,7 @@ class Template
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_style_path(string $path): string
     {
@@ -141,7 +141,7 @@ class Template
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_style_url(string $url): string
     {
@@ -157,10 +157,43 @@ class Template
      * @since 1.0.0
      * @version 1.0.0
      *
-     * @author Richard Muvirimi <rich4rdmuvirimi@gmail.com>
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
     public static function get_image_url(string $url): string
     {
         return self::get_views_url('img' . self::$URL_SEPARATOR . $url);
+    }
+
+    /**
+     * Get the images path
+     *
+     * @param string $path
+     *
+     * @return string
+     * @since 1.0.0
+     * @version 1.0.0
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     */
+    public static function get_image_path(string $path): string
+    {
+        return self::get_views_path('img' . DIRECTORY_SEPARATOR . $path);
+    }
+
+    /**
+     * Get the files base64
+     *
+     * @param string $path
+     * @param string $prefix
+     *
+     * @return string
+     * @since 1.0.0
+     * @version 1.0.0
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     */
+    public static function get_file_base64(string $path, string $prefix = ""): string
+    {
+        return $prefix . base64_encode(file_get_contents($path));
     }
 }
