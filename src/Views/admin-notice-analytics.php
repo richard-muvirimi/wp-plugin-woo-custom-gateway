@@ -15,7 +15,7 @@ if (!defined('WPINC')) {
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Views
  *
- * @link http://richard.co.zw
+ * @link https://richard.co.zw
  * @author Richard Muvirimi <richard@tyganeutronics.com>
  * @since 1.1.0
  * @version 1.1.1

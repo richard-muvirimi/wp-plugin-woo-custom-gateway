@@ -3,10 +3,10 @@ Contributors: tygalive
 Tags: woocommerce, custom, woocommerce gateway, gateway, payment, gateways, payment gateways, payment gateway, woocommerce payment gateway, woocommerce payment gateways, woocommerce, woo custom gateway, woo gateway
 Donate link: https://buymeacoffee.com/fpjyrXk
 Requires at least: 4.0.0
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.3
-WC tested up to: 7.4
-Stable tag: 1.5.9
+WC tested up to: 7.7
+Stable tag: 1.5.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,7 +64,7 @@ Currently, there is no limit. You can create as many custom payment gateways as 
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
-= 1.5.0 - 1.5.9 =
+= 1.5.0 - 1.5.10 =
 * Set minimum supported version to 7.3.
 * Allow opting in to usage analytics collection.
 

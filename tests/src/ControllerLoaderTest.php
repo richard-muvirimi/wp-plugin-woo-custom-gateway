@@ -40,6 +40,12 @@ class ControllerLoaderTest extends TestCase
         $loader->add_action('init', '__return_true', 25);
         $loader->add_filter('the_title', '__return_true', 25);
 
+        // constants loaded
+        self::assertTrue(WOO_CUSTOM_GATEWAY_VERSION !== null);
+        self::assertTrue(WOO_CUSTOM_GATEWAY_NAME !== null);
+        self::assertTrue(WOO_CUSTOM_GATEWAY_FILE !== null);
+        self::assertTrue(WOO_CUSTOM_GATEWAY_SLUG !== null);
+
         // assert added
         self::assertNotFalse(has_action('init', '__return_true'));
         self::assertNotFalse(has_filter('the_title', '__return_true'));
