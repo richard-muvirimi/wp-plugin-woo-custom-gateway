@@ -156,7 +156,7 @@ class Logger
      *
      * @return string
      * @since 1.5.0
-     * @version 1.5.0
+     * @version 1.6.1
      *
      * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
@@ -181,7 +181,7 @@ class Logger
      *
      * @return float
      * @since 1.5.0
-     * @version 1.5.0
+     * @version 1.6.1
      *
      * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
