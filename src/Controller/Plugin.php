@@ -115,7 +115,7 @@ class Plugin extends BaseController
      * Mark plugin as compatible with the new woocommerce order feature
      *
      * @return void
-     * @version 1.5.4
+     * @version 1.6.1
      * @since 1.5.4
      *
      * @link https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
@@ -123,7 +123,7 @@ class Plugin extends BaseController
     public static function before_woocommerce_init(): void
     {
         if (class_exists(FeaturesUtil::class)) {
-            FeaturesUtil::declare_compatibility('custom_order_tables', WOO_CUSTOM_GATEWAY_FILE, false);
+            FeaturesUtil::declare_compatibility('custom_order_tables', WOO_CUSTOM_GATEWAY_FILE, true);
         }
     }
 }
