@@ -168,7 +168,9 @@ class Logger
         $unique_id = $_COOKIE[$cookie_name] ?? uniqid("woo-cg-", true);
         $domain = parse_url(site_url(), PHP_URL_HOST);
 
-        setcookie($cookie_name, $unique_id, time() + MONTH_IN_SECONDS, "/", $domain, true, true);
+        if (!headers_sent()){
+            setcookie($cookie_name, $unique_id, time() + MONTH_IN_SECONDS, "/", $domain, true, true);
+        }
 
         return $unique_id;
 
@@ -193,7 +195,9 @@ class Logger
         $domain = parse_url(site_url(), PHP_URL_HOST);
 
         // Update the start time cookie
-        setcookie($cookie_name, $time_now, time() + HOUR_IN_SECONDS, '/', $domain, true, true);
+        if (!headers_sent()){
+            setcookie($cookie_name, $time_now, time() + HOUR_IN_SECONDS, '/', $domain, true, true);
+        }
 
         // Calculate the engagement time
         return ($time_now - $start_time) * 1000;
