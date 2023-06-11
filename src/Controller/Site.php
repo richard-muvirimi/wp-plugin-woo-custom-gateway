@@ -25,7 +25,7 @@ use WC_Order;
  *
  * @author Richard Muvirimi <erichard@tyganeutronics.com>
  * @since 1.0.0
- * @version 1.0.2
+ * @version 1.6.0
  */
 class Site extends BaseController
 {
@@ -37,7 +37,7 @@ class Site extends BaseController
      * @param WC_Order $order
      * @param bool $sent_to_admin
      * @param bool $plain_text
-     * @version 1.2.0
+     * @version 1.6.0
      * @since 1.0.0
      */
     public function gateway_email_instructions(WC_Order $order, bool $sent_to_admin, bool $plain_text = false): void
@@ -47,14 +47,19 @@ class Site extends BaseController
 
         $gateway = Functions::gateway_instance($method);
 
-        if ($gateway) {
+        if ($gateway !== null) {
 
-            $instructions = $gateway->get_option('email');
-            if (!empty($instructions) && !$sent_to_admin) {
-                if ($plain_text) {
-                    echo wptexturize(wp_strip_all_tags($instructions) . PHP_EOL);
-                } else {
-                    echo wp_kses_post(wpautop(wptexturize($instructions)));
+            $email_statuses = (array) $gateway->get_option("email_order_stat", array($gateway->get_default_order_status()));
+
+            if (in_array(Functions::prefix_order_status($order->get_status()), $email_statuses)){
+
+                $instructions = $gateway->get_option('email');
+                if (!empty($instructions) && !$sent_to_admin) {
+                    if ($plain_text) {
+                        echo wptexturize(wp_strip_all_tags($instructions) . PHP_EOL);
+                    } else {
+                        echo wp_kses_post(wpautop(wptexturize($instructions)));
+                    }
                 }
             }
         }
@@ -66,7 +71,7 @@ class Site extends BaseController
      * @param int|WC_Order $order
      *
      * @since 1.0.0
-     * @version 1.3.0
+     * @version 1.6.0
      */
     public function woocommerce_thankyou($order): void
     {
@@ -79,7 +84,7 @@ class Site extends BaseController
 
             $gateway = Functions::gateway_instance($method);
 
-            if ($gateway) {
+            if ($gateway !== null) {
                 echo wp_kses_post(wpautop(wptexturize($gateway->get_option('instructions'))));
             }
         }

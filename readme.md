@@ -7,7 +7,7 @@
 - **_ Tested up to: _** 6.2
 - **_ Requires PHP: _** 7.3
 - **_ WC tested up to: _** 7.7
-- **_ Stable tag: _** 1.5.10
+- **_ Stable tag: _** 1.6.0
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -75,6 +75,10 @@ Custom payment gateway settings in WooCommerce. These settings will to shown to 
 Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 ## Changelog
+
+**_ 1.6.0 _**
+
+- Send instructions email for specific order statuses.
 
 **_ 1.5.0 - 1.5.10 _**
 

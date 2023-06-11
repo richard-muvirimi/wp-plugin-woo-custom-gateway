@@ -31,13 +31,13 @@ class Functions
     /**
      * Get initialized payment gateway class
      *
-     * @return Gateway|false
+     * @return Gateway|null
      * @since 1.0.0
-     * @version 1.0.0
+     * @version 1.6.0
      *
      * @author Richard Muvirimi <richard@tyganeutronics.com>
      */
-    public static function gateway_instance($gateway)
+    public static function gateway_instance($gateway) : ?Gateway
     {
         if (function_exists('WC')) {
 
@@ -54,7 +54,7 @@ class Functions
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -108,6 +108,21 @@ class Functions
     public static function gateway_slug(): string
     {
         return 'woocg-post';
+    }
+
+    /**
+     * Prefix order status
+     *
+     * @param string $status
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     * @since 1.6.0
+     * @version 1.6.0
+     *
+     * @return string
+     */
+    public static function prefix_order_status(string $status):string{
+        return str_starts_with($status, 'wc-') ? $status : 'wc-' . $status;
     }
 
 }
