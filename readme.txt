@@ -5,8 +5,8 @@ Donate link: https://buymeacoffee.com/fpjyrXk
 Requires at least: 4.0.0
 Tested up to: 6.2
 Requires PHP: 7.3
-WC tested up to: 7.7
-Stable tag: 1.6.1
+WC tested up to: 7.8
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,8 +64,9 @@ Currently, there is no limit. You can create as many custom payment gateways as 
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
-= 1.6.1 =
+= 1.6.1 - 1.6.2 =
 * Add support for High-Performance Order Storage.
+* Minor Bug Fixes
 
 = 1.6.0 =
 * Send instructions email for specific order statuses.
