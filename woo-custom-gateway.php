@@ -4,7 +4,7 @@
  * The plugin bootstrap file
  *
  * @wordpress-plugin
- * Plugin Name:       Woo Custom Gateway
+ * Plugin Name:       Custom Payment Gateways for WooCommerce
  * Plugin URI:        https://github.com/richard-muvirimi/wp-plugin-woo-custom-gateway
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
  * Version:           1.6.2
