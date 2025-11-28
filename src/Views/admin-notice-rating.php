@@ -25,7 +25,7 @@ if (!defined('WPINC')) {
 <div class="<?php esc_attr_e(Functions::get_plugin_slug()); ?> notice notice-info is-dismissible">
     <div>
         <div class="<?php esc_attr_e(Functions::get_plugin_slug()); ?>-prompt">
-            <?php printf(__('Please take a moment to rate %s as your rating will help others discover and use this plugin. Thank you for your support!', Functions::get_plugin_slug()), __('Woo Custom Gateway', Functions::get_plugin_slug())); ?>
+            <?php printf(__('Please take a moment to rate %s as your rating will help others discover and use this plugin. Thank you for your support!', Functions::get_plugin_slug()), __('Custom Payment Gateways for WooCommerce', Functions::get_plugin_slug())); ?>
         </div>
         <div class="<?php esc_attr_e(Functions::get_plugin_slug()); ?>-button">
             <a class="button btn-yield" href="#"

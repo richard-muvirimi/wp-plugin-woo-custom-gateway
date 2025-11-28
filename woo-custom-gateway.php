@@ -4,18 +4,19 @@
  * The plugin bootstrap file
  *
  * @wordpress-plugin
- * Plugin Name:       Woo Custom Gateway
+ * Plugin Name:       Custom Payment Gateways for WooCommerce
  * Plugin URI:        https://github.com/richard-muvirimi/wp-plugin-woo-custom-gateway
  * Description:       Add multiple custom payment gateways to WooCommerce e-commerce plugin.
- * Version:           1.6.1
+ * Version:           1.6.3
  * Author:            Richard Muvirimi
  * Author URI:        https://richard.co.zw
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       woo-custom-gateway
  * Domain Path:       /languages
+ * Requires Plugins:  woocommerce
  * WC requires at least: 3.0.0
- * WC tested up to:   7.7
+ * WC tested up to:   10.3
  *
  * @package WooCustomGateway
  *
@@ -46,7 +47,7 @@ const WOO_CUSTOM_GATEWAY_SLUG = 'woo-custom-gateway';
 /**
  * Plugin version number
  */
-const WOO_CUSTOM_GATEWAY_VERSION = '1.6.1';
+const WOO_CUSTOM_GATEWAY_VERSION = '1.6.3';
 
 /**
  * Plugin name as known to WordPress

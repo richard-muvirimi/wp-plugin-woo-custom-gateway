@@ -1,6 +1,6 @@
 <?php
 /**
- * Translations loader for Woo Custom Gateway
+ * Translations loader for Custom Payment Gateways for WooCommerce
  *
  * @package WooCustomGateway
  * @subpackage WooCustomGateway/Locale

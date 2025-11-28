@@ -171,8 +171,8 @@ class Admin extends BaseController
     public function on_admin_menu()
     {
         add_menu_page(
-            __('Woo Custom Gateway', Functions::get_plugin_slug()),
-            __('Woo Custom Gateway', Functions::get_plugin_slug()),
+            __('Custom Payment Gateways', Functions::get_plugin_slug()),
+            __('Custom Payment Gateways', Functions::get_plugin_slug()),
             'manage_options',
             Functions::get_plugin_slug(),
             "",
