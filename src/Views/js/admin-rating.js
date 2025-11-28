@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
 
-    $(document).ready(function () {
+    $(document).on("DOMContentLoaded",function () {
 
         const pluginName = window["wooCustomGateway"].name;
 

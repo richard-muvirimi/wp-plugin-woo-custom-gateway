@@ -19,7 +19,7 @@ use RichardMuvirimi\WooCustomGateway\Helpers\Template;
 use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 use WC_Order;
 use WC_Payment_Gateway;
-use function \current as array_first;
+use function current as array_first;
 
 /**
  * Custom Payment Gateway
@@ -37,6 +37,30 @@ use function \current as array_first;
  */
 class Gateway extends WC_Payment_Gateway
 {
+
+    /**
+     * Order Instructions.
+     *
+     * @var string
+     *
+     * @version 1.6.3
+     * @since 1.6.3
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     */
+    public $instructions;
+
+    /**
+     * Order status.
+     *
+     * @var string
+     *
+     * @version 1.6.3
+     * @since 1.6.3
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     */
+    public $order_stat;
 
     /**
      * Init payment gateway
@@ -199,7 +223,7 @@ class Gateway extends WC_Payment_Gateway
         parent::payment_fields();
 
         if ($this->has_fields) {
-            echo Template::get_template(Functions::get_plugin_slug( '-proof-of-payment'), array('description' => $this->description, "id" => $this->id), 'proof-of-payment.php');
+            echo Template::get_template(Functions::get_plugin_slug('-proof-of-payment'), array('description' => $this->description, "id" => $this->id), 'proof-of-payment.php');
         }
 
     }
@@ -297,7 +321,7 @@ class Gateway extends WC_Payment_Gateway
 
         $args = compact('field_key', 'data', 'key', 'gateway');
 
-        return Template::get_template(Functions::get_plugin_slug( 'admin-gateway-editor'), $args, 'admin-gateway-editor.php');
+        return Template::get_template(Functions::get_plugin_slug('admin-gateway-editor'), $args, 'admin-gateway-editor.php');
 
     }
 

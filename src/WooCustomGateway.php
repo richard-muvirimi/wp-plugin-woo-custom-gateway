@@ -204,7 +204,7 @@ class WooCustomGateway
      *
      * @param string $name
      * @param array $arguments
-     * @return mixed #type intentionally left out.
+     * @return mixed|void #type intentionally left out.
      * @throws BadMethodCallException When called function does not exist or has missing arguments.
      * @since 1.4.0
      * @version 1.4.3

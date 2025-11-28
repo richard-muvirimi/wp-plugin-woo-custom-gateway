@@ -49,7 +49,7 @@ class Site extends BaseController
 
         if ($gateway !== null) {
 
-            $email_statuses = (array) $gateway->get_option("email_order_stat", array($gateway->get_default_order_status()));
+            $email_statuses = (array) $gateway->get_option("email_order_stat", array_keys(wc_get_order_statuses()));
 
             if (in_array(Functions::prefix_order_status($order->get_status()), $email_statuses)){
 

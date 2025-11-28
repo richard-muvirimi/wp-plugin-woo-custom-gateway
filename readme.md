@@ -1,13 +1,13 @@
-# Woo Custom Gateway
+# Custom Payment Gateways for WooCommerce
 
 - **_ Contributors: _** @tygalive
-- **_ Tags: _** woocommerce gateway, gateway, payment, gateways, payment gateways, payment gateway, woocommerce payment gateway, woocommerce payment gateways, woocommerce, woo custom gateway, woo gateway
+- **_ Tags: _** woocommerce gateway, gateway, payment, gateways, payment gateways, payment gateway, woocommerce payment gateway, woocommerce payment gateways, custom gateway
 - **_ Donate link: _** [Buy Me A Coffee](https://buymeacoffee.com/fpjyrXk)
 - **_ Requires at least: _** 4.0.0
-- **_ Tested up to: _** 6.2
+- **_ Tested up to: _** 6.8
 - **_ Requires PHP: _** 7.3
-- **_ WC tested up to: _** 7.7
-- **_ Stable tag: _** 1.6.1
+- **_ WC tested up to: _** 10.3
+- **_ Stable tag: _** 1.6.3
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -33,9 +33,9 @@ This plugin also includes non-intrusive ads (shown only in the backend) that hel
 
 ### Automatic installation
 
-The easiest way to install Woo Custom Gateway is through the automatic installation option. To do this, simply log in to your WordPress dashboard, navigate to the Plugins menu, and click on "Add New."
+The easiest way to install Custom Payment Gateways for WooCommerce is through the automatic installation option. To do this, simply log in to your WordPress dashboard, navigate to the Plugins menu, and click on "Add New."
 
-In the search field, type "Woo Custom Gateway," and click on "Search Plugins." Once you find our plugin, you can view details such as the rating, description, and the current version. To install the plugin, click on "Install Now," and let WordPress handle the file transfer for you.
+In the search field, type "Custom Payment Gateways for WooCommerce," and click on "Search Plugins." Once you find our plugin, you can view details such as the rating, description, and the current version. To install the plugin, click on "Install Now," and let WordPress handle the file transfer for you.
 
 ### Manual installation
 
@@ -44,7 +44,7 @@ In the search field, type "Woo Custom Gateway," and click on "Search Plugins." O
 3. Click the “Upload Plugin” button at the top of the page.
 4. Choose the plugin zip file you downloaded and click “Install Now.”
 5. Once the installation is complete, click the “Activate Plugin” button.
-6. You can now access the plugin through “Woo Custom Gateways” option in the admin menu.
+6. You can now access the plugin through "Custom Payment Gateways" option in the admin menu.
 
 ## Frequently Asked Questions
 
@@ -54,7 +54,7 @@ In the search field, type "Woo Custom Gateway," and click on "Search Plugins." O
 
 #### So where do I start?
 
-- After you install and activate the plugin, a new menu item "Woo Custom Gateway" will appear in the WooCommerce menu in the WordPress admin sidebar. Click on this menu item to create a payment gateway, and then further customize the payment gateway in the WooCommerce payment settings.
+- After you install and activate the plugin, a new menu item "Custom Payment Gateways" will appear in the WooCommerce menu in the WordPress admin sidebar. Click on this menu item to create a payment gateway, and then further customize the payment gateway in the WooCommerce payment settings.
 
 #### Is there a limit on the number of gateways I can create?
 
@@ -66,7 +66,7 @@ In the search field, type "Woo Custom Gateway," and click on "Search Plugins." O
 Adding and Editing Screen. A good name, logo and desciption will help the admin to identify this gateway when customising in WooCommerce payment settings.
 
 ![Screenshot](https://ps.w.org/woo-custom-gateway/assets/screenshot-2.png?rev=2131125)
-A list of all your Woo Custom Gateways. Here you can delete, edit or directly goto payment gateway settings in WooCommerce.
+A list of all your Custom Payment Gateways. Here you can delete, edit or directly goto payment gateway settings in WooCommerce.
 
 ![Screenshot](https://ps.w.org/woo-custom-gateway/assets/screenshot-3.png?rev=2131125)
 Custom payment gateway settings in WooCommerce. These settings will to shown to the customer at the appropriate times.
@@ -76,9 +76,15 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
-**_ 1.6.1 _**
+**_ 1.6.3 _**
+
+- Rename plugin to comply with WooCommerce trademark guidelines.
+- Add WooCommerce plugin dependency.
+
+**_ 1.6.1 - 1.6.2 _**
 
 - Add support for High-Performance Order Storage.
+- Minor Bug Fixes
 
 **_ 1.6.0 _**
 
