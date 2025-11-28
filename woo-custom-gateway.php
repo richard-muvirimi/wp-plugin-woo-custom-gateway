@@ -14,6 +14,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       woo-custom-gateway
  * Domain Path:       /languages
+ * Requires Plugins:  woocommerce
  * WC requires at least: 3.0.0
  * WC tested up to:   7.8
  *
