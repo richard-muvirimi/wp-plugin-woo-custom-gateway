@@ -6,7 +6,7 @@ Requires at least: 4.0.0
 Tested up to: 6.8
 Requires PHP: 7.3
 WC tested up to: 10.3
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,10 @@ Currently, there is no limit. You can create as many custom payment gateways as 
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
+= 1.6.3 =
+* Rename plugin to comply with WooCommerce trademark guidelines.
+* Add WooCommerce plugin dependency.
+
 = 1.6.1 - 1.6.2 =
 * Add support for High-Performance Order Storage.
 * Minor Bug Fixes
