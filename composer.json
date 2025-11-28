@@ -1,5 +1,6 @@
 {
   "name": "richardmuvirimi/woo-custom-gateway",
+  "version" : "1.6.3",
   "description": "Add multiple custom payment gateways to WooCommerce e-commerce plugin.",
   "type": "wordpress-plugin",
   "license": "GNU-V2",
@@ -65,6 +66,12 @@
       "@php ./mozart.phar compose",
       "@composer dump-autoload",
       "@php -r \"@unlink('./mozart.phar');\""
+    ],
+    "docker:up" : [
+      "sudo docker-compose -f docker-compose.yml up -d"
+    ],
+    "docker:down" : [
+      "sudo docker-compose -f docker-compose.yml down"
     ]
   },
   "authors": [
