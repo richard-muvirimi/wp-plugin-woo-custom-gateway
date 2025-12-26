@@ -6,7 +6,7 @@ Requires at least: 4.0.0
 Tested up to: 6.9
 Requires PHP: 7.3
 WC tested up to: 10.4
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,14 @@ Currently, there is no limit. You can create as many custom payment gateways as 
 4. Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 == Changelog ==
+= 1.6.4 =
+* Add WooCommerce Blocks checkout support.
+* Optimize package dependencies and remove unused imports.
+* Improve TypeScript configuration and type definitions.
+* Replace unreliable current() function with array_key_first().
+* Add automated version tagging in deployment workflow.
+* Update to latest PHP polyfills (7.4-8.5).
+
 = 1.6.3 =
 * Rename plugin to comply with WooCommerce trademark guidelines.
 * Add WooCommerce plugin dependency.

@@ -76,6 +76,14 @@ Custom payment gateway displayed to the customer highlighted inside the red rect
 
 ## Changelog
 
+**_ 1.6.4 _**
+- Add WooCommerce Blocks checkout support
+- Optimize package dependencies and remove unused imports
+- Improve TypeScript configuration and type definitions
+- Replace unreliable current() function with array_key_first()
+- Add automated version tagging in deployment workflow
+- Update to latest PHP polyfills (7.4-8.5)
+
 **_ 1.6.3 _**
 
 - Rename plugin to comply with WooCommerce trademark guidelines.
