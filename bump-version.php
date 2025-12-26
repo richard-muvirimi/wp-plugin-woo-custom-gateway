@@ -84,12 +84,12 @@ $files = [
         'replacement' => '${1}' . $newVersion,
         'description' => 'readme.txt stable tag'
     ],
-    // readme.md - Stable tag
+    // readme.md - First version mention in changelog
     [
         'file' => findFile($rootDir, 'readme.md'),
-        'pattern' => '/(\*\*_ Stable tag: _\*\* )\d+\.\d+\.\d+/',
-        'replacement' => '${1}' . $newVersion,
-        'description' => 'readme.md stable tag'
+        'pattern' => '/(## Changelog\s+\*\*_ )\d+\.\d+\.\d+( _\*\*)/',
+        'replacement' => '${1}' . $newVersion . '${2}',
+        'description' => 'readme.md changelog version'
     ],
 ];
 
