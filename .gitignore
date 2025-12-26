@@ -1,6 +1,5 @@
 *.code-workspace
 /vendor/
-composer.lock
 .idea/
 
 #Docker
