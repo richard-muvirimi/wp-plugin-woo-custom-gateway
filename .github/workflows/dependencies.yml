@@ -18,6 +18,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Update npm dependencies
+        run: npm ci
+      
       - name: Cache Composer dependencies
         uses: actions/cache@v5
         with:
