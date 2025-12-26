@@ -1,6 +1,5 @@
 *.code-workspace
 /vendor/
-composer.lock
 .idea/
 
 #Docker
@@ -13,7 +12,6 @@ output.log
 
 # Node
 node_modules/
-package-lock.json
 /src/Views/js/dist/
 .env
 .wp-env.override.json

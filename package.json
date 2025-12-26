@@ -1,6 +1,6 @@
 {
     "name": "woo-custom-gateway",
-    "version": "1.6.4",
+    "version": "1.6.5",
     "description": "Add multiple custom payment gateways to WooCommerce e-commerce plugin.",
     "private": true,
     "scripts": {

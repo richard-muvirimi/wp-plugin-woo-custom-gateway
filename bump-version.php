@@ -31,46 +31,62 @@ if (!preg_match('/^\d+\.\d+\.\d+$/', $newVersion)) {
 
 $rootDir = __DIR__;
 
+// Helper function to find files case-insensitively
+function findFile($dir, $pattern) {
+    // Convert pattern to case-insensitive version
+    $caseInsensitivePattern = '';
+    for ($i = 0; $i < strlen($pattern); $i++) {
+        $char = $pattern[$i];
+        if (preg_match('/[a-zA-Z]/', $char)) {
+            $caseInsensitivePattern .= '[' . strtoupper($char) . strtolower($char) . ']';
+        } else {
+            $caseInsensitivePattern .= $char;
+        }
+    }
+    $files = glob($dir . '/' . $caseInsensitivePattern, GLOB_BRACE);
+    return !empty($files) ? $files[0] : null;
+}
+
 // Define files to update with their patterns
 $files = [
     // Main plugin file - version in header
     [
-        'file' => $rootDir . '/woo-custom-gateway.php',
+        'file' => findFile($rootDir, 'woo-custom-gateway.php'),
         'pattern' => '/(\* Version:\s+)\d+\.\d+\.\d+/',
         'replacement' => '${1}' . $newVersion,
         'description' => 'Plugin header version'
     ],
     // Main plugin file - version constant
     [
-        'file' => $rootDir . '/woo-custom-gateway.php',
+        'file' => findFile($rootDir, 'woo-custom-gateway.php'),
         'pattern' => "/(const WOO_CUSTOM_GATEWAY_VERSION = ')\d+\.\d+\.\d+('\;)/",
         'replacement' => '${1}' . $newVersion . '${2}',
         'description' => 'Plugin constant version'
     ],
     // package.json
     [
-        'file' => $rootDir . '/package.json',
+        'file' => findFile($rootDir, 'package.json'),
         'pattern' => '/("version":\s*")\d+\.\d+\.\d+(",)/',
         'replacement' => '${1}' . $newVersion . '${2}',
         'description' => 'package.json version'
     ],
     // composer.json
     [
-        'file' => $rootDir . '/composer.json',
+        'file' => findFile($rootDir, 'composer.json'),
         'pattern' => '/("version"\s*:\s*")\d+\.\d+\.\d+(",)/',
         'replacement' => '${1}' . $newVersion . '${2}',
         'description' => 'composer.json version'
     ],
     // readme.txt - Stable tag
     [
-        'file' => $rootDir . '/readme.txt',
+        'file' => findFile($rootDir, 'readme.txt'),
         'pattern' => '/(Stable tag:\s+)\d+\.\d+\.\d+/',
         'replacement' => '${1}' . $newVersion,
         'description' => 'readme.txt stable tag'
     ],
     // readme.md - First version mention in changelog
     [
-        'file' => $rootDir . '/readme.md',
+        'file' => findFile($rootDir, 'readme.md'),
         'pattern' => '/(## Changelog\s+\*\*_ )\d+\.\d+\.\d+( _\*\*)/',
         'replacement' => '${1}' . $newVersion . '${2}',
         'description' => 'readme.md changelog version'
