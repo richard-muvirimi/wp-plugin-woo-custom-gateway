@@ -19,7 +19,6 @@ use RichardMuvirimi\WooCustomGateway\Helpers\Template;
 use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 use WC_Order;
 use WC_Payment_Gateway;
-use function current as array_first;
 
 /**
  * Custom Payment Gateway
@@ -193,7 +192,12 @@ class Gateway extends WC_Payment_Gateway
     {
         $pending = array_map(array(Functions::class, "prefix_order_status"), wc_get_is_pending_statuses());
 
-        return empty($pending) ? array_first(wc_get_order_statuses()) : array_first($pending);
+        if (!empty($pending)) {
+            return $pending[array_key_first($pending)];
+        }
+        
+        $statuses = wc_get_order_statuses();
+        return $statuses[array_key_first($statuses)];
     }
 
     /**
