@@ -1,6 +1,6 @@
 {
   "name": "richardmuvirimi/woo-custom-gateway",
-  "version" : "1.6.3",
+  "version" : "1.6.4",
   "description": "Add multiple custom payment gateways to WooCommerce e-commerce plugin.",
   "type": "wordpress-plugin",
   "license": "GNU-V2",
@@ -36,6 +36,9 @@
     "qc": [
       "@phpcs",
       "@test"
+    ],
+    "bump-version": [
+      "@php bump-version.php"
     ],
     "phpcs": [
       "./vendor/bin/phpcs ."
