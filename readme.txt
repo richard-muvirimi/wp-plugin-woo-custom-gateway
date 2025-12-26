@@ -1,6 +1,6 @@
 === Custom Payment Gateways for WooCommerce ===
 Contributors: tygalive
-Tags: woocommerce, custom, woocommerce gateway, gateway, payment, gateways, payment gateways, payment gateway, woocommerce payment gateway, woocommerce payment gateways, custom gateway
+Tags: woocommerce, payment, gateway, custom, payment-gateway
 Donate link: https://buymeacoffee.com/fpjyrXk
 Requires at least: 4.0.0
 Tested up to: 6.9
