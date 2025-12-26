@@ -247,12 +247,14 @@ class Gateway extends WC_Payment_Gateway
         // Reduce stock levels.
         wc_reduce_stock_levels($order_id);
 
-        if ($this->has_fields) {
-            $note = filter_input(INPUT_POST, Functions::get_plugin_slug('-note-' . $this->id));
-
-            $note = sanitize_textarea_field($note);
-            if (strlen($note) != 0) {
-                $order->add_order_note(esc_html($note), 1, true);
+        // Handle payment note for classic checkout only
+        // Block checkout is handled by GatewayBlockSupport::process_payment_with_context
+        if ($this->has_fields && !defined('REST_REQUEST')) {
+            $field_name = Functions::get_payment_note_field_name($this->id);
+            $note = filter_input(INPUT_POST, $field_name);
+            
+            if ($note) {
+                Functions::save_payment_note_to_order($order, $note);
             }
         }
 

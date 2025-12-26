@@ -20,11 +20,15 @@
     }
   },
   "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
     "platform": {
       "php": "7.3"
     },
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "inpsyde/composer-assets-compiler": true
     },
     "process-timeout": 0
   },
@@ -85,20 +89,23 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.3",
-    "symfony/polyfill-php74": "^1.29",
-    "symfony/polyfill-php80": "^1.29",
-    "symfony/polyfill-php81": "^1.29",
-    "symfony/polyfill-php82": "^1.29",
+    "ext-json": "*",
     "br33f/php-ga4-mp": "^0.1.4",
-    "yidas/client-ip": "^1.0",
-    "ext-json": "*"
+    "symfony/polyfill-php74": "^1.33",
+    "symfony/polyfill-php80": "^1.33",
+    "symfony/polyfill-php81": "^1.33",
+    "symfony/polyfill-php82": "^1.33",
+    "symfony/polyfill-php83": "^1.33",
+    "symfony/polyfill-php84": "^1.33",
+    "yidas/client-ip": "^1.0"
   },
   "require-dev": {
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "brain/monkey": "^2.6",
     "phpunit/phpunit": "^8.5",
     "squizlabs/php_codesniffer": "^3.9",
-    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "inpsyde/composer-assets-compiler": "^3.0"
   },
   "extra": {
     "mozart": {
@@ -107,6 +114,12 @@
       "classmap_directory": "/vendor/woo-custom-gateway/classes/",
       "classmap_prefix": "WooCustomGateway_",
       "delete_vendor_directories": true
+    },
+    "composer-asset-compiler": {
+      "dependencies": "install",
+      "script": "dist",
+      "auto-run": "true",
+      "wipe-node-modules": "false"
     }
   }
 }

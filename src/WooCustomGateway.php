@@ -98,6 +98,7 @@ class WooCustomGateway
         $this->define_admin_hooks();
         $this->define_site_hooks();
         $this->define_ajax_hooks();
+        $this->define_blocks_hooks();
     }
 
     /**
@@ -195,6 +196,20 @@ class WooCustomGateway
         $this->add_action('wp_ajax_' . Functions::get_plugin_slug('-analytics-remind'), $controller, 'ajaxDoRemindAnalytics');
         $this->add_action('wp_ajax_' . Functions::get_plugin_slug('-analytics-cancel'), $controller, 'ajaxDoCancelAnalytics');
 
+    }
+
+    /**
+     * Register hooks for WooCommerce Blocks integration
+     *
+     * @return void
+     * @version 1.6.4
+     * @since 1.6.4
+     */
+    public function define_blocks_hooks(): void
+    {
+        $controller = new Admin();
+
+        $this->add_action('woocommerce_blocks_payment_method_type_registration', $controller, 'register_payment_method_blocks');
     }
 
     /**

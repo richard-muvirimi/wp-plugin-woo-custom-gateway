@@ -14,6 +14,7 @@
 namespace RichardMuvirimi\WooCustomGateway\Helpers;
 
 use RichardMuvirimi\WooCustomGateway\Model\Gateway;
+use WC_Order;
 
 /**
  * Class to handle plugin generic functions
@@ -123,6 +124,45 @@ class Functions
      */
     public static function prefix_order_status(string $status):string{
         return str_starts_with($status, 'wc-') ? $status : 'wc-' . $status;
+    }
+
+    /**
+     * Get payment note field name for a gateway
+     *
+     * @param string $gateway_id Gateway ID
+     *
+     * @return string
+     * @since 1.6.4
+     * @version 1.6.4
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     */
+    public static function get_payment_note_field_name(string $gateway_id): string
+    {
+        return self::get_plugin_slug('-note-' . $gateway_id);
+    }
+
+    /**
+     * Save payment note to order
+     *
+     * Sanitizes and adds payment proof/note as a customer-visible order note
+     *
+     * @param WC_Order $order Order object
+     * @param string $note Payment note/proof text
+     *
+     * @return void
+     * @since 1.6.4
+     * @version 1.6.4
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     */
+    public static function save_payment_note_to_order(WC_Order $order, string $note): void
+    {
+        $note = sanitize_textarea_field($note);
+        
+        if (!empty($note)) {
+            $order->add_order_note(esc_html($note), 1, true);
+        }
     }
 
 }

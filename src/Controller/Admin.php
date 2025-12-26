@@ -16,6 +16,8 @@ use RichardMuvirimi\WooCustomGateway\Helpers\Functions;
 use RichardMuvirimi\WooCustomGateway\Helpers\Logger;
 use RichardMuvirimi\WooCustomGateway\Helpers\Template;
 use RichardMuvirimi\WooCustomGateway\Model\Gateway;
+use RichardMuvirimi\WooCustomGateway\Model\GatewayBlockSupport;
+use Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry;
 use WP_Post;
 
 /**
@@ -57,6 +59,36 @@ class Admin extends BaseController
         }
 
         return $gateways;
+    }
+
+    /**
+     * Register payment method blocks for WooCommerce Blocks
+     *
+     * @param PaymentMethodRegistry $payment_method_registry
+     * @return void
+     * @since 1.6.4
+     * @version 1.6.4
+     */
+    public function register_payment_method_blocks(PaymentMethodRegistry $payment_method_registry): void
+    {
+        // Check if WooCommerce Blocks is available
+        if (!class_exists('Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType')) {
+            return;
+        }
+
+        $args = array(
+            'post_type' => Functions::gateway_slug(),
+            'fields' => 'ids',
+            'no_found_rows' => true,
+            'post_status' => 'publish',
+            'numberposts' => -1,
+        );
+
+        $posts = get_posts($args);
+
+        foreach ($posts as $id) {
+            $payment_method_registry->register(new GatewayBlockSupport($id));
+        }
     }
 
     /**
@@ -445,7 +477,6 @@ class Admin extends BaseController
             }
         }
     }
-
     /**
      * Add custom post thumbnail column
      *

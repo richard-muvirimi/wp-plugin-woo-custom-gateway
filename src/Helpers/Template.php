@@ -196,4 +196,79 @@ class Template
     {
         return $prefix . base64_encode(file_get_contents($path));
     }
+
+    /**
+     * Get the list of npm dependencies to load
+     *
+     * @param string $path
+     * @return array
+     * @version 1.6.4
+     * @see     https://www.npmjs.com/package/@wordpress/dependency-extraction-webpack-plugin#user-content-wordpress
+     *
+     * @author  Richard Muvirimi <richard@tyganeutronics.com>
+     * @since   1.6.4
+     */
+    public static function get_script_dependencies(string $path): array
+    {
+
+        $contents = wp_cache_get($path, Functions::get_plugin_slug("-files"));
+
+        if ($contents === false) {
+            if (file_exists($path)) {
+                try {
+                    $contents = include $path;
+
+                    // Ensure it's an array
+                    if (!is_array($contents)) {
+                        $contents = [
+                            'dependencies' => [],
+                            'version' => filemtime(WOO_CUSTOM_GATEWAY_FILE),
+                        ];
+                    }
+
+                    wp_cache_set($path, $contents, Functions::get_plugin_slug("-files"), DAY_IN_SECONDS);
+                } catch (\Exception $exception) {
+                    $contents = [
+                        'dependencies' => [],
+                        'version' => filemtime(WOO_CUSTOM_GATEWAY_FILE),
+                    ];
+                }
+            } else {
+                // File doesn't exist yet (needs to be built)
+                $contents = [
+                    'dependencies' => [],
+                    'version' => filemtime(WOO_CUSTOM_GATEWAY_FILE),
+                ];
+            }
+        }
+
+        return $contents;
+    }
+
+    /**
+     * Get JSON file contents
+     *
+     * @param string $path
+     * @return array
+     * @since 1.6.4
+     * @version 1.6.4
+     *
+     * @author Richard Muvirimi <richard@tyganeutronics.com>
+     */
+    public static function get_json_file(string $path): array
+    {
+        $contents = wp_cache_get($path, Functions::get_plugin_slug("-files"));
+
+        if ($contents === false) {
+            if (function_exists("wp_json_file_decode")) {
+                $contents = wp_json_file_decode($path, ["associative" => true]);
+            } else {
+                $contents = json_decode(file_get_contents($path), true);
+            }
+
+            wp_cache_set($path, $contents, Functions::get_plugin_slug("-files"), DAY_IN_SECONDS);
+        }
+
+        return $contents;
+    }
 }

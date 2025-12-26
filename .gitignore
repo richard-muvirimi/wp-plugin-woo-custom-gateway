@@ -10,3 +10,10 @@ DOCKER_ENV
 output.log
 
 .phpunit.result.cache
+
+# Node
+node_modules/
+package-lock.json
+/src/Views/js/dist/
+.env
+.wp-env.override.json
