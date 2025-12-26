@@ -44,7 +44,7 @@ jobs:
     
     - name: Install npm dependencies
       if: steps.check_tag.outputs.exists == 'false'
-      run: npm ci
+      run: npm install
     
     - name: Build JavaScript assets
       if: steps.check_tag.outputs.exists == 'false'
@@ -52,7 +52,7 @@ jobs:
     
     - name: Cache Composer dependencies
       if: steps.check_tag.outputs.exists == 'false'
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: /tmp/composer-cache
         key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
