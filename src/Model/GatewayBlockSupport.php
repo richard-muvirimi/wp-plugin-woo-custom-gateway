@@ -33,6 +33,13 @@ use RichardMuvirimi\WooCustomGateway\WooCustomGateway;
 class GatewayBlockSupport extends AbstractPaymentMethodType
 {
     /**
+     * Collected gateway ids to expose to frontend
+     *
+     * @var array<string>
+     */
+    private static $gateway_ids = [];
+
+    /**
      * Gateway instance
      *
      * @var Gateway
@@ -155,6 +162,19 @@ class GatewayBlockSupport extends AbstractPaymentMethodType
             $handle,
             Functions::get_plugin_slug(),
             plugin_dir_path(WOO_CUSTOM_GATEWAY_FILE) . 'languages'
+        );
+
+        // Aggregate gateway ids and expose via localized data for the frontend script
+        if (!in_array($this->name, self::$gateway_ids, true)) {
+            self::$gateway_ids[] = $this->name;
+        }
+
+        wp_localize_script(
+            $handle,
+            'wooCustomGatewayBlocks',
+            [
+                'ids' => array_values(self::$gateway_ids),
+            ]
         );
 
         return [$handle];

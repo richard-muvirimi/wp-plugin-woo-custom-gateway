@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { registerPaymentMethod, type PaymentMethodInterface } from '@woocommerce/blocks-registry';
+import { registerPaymentMethod } from '@woocommerce/blocks-registry';
 import { decodeEntities } from '@wordpress/html-entities';
 
 /**
@@ -13,37 +13,40 @@ import { CustomPaymentGatewayLabel } from './components/label';
 import { CustomPaymentGatewayContent } from './components/content';
 import type { GatewaySettings } from './types';
 
+type PaymentMethodRegistrationOptions = Parameters<typeof registerPaymentMethod>[0];
+
 /**
  * Get all custom gateway settings
- * 
+ *
  * WooCommerce provides each payment method's data via window.wc.wcSettings.getSetting
  * using the pattern: getSetting('{paymentMethodId}_data')
+ *
+ * Gateway IDs are exposed via wp_localize_script (wooCustomGatewayBlocks.ids) from PHP
+ * to avoid relying solely on enumerating wcSettings keys.
  */
 const getCustomGateways = (): Record<string, GatewaySettings> => {
     const gateways: Record<string, GatewaySettings> = {};
-    
-    // Access WooCommerce settings from global window object
+
     const wcSettings = (window as any).wc?.wcSettings;
+    const localizedIds: string[] = (window as any).wooCustomGatewayBlocks?.ids || [];
+
     if (!wcSettings || typeof wcSettings.getSetting !== 'function') {
         return gateways;
     }
-    
-    // Get all settings to find our gateway data keys
-    // They follow the pattern: woocg-{id}_data
-    const allSettings = wcSettings.getSettings() || {};
-    
-    Object.keys(allSettings).forEach((key) => {
-        // Check if this is a custom gateway data key (starts with woocg- and ends with _data)
+
+    // Use ids passed from PHP (wp_localize_script)
+    const idsToLoad = localizedIds;
+
+    idsToLoad.forEach((id) => {
+        const key = `${id}_data`;
         if (key.startsWith('woocg-') && key.endsWith('_data')) {
-            // Extract gateway ID by removing '_data' suffix
-            const gatewayId = key.replace('_data', '');
             const settings = wcSettings.getSetting(key) as GatewaySettings;
             if (settings) {
-                gateways[gatewayId] = settings;
+                gateways[id] = settings;
             }
         }
     });
-    
+
     return gateways;
 };
 
@@ -64,7 +67,7 @@ const registerCustomGateways = () => {
             />
         );
 
-        const paymentMethod: PaymentMethodInterface = {
+        const paymentMethod: PaymentMethodRegistrationOptions = {
             name: gatewayId,
             label: <CustomPaymentGatewayLabel 
                 title={decodeEntities(settings.title)} 
