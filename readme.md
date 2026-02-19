@@ -6,8 +6,8 @@
 - **_ Requires at least: _** 4.0.0
 - **_ Tested up to: _** 6.9
 - **_ Requires PHP: _** 7.3
-- **_ WC tested up to: _** 10.4
-- **_ Stable tag: _** 1.6.5
+- **_ WC tested up to: _** 10.5
+- **_ Stable tag: _** 1.6.6
 - **_ License: _** GPLv2 or later
 - **_ License URI: _** [GPL-2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -75,6 +75,10 @@ Custom payment gateway settings in WooCommerce. These settings will to shown to 
 Custom payment gateway displayed to the customer highlighted inside the red rectangle.
 
 ## Changelog
+
+**_ 1.6.6 _**
+
+- Fixed block-based checkout.
 
 **_ 1.6.4 _**
 - Add WooCommerce Blocks checkout support
